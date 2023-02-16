@@ -2,23 +2,33 @@
 class LoginController {
 
     loginPage(req, res) {
-        res.render('login', { message: 'Please login to view your cars' })
+        res.render('login', { message: 'Please login' })
     }
 
     requestLogin(req, res, next) {
 
         console.log("Request body")
         console.log(req.body)
-        //****check database for userIDs
-        //****verify that user input matches
+        //[TODO] check database for userIDs
+        //[TODO] verify that user input matches an entry in the user database
+        const admin = "admin"; //these can go away once user verification works properly
+        const faculty = "faculty";
+        if (req.body.username !== admin && req.body.username !== faculty) {
+            res.render("login", { message: 'Incorrect userID' });
+        } else {
             console.log("Creating new session");
             req.session.regenerate((err) => {
                 if (err) next(err)
                 req.session.user = req.body.username;
                 console.log('here!');
-                res.redirect('/admin'); //*****only if user is admin, otherwise /faculty
+                if (req.body.username == admin){
+                    res.redirect('/admin'); //only if user is admin, otherwise /faculty
+                } else {
+                    res.redirect('/faculty');
+                }
             })
         }
+    }
     
     logout(req, res) {
         req.session.destroy(function(){
@@ -27,5 +37,4 @@ class LoginController {
     }
 }
 
-module.exports = LoginController
-
+module.exports = LoginController;
