@@ -9,14 +9,14 @@ class LoginController {
 
         console.log("Request body")
         console.log(req.body)
-        //check database for userIDs
-        //verify that user input matches
+        //****check database for userIDs
+        //****verify that user input matches
             console.log("Creating new session");
             req.session.regenerate((err) => {
                 if (err) next(err)
                 req.session.user = req.body.username;
                 console.log('here!');
-                res.redirect('/admin'); //only if user is admin, otherwise /faculty
+                res.redirect('/admin'); //*****only if user is admin, otherwise /faculty
             })
         }
     

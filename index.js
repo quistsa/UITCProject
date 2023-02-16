@@ -42,3 +42,16 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
     loginController.requestLogin(req, res)
 })
+
+app.get('/admin', (req, res) => {
+    //when an admin logs in, use the userController to send them to the admin view, which lists all classes and faculty responses
+    userController.admin(req, res);
+})
+
+app.get('/faculty', (req, res) => {
+    userController.faculty(req, res);
+})
+
+app.get('/classes', (req, res) => {
+    classController.getAll(req, res);
+})
