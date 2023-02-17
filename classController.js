@@ -73,7 +73,6 @@ class classController{
             res.writeHead(302, { 'Location': `/classes/${classObj.id}` });
             res.end();
         }
-
     }
 
     async delete(req, res) {
