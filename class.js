@@ -39,4 +39,4 @@ class Class {
 
 }
 
-module.exports = Car;
+module.exports = Class;

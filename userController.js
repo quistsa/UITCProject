@@ -1,8 +1,8 @@
 // used to perform operations on users (create, edit, show)
 
 const { test } = require('media-typer');
-const User = requrie('./class');
-const userDB = require('[./userDBfile]'); //[TODO] update userDBfile when database file is created
+const User = require('./class');
+//const userDB = require('[./userDBfile]'); //[TODO] update userDBfile when database file is created
 
 class userController{
     //retun list of all users
