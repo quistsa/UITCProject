@@ -74,6 +74,6 @@ app.post('/classes', (req, res) => {
 })
 
 app.get('/classes/new', (req, res) => {
-    //display form for creating a new class
+    //display form for creating a new class 
     classController.newClass(req, res);
 })
