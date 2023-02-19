@@ -77,3 +77,8 @@ app.get('/classes/new', (req, res) => {
     //display form for creating a new class 
     classController.newClass(req, res);
 })
+
+/////////////////////
+//launch the server//
+/////////////////////
+app.listen(port, () => console.log(`Example listening on port ${port}`));

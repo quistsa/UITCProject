@@ -2,23 +2,23 @@
 
 const { test } = require('media-typer');
 const User = require('./class');
-//const userDB = require('[./userDBfile]'); //[TODO] update userDBfile when database file is created
+const userDB = require('./userDB');
 
-class userController{
+class UserController{
     //retun list of all users
     async index(req, res) {
         let users = await userDB.allUsers();
         res.render('userList', { users: users });
     }
-    
+
     async admin(req, res) {
-        let users = await userDB.allFaculty();
-        res.render('admin', { users: users });
+        //let users = await userDB.allFaculty();
+        res.render('admin'); //, { users: users }
     }
 
     async faculty(req, res) {
-        let classes = await userDB.allClasses();
-        res.render('faculty', { classes: classes });
+        //let classes = await userDB.allClasses();
+        res.render('faculty'); //, { classes: classes }
     }
 
     async show(req, res) {
@@ -69,8 +69,6 @@ class userController{
 
             res.writeHead(302, { 'Location': `/users/${user.id}` });
             res.end();
-        
-
     }
 
     async delete(req, res) {
@@ -92,3 +90,5 @@ class userController{
         res.send(users);
     }
 }
+
+module.exports = UserController;

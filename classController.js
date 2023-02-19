@@ -2,9 +2,9 @@
 
 const { test } = require('media-typer');
 const Class = requrie('./class');
-//const classDB = require('[./classDBfile]');
+const classDB = require('./classDB');
 
-class classController{
+class ClassController{
     //return list of all classes
     async index(req, res) {
         let classes = await classDB.allClasses();
@@ -94,3 +94,5 @@ class classController{
         res.send(classes);
     }
 }
+
+module.exports = ClassController;
