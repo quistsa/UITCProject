@@ -1,7 +1,7 @@
 // used to perform operations on classes (create, edit, show)
 
 const { test } = require('media-typer');
-const Class = requrie('./class');
+const Class = require('./class');
 const classDB = require('./classDB');
 
 class ClassController{
