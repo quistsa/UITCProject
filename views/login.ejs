@@ -4,8 +4,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-  <style>   
+  <title>Login Page</title> 
+
+</head>
+
+<body id="login">
+  <main id="main-holder">
+    <h1>GVSU School of Computing</h1>
+    
+    <p><%=message%></p>
+    <form id="login-form" action="/login" accept-charset="UTF-8" method="post">
+      <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username" required>
+      <!--<input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password" required>-->
+      <input type="submit" name="commit" value="Submit" id="login-form-submit">
+    </form>
+  
+  </main>
+</body>
+
+</html>
+
+
+<!-- <style>   
 
 html {
   height: 100%;
@@ -56,22 +76,4 @@ body {
   cursor: pointer;
   outline: none;
 }
-  </style>   
-
-</head>
-
-<body>
-  <main id="main-holder">
-    <h1>GVSU School of Computing</h1>
-    
-    <p><%=message%></p>
-    <form id="login-form" action="/login" accept-charset="UTF-8" method="post">
-      <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username" required>
-      <!--<input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password" required>-->
-      <input type="submit" name="commit" value="Submit" id="login-form-submit">
-    </form>
-  
-  </main>
-</body>
-
-</html>
+  </style> --> 
