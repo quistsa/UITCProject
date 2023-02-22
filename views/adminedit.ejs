@@ -1,0 +1,212 @@
+<!-- This website template was created by: Nicole Kinney 2/15/2023 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!--<link rel="stylesheet" href="styles/stylesheet.css"> -->
+	<title>Grand Valley State University Admin Page</title>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">  
+	<style>
+		/* Style sheet created by: Nicole Kinney, 2/18/2023 */
+		@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+		/*fluid banner with page*/
+		img {
+			max-width: 30%
+		}  
+		/*Button*/
+		button{
+			text-align: right;
+			}
+		/*centering the banner and center command*/
+		.center {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		} 
+		/*button itself*/
+		.dropbtn {  
+		background-color: #FFF0F5; 
+		font-size: 16px;
+		border: none;
+		}
+		/*centering dropdown*/
+		.dropdown { 
+		position: relative;
+		display: inline-block;
+		}
+		/*content inside the dropdown*/
+		.dropdown-content { 
+		display: none;
+		position: absolute;
+		background-color: #FFFFFF;
+		min-width: 200px; 
+		}
+		.dropdown-content a { 
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		}
+		/*header with gvsu blue*/
+		h1{
+			color: #0032A0;
+			font-family: 'Quicksand', sans-serif;	
+		}
+		/*Table Designing*/ 
+		table { 
+			border-collapse: collapse;	 
+			width: 98%;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;	  
+			font-family: 'Quicksand', sans-serif;	
+		}
+		/* for table*/
+		th, td {
+			border: 0.1em solid #0033A0; 
+			background-color: #FFFFFF;	
+		}
+		/* for th element */
+		th {
+			background-color: #B0C4DE;
+			font-family: 'Quicksand', sans-serif;	
+		}
+		.left{
+			display: block;
+			float: left;
+		}
+		.right {
+			display: block;
+			float: right;
+		}
+		/*styling the body of the page*/
+		body {
+			background-color: #F5F5F5;
+			font-family: 'Quicksand', sans-serif;	
+		}
+		/*centering the page and creating a width for page*/
+		#wrapper {
+			width: 90%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
+</head>
+
+<body>
+
+	<p> Welcome Back, ___________ ! 
+	<button  class= "right" type="button" onclick="alert('You have successfully logged out. You may now close this window.')">Logout</button> </p> 
+
+	 <p class="center"> Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> 
+	<div id="wrapper">
+
+		<!--header image-->
+		<header> 
+			<a><img src="images/gvsubanner.png" alt="banner logo" class="center"></a>
+		</header>
+
+	 <h1 class="center">School of Computing Course Listing</h1> 
+
+		<table><!--Starting Table--> 
+
+			<tr><!--Row 1 -->
+				<th>Course Number</th>
+				<th>Name</th>
+				<th>Ranking</th>
+				<th>Desire</th>
+				<th>Notes</th> 
+			</tr>	
+
+			<tr><!--Row 2-->
+				<td>				  
+					 <select >
+						<option>CIS 101</option>
+						<option>CIS 150</option>
+						<option>CIS 159</option>
+						<option>CIS 160</option>
+						<option>CIS 161</option>
+						<option>CIS 162</option>
+						<option>CIS 163</option>
+						<option>CIS 180</option>
+						<option>CIS 221</option>
+						<option>CIS 230</option>
+						<option>CIS 231</option>
+						<option>CIS 233</option>
+						<option>CIS 237</option>
+						<option>CIS 238</option>
+						<option>CIS 241</option>
+						<option>CIS 250</option>
+						<option>CIS 253</option>
+						<option>CIS 258</option>
+						<option>CIS 260</option>
+						<option>CIS 263</option>
+						<option>CIS 280</option>
+						<option>CIS 290</option>
+						<option>CIS 310</option>
+						<option>CIS 320</option>						
+					  </select> </td>
+
+				<td>Professor Name</td>
+				<td>0-3</td>
+				<td>0-3</td>
+				<td>Notes here...</td>
+			</tr> 		
+
+			<tr><!--Row 3-->
+				<td></td>
+				<td>Professor Name</td>
+				<td>0-3</td>
+				<td>0-3</td>
+				<td>Notes here...</td>
+			</tr>
+
+			<tr><!--Row 4-->
+				<td></td>
+				<td>Professor Name</td>
+				<td>0-3</td>
+				<td>0-3</td>
+				<td>Notes here...</td>
+			</tr>
+
+			<tr><!--Row 5-->
+				<td></td>
+				<td>Professor Name</td>
+				<td>0-3</td>
+				<td>0-3</td>
+				<td>Notes here...</td>
+			</tr>		
+
+			<tr><!--Row 6-->
+				<td></td>
+				<td>Professor Name</td>
+				<td>0-3</td>
+				<td>0-3</td>
+				<td>Notes here...</td>
+			</tr>
+
+			<tr><!--Row 7-->
+				<td></td>
+				<td>Professor Name</td>
+				<td>0-3</td>
+				<td>0-3</td>
+				<td>Notes here...</td>
+			</tr>		
+
+			<tr><!--Row 8-->
+				<td></td>
+				<td>Professor Name</td>
+				<td>0-3</td>
+				<td>0-3</td>
+				<td>Notes here...</td>
+			</tr>
+
+			</table>
+
+	</div>
+
+</body>
+
+</html>
