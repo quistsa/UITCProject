@@ -64,8 +64,7 @@ class ClassController{
         if (!classObj) {
             res.send("Could not find class with id of " + id);
         } else {
-        //update variables for a class
-        //[TODO] add variables to be changed when database is set
+            classObj.name = req.body.class.name;
 
             console.log("Updating class");
             classDB.update(classObj);

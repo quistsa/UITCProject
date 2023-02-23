@@ -4,8 +4,8 @@ class User {
     constructor(description){
         if (description) {
             this.id = description.id;
-            this.firstName = description.firstName;
-            this.lastName = description.lastName;
+            this.fName = description.fName;
+            this.lName = description.lName;
         }
         
         this.errors = [];

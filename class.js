@@ -4,8 +4,7 @@ class Class {
     constructor(description){
         if (description) {
             this.id = description.id;
-            this.className = description.className;
-            this.classDesc = description.classDesc;
+            this.name = description.name;
         }
         
         this.errors = [];
