@@ -1,31 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Faculty Page</title>
+	<title>Grand Valley State University Faculty Page</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width-device-width, initial-scale=1">
 	<link rel="stylesheet" href="styles/style.css">
 </head>
 
-<body>
-		<!-- Use the header area for the website name or logo -->
-		<header id="gvlogo">
-			<a href="index.html"><img src="images/gvlogo.png" alt="Grand Valley State University Logo"></a>
-		</header>
-		
+<body>	
 		<!-- Main Area -->
-		<!-- <main id="content"> -->
-			
-			<p> Welcome Back, <!--<%=user.fName> ! -->
-			<button  class= "right" type="button" onclick="alert('You have successfully logged out. You may now close this window.')">Logout</button> </p> 
-		
-		 	<p class="center"> Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> 
-			
-			<!--<h1> Welcome Back, _______________________!
+		<main id="content">
+			<h1> Welcome Back, <!--<%=user.fName%> ! -->
 				
-			<button id="button" type="button" action="/logout" accept-charset="UTF-8" method="get">Logout</button></h1>
+			<button  class= "right" type="button" onclick="alert('You have successfully logged out. You may now close this window.')">Logout</button></h1>
 			
-			<p>Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> -->
+			<p>Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> 
 			
 			<div class="wrapper">
 		 
@@ -482,30 +471,6 @@
 				</table><!-- End Table -->
 			</div>		
 			
-		<!--</main> -->
-			
+		</main> 			
 </body>
 </html>
-
-
-	<!--<style>
-		header img {max-width: 50%;}
-		
-		main h1 {font-weight: bold; font-size: 1.25em;}
-		
-		main p {border: 8px solid; border-color: #b0c4de; border-radius: 10px; padding: 1em; margin: 4em; font-size: 1.25em; text-align: center;}
-		
-		#button {display: block; float: right; padding: 10px; margin: 15px; text-align: right; font-size: 1em; font-family: times new roman;}
-		
-		table {border: 1px solid #000; border-collapse: collapse; margin: 0 auto; width: 75%;}
-		
-		caption {font-size: 1.7em; font-weight: bold; padding: 1.5px; color: #4169e1;}
-	
-		td {padding: 1em; font-size: 1em; text-align: center;}
-	
-		td, th {border: 1.5px solid #000;}
-	
-		th {background-color: #b0c4de; color: #000; font-size: 1.25em; text-align: center; padding: 1.15em;}
-	
-		tr {background-color: #fff;}
-	</style> -->
