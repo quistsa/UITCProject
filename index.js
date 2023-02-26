@@ -24,6 +24,9 @@ app.use(session({
     secret: 'abcdefghijklmnopqrstuvwxzy'
 }));
 
+//create public folder for css files
+app.use(express.static(__dirname + '/public'));
+
 function isAuthenticated(req, res, next) {
 
     console.log('Enter isAuthenticated')
@@ -58,15 +61,23 @@ app.get('/logout', (req, res) => {
     loginController.logout(req, res); // this doesnt work yet :)
 })
 
-app.get('/admin', isAuthenticated, (req, res) => {
+app.get('/adminFaculty', isAuthenticated, (req, res) => {
     //when an admin logs in, use the userController to send them to the admin view, which lists all classes and faculty responses
-    userController.admin(req, res);
+    userController.adminFaculty(req, res);
 })
 
-app.post('/admin', (req, res) => {
-    //create new admin on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
-    userController.newAdmin(req, res);
+app.get('/adminCourse', isAuthenticated, (req, res) => {
+    userController.adminCourse(req, res);
 })
+
+app.get('/adminEdit', isAuthenticated, (req, res) => {
+    userController.adminEdit(req, res);
+})
+
+//app.post('/admin', (req, res) => {
+    //create new admin on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
+//    userController.newAdmin(req, res);
+//})
 
 app.post('/faculty', (req, res) => {
     //create new faculty on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
@@ -77,6 +88,8 @@ app.get('/faculty', isAuthenticated, (req, res) => {
     //when a faculty user logs in, use the userController to send them to the faculty view, which should match the user's responses with their ID using mongoDB
     userController.faculty(req, res);
 })
+
+
 
 app.get('/classes', (req, res) => {
     //when the class list is requested, use classController to retrieve all classes

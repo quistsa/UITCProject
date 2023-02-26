@@ -11,9 +11,17 @@ class UserController{
         res.render('userList', { users: users });
     }
 
-    async admin(req, res) {
+    async adminFaculty(req, res) {
         //let users = await userDB.allFaculty();
-        res.render('admin'); //, { users: users }
+        res.render('adminFaculty'); //, { users: users }
+    }
+
+    async adminCourse(req, res) { 
+        res.render('adminCourse');
+    }
+
+    async adminEdit(req, res) {
+        res.render('adminEdit');
     }
 
     async faculty(req, res) {
@@ -50,39 +58,41 @@ class UserController{
     }
 
     async edit(req, res) {
-        let id = req.params.id;
-        let user = await userDB.findUser(id);
+        //let id = req.params.id;
+        //let user = await userDB.findUser(id);
 
-        if (!user) {
-            res.send("Couldn't find a user with id " + id);
-        } else {
-            res.render('userEdit', { user: user });
-        }
+        //if (!user) {
+        //    res.send("Couldn't find a user with id " + id);
+        //} else {
+            res.render('adminEdit'); //, { user: user }
+       // }
     }
 
     async update(req, res) {
+        console.log("update")
         //update variables for a user
         //[TODO] add variables to be changed when database is set
 
-            console.log("Updating user");
-            userDB.update(user);
+        //    console.log("Updating user");
+        //    userDB.update(user);
 
-            res.writeHead(302, { 'Location': `/users/${user.id}` });
-            res.end();
+        //    res.writeHead(302, { 'Location': `/users/${user.id}` });
+        //    res.end();
     }
 
     async delete(req, res) {
-        let id = req.params.id;
-        let user = await userDB.findUser(id);
+        console.log("delete :)")
+        //let id = req.params.id;
+        //let user = await userDB.findUser(id);
         
 
-        if (!user) {
-            res.send("Couldn't find a user with id " + id);
-        } else {
-            userDB.removeUser(user);
-            let users = await userDB.allUsers();
-            res.render('userIndex', { users: users });
-        }
+        //if (!user) {
+        //    res.send("Couldn't find a user with id " + id);
+        //} else {
+        //   userDB.removeUser(user);
+        //    let users = await userDB.allUsers();
+        //    res.render('userIndex', { users: users });
+        //}
     }
 
     async rawIndex(req, res) {
