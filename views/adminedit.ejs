@@ -6,12 +6,12 @@
 	<title>Grand Valley State University Admin Page</title>
 	<meta charset="utf-8"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1">  
-	<link rel="stylesheet" href="styles/style.css">
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 
 <body>
 	<main class="content">
-		<h1> Welcome Back, <!--<%=user.fName%> ! -->
+		<h1> Welcome Back, [user_name]</h1>
 			
 		<button  class= "right" type="button" onclick="alert('You have successfully logged out. You may now close this window.')">Logout</button></h1>
 		
@@ -30,9 +30,9 @@
 					<li class="center">  	
 						<!--Desktop nav bar-->
 						<div class="desktop">
-							<a href="index.html">Search by Professor</a> &nbsp; &nbsp; 
-							<a href="index.html">Search by Course</a> &nbsp; &nbsp; 
-							<a href="index.html">Edit Listing</a> &nbsp; &nbsp; 
+							<a href="/adminFaculty">Search by Professor</a> &nbsp; &nbsp; 
+							<a href="/adminCourse">Search by Course</a> &nbsp; &nbsp; 
+							<a href="/adminEdit">Edit Listing</a> &nbsp; &nbsp; 
 						</div> 
 					</li>
 				</ul>		
