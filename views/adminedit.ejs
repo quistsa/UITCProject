@@ -1,140 +1,102 @@
-<!-- This website template was created by: Nicole Kinney 2/15/2023 -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Grand Valley State University Admin Page</title>
+	<title>Grand Valley State University Admin Edit Page</title>
 	<meta charset="utf-8"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1">  
-	<link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 
+<style>
+input[type=text], select {
+  width: 25%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button[type=save] {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: auto;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  padding: 1%;
+}
+</style>
 <body>
-	<main class="content">
-		<h1> Welcome Back, [user_name]</h1>
-			
-		<button  class= "right" type="button" onclick="alert('You have successfully logged out. You may now close this window.')">Logout</button></h1>
-		
-		<p>Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> 
-		
-		<div class="wrapper">
-		
-			<header> 
-				<a><img src="images/gvsubanner.png" alt="banner logo" class="center"></a>
-			</header>
 
-			<h1 class="center">GVSU School of Computing Course Listing</h1> 
+<h1>Add and Edit Courses and Faculty</h1>
 
-			<nav>		
-				<ul>
-					<li class="center">  	
-						<!--Desktop nav bar-->
-						<div class="desktop">
-							<a href="/adminFaculty">Search by Professor</a> &nbsp; &nbsp; 
-							<a href="/adminCourse">Search by Course</a> &nbsp; &nbsp; 
-							<a href="/adminEdit">Edit Listing</a> &nbsp; &nbsp; 
-						</div> 
-					</li>
-				</ul>		
-			</nav> 
+<div class="background">
+  <form>
 
-			<table><!--Starting Table--> 
+    <label for="nameprefix">Suffix</label>
+    <input type="text" id="nameprefix" name="prefix" placeholder="Suffix">
 
-				<tr><!--Row 1 -->
-					<th>Course Number</th>
-					<th>Name</th>
-					<th>Ranking</th>
-					<th>Desire</th>
-					<th>Notes</th> 
-				</tr>	
 
-				<tr><!--Row 2-->
-					<td>				  
-						 <select >
-							<option>CIS 101</option>
-							<option>CIS 150</option>
-							<option>CIS 159</option>
-							<option>CIS 160</option>
-							<option>CIS 161</option>
-							<option>CIS 162</option>
-							<option>CIS 163</option>
-							<option>CIS 180</option>
-							<option>CIS 221</option>
-							<option>CIS 230</option>
-							<option>CIS 231</option>
-							<option>CIS 233</option>
-							<option>CIS 237</option>
-							<option>CIS 238</option>
-							<option>CIS 241</option>
-							<option>CIS 250</option>
-							<option>CIS 253</option>
-							<option>CIS 258</option>
-							<option>CIS 260</option>
-							<option>CIS 263</option>
-							<option>CIS 280</option>
-							<option>CIS 290</option>
-							<option>CIS 310</option>
-							<option>CIS 320</option>						
-						  </select> </td>
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="First Name">
 
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr> 		
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname" placeholder="Last Name">
 
-				<tr><!--Row 3-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>
+  </form>
+</div>
 
-				<tr><!--Row 4-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>
+<br><br>
 
-				<tr><!--Row 5-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>		
+<div class="background">
+  <form>
 
-				<tr><!--Row 6-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>
+    <label for="coursePrefix">Course Prefix</label>
+    <input type="text" id="coursePrefix" name="Cprefix" placeholder="Course Prefix">
 
-				<tr><!--Row 7-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>		
 
-				<tr><!--Row 8-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>
+    <label for="cNumber">Course Number</label>
+    <input type="text" id="cNumber" name="CourseNumber" placeholder="Couse Number">
 
-			</table>
-		</div>
-	</main>
+   </form>
+</div>
+
+<br><br>
+
+<div class="center">
+
+      <button type="save" id="saveBtn">Save</button>
+      <button type="save" id="editBtn">Edit</button>
+
+</div>
+
+
 
 </body>
-
 </html>
+
+
