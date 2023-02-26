@@ -42,6 +42,10 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/', (req, res) =>{
+    loginController.loginPage(req, res);
+})
+
 app.get('/login', (req, res) => {
     loginController.loginPage(req, res);
 })
@@ -60,12 +64,12 @@ app.get('/admin', isAuthenticated, (req, res) => {
 })
 
 app.post('/admin', (req, res) => {
-    //create new admin on post request, ****make sure user is an admin, faculty should not be able to create new users
+    //create new admin on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
     userController.newAdmin(req, res);
 })
 
 app.post('/faculty', (req, res) => {
-    //create new faculty on post request, ****make sure user is an admin, faculty should not be able to create new users
+    //create new faculty on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
     userController.newFaculty(req, res);
 })
 

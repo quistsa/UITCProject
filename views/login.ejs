@@ -2,68 +2,17 @@
 <html lang="en">
 
 <head>
+  <title>Grand Valley State University Login Page</title> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-  <style>   
-
-html {
-  height: 100%;
-}
-
-body {
-  height: 100%;
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  display: grid;
-  align-items: center;
-  background-color: #0032A0;
-}
-
-#main-holder {
-  width: 50%;
-  height: 70%;
-  margin: auto;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  background-color: white;
-  border-radius: 7px;
-}
-
-#login-form {
-  align-self: flex-start;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-}
-
-.login-form-field {
-  margin-bottom: 10px;
-  border-radius: 3px;
-  border: 1px solid black;
-  padding: 5%;
-}
-
-#login-form-submit {
-  width: 100%;
-  padding: 7px;
-  border: none;
-  border-radius: 5px;
-  color: black;
-  font-weight: bold;
-  background-color: #90ee90;
-  cursor: pointer;
-  outline: none;
-}
-  </style>   
-
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
   <main id="main-holder">
     <h1>GVSU School of Computing</h1>
-
+    
+    <p><%=message%></p>
     <form id="login-form" action="/login" accept-charset="UTF-8" method="post">
       <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username" required>
       <!--<input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password" required>-->
@@ -73,4 +22,4 @@ body {
   </main>
 </body>
 
-</html>
+</html>  
