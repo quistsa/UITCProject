@@ -15,9 +15,13 @@ font-family: 'Quicksand', sans-serif;
 }
 
 h1, caption { 
-padding: 1.25em;
+padding: 1em;
 color: #0032A0;
 font-family: 'Quicksand', sans-serif;	
+}
+
+h1 {
+  size: .5em;
 }
 
 
@@ -168,4 +172,9 @@ th {
 
 tr {
 background-color: #fff;
+}
+
+li{
+  padding: 0;
+  margin: 0;
 }
