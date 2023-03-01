@@ -27,6 +27,7 @@ app.use(session({
 //create public folder for css files
 app.use(express.static(__dirname + '/public'));
 
+//check if users have logged in when requesting login-required pages
 function isAuthenticated(req, res, next) {
 
     console.log('Enter isAuthenticated')
@@ -40,15 +41,17 @@ function isAuthenticated(req, res, next) {
     }
 }
 
-app.use(express.static(__dirname + '/public'));
-
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//redirect to login page when root directory is requested
 app.get('/', (req, res) =>{
+    //[TODO] redirect users to respective pages if they're already logged in
     loginController.loginPage(req, res);
 })
 
+//login redirects
+/////////////////////////////////////////
 app.get('/login', (req, res) => {
     loginController.loginPage(req, res);
 })
@@ -60,7 +63,10 @@ app.post('/login', (req, res) => {
 app.get('/logout', (req, res) => {
     loginController.logout(req, res); // this doesnt work yet :)
 })
+//////////////////////////////////////////
 
+//admin redirects
+//////////////////////////////////////////
 app.get('/adminFaculty', isAuthenticated, (req, res) => {
     //when an admin logs in, use the userController to send them to the admin view, which lists all courses and faculty responses
     userController.adminFaculty(req, res);
@@ -78,21 +84,26 @@ app.get('/adminEdit', isAuthenticated, (req, res) => {
     //create new admin on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
 //    userController.newAdmin(req, res);
 //})
+/////////////////////////////////////////
 
-app.post('/faculty', (req, res) => {
-    //create new faculty on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
-    userController.newFaculty(req, res);
-})
-
+//faculty redirects
+/////////////////////////////////////////
 app.get('/faculty', isAuthenticated, (req, res) => {
     //when a faculty user logs in, use the userController to send them to the faculty view, which should match the user's responses with their ID using mongoDB
     userController.faculty(req, res);
 })
 
+app.post('/faculty', (req, res) => {
+    //create new faculty on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
+    userController.newFaculty(req, res);
+})
+//////////////////////////////////////////
 
-
+//courses redirects
+//////////////////////////////////////////
 app.get('/courses', (req, res) => {
     //when the course list is requested, use courseController to retrieve all courses
+    //[not sure if necessary]
     courseController.index(req, res);
 })
 
@@ -105,6 +116,7 @@ app.get('/courses/new', (req, res) => {
     //display form for creating a new course 
     courseController.newCourse(req, res);
 })
+//////////////////////////////////////////
 
 /////////////////////
 //launch the server//
