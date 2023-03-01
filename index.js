@@ -62,7 +62,7 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/adminFaculty', isAuthenticated, (req, res) => {
-    //when an admin logs in, use the userController to send them to the admin view, which lists all classes and faculty responses
+    //when an admin logs in, use the userController to send them to the admin view, which lists all courses and faculty responses
     userController.adminFaculty(req, res);
 })
 
@@ -91,19 +91,19 @@ app.get('/faculty', isAuthenticated, (req, res) => {
 
 
 
-app.get('/classes', (req, res) => {
-    //when the class list is requested, use classController to retrieve all classes
-    classController.index(req, res);
+app.get('/courses', (req, res) => {
+    //when the course list is requested, use courseController to retrieve all courses
+    courseController.index(req, res);
 })
 
-app.post('/classes', (req, res) => {
-    //create new class on post request for /classes
-    classController.create(req, res);
+app.post('/courses', (req, res) => {
+    //create new course on post request for /courses
+    courseController.create(req, res);
 })
 
-app.get('/classes/new', (req, res) => {
-    //display form for creating a new class 
-    classController.newClass(req, res);
+app.get('/courses/new', (req, res) => {
+    //display form for creating a new course 
+    courseController.newCourse(req, res);
 })
 
 /////////////////////

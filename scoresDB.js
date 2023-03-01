@@ -1,8 +1,9 @@
 var sqlite3 = require('sqlite3').verbose();
 let User = require('./User');
+let Course = require('./course')
 
-class UserDB {
+class ScoresDB {
 
 }
 
-module.exports = UserDB;
+module.exports = ScoresDB;

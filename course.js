@@ -1,5 +1,5 @@
 //define class and validate inputs
-class Class {
+class Course {
 
     constructor(description){
         if (description) {
@@ -19,4 +19,4 @@ class Class {
 
 }
 
-module.exports = Class;
+module.exports = Course;

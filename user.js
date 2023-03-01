@@ -1,4 +1,4 @@
-//define car and validate inputs
+//define user and validate inputs
 class User {
 
     constructor(description){
