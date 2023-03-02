@@ -11,13 +11,13 @@ body {
   display: grid;
   align-items: center;
   background-color: #F5F5F5;
-font-family: 'Quicksand', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 h1, caption { 
-padding: 1em;
-color: #0032A0;
-font-family: 'Quicksand', sans-serif;	
+  padding: 1em;
+  color: #0032A0;
+  font-family: 'Quicksand', sans-serif;	
 }
 
 h1 {
@@ -67,17 +67,17 @@ h1 {
 
 /* Style for Faculty and Admin Page */
 img {
-max-width: 30%
+  max-width: 30%
 }  
   
 .content p {
-border: 8px solid; 
-border-color: #b0c4de; 
-border-radius: 10px; 
-padding: 1em; 
-margin: 2em; 
-font-size: 1.25em; 
-text-align: center;
+  border: 8px solid; 
+  border-color: #b0c4de; 
+  border-radius: 10px; 
+  padding: 1em; 
+  margin: 2em; 
+  font-size: 1.25em; 
+  text-align: center;
 }
 
 /*centering the banner and center command*/
@@ -90,14 +90,14 @@ text-align: center;
 
 /*centering the page and creating a width for page*/
 .wrapper {
-width: 90%;
-margin-left: auto;
-margin-right: auto;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*Button*/
 button{
-text-align: right; 
+  text-align: right; 
 }
 
 /*button itself*/
@@ -127,13 +127,13 @@ text-align: right;
 }
 
 .left{
-display: block;
-float: left;
+  display: block;
+  float: left;
 }
 
 .right {
-display: block;
-float: right;
+  display: block;
+  float: right;
 }
 
 /*Table Designing*/ 
@@ -143,7 +143,7 @@ table {
   margin: 0 auto; 
   width: 98%;
   text-align: center;	  
-font-family: 'Quicksand', sans-serif; 
+  font-family: 'Quicksand', sans-serif; 
 }
 
 caption {
@@ -158,7 +158,7 @@ td {
 }
 
 th, td {
-border: 0.1em solid #0033A0; 
+  border: 0.1em solid #0033A0; 
 }
 
 th {
@@ -171,7 +171,7 @@ th {
 }
 
 tr {
-background-color: #fff;
+  background-color: #fff;
 }
 
 li{
