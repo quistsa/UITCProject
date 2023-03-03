@@ -8,6 +8,7 @@ body, header, main, img, h1, caption, td, th, tr, table, button {
 body {
   height: 100%;
   margin: 5em;
+  padding: 3em 0;
   display: grid;
   align-items: center;
   background-color: #F5F5F5;
