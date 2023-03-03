@@ -1,4 +1,3 @@
-
 class LoginController {
 
     loginPage(req, res) {
@@ -25,6 +24,7 @@ class LoginController {
                     res.redirect('/adminCourse'); //only if user is admin, otherwise /faculty
                 } else {
                     res.redirect('/faculty');
+                    //[TODO] redirect to specific faculty member's page once faculty validation is done
                 }
             })
         }

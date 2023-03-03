@@ -1,7 +1,7 @@
 // used to perform operations on users (create, edit, show)
 
 const { test } = require('media-typer');
-const User = require('./class');
+const User = require('./User');
 const userDB = require('./userDB');
 
 class UserController{
