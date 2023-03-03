@@ -24,6 +24,14 @@ class UserController{
         res.render('adminEdit');
     }
 
+    async courseForm(req, res) {
+        res.render('courseForm');
+    }
+
+    async facultyForm(req, res) {
+        res.render('facultyForm');
+    }
+
     async faculty(req, res) {
         //let classes = await userDB.allClasses();
         res.render('faculty'); //, { classes: classes }
