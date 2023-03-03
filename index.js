@@ -76,8 +76,12 @@ app.get('/adminCourse', isAuthenticated, (req, res) => {
     userController.adminCourse(req, res);
 })
 
-app.get('/adminEdit', isAuthenticated, (req, res) => {
-    userController.adminEdit(req, res);
+app.get('/courseForm', isAuthenticated, (req, res) => {
+    userController.courseForm(req, res);
+})
+
+app.get('/facultyForm', isAuthenticated, (req, res) => {
+    userController.facultyForm(req, res);
 })
 
 //app.post('/admin', (req, res) => {
