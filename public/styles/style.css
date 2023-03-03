@@ -181,7 +181,6 @@ li{
 }
 
 input[type=text], select {
-  width: 25%;
   padding: 12px 20px;
   margin: 8px 0;
   display: block;

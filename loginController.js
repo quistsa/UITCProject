@@ -1,3 +1,5 @@
+var Users = require ('./userDB'); //for checking user IDs
+
 class LoginController {
 
     loginPage(req, res) {

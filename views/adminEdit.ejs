@@ -31,10 +31,26 @@ button[type=save] {
   cursor: pointer;
 }
 
+button[type=delete] {
+  width: 25%;
+  background-color: red;
+  color: white;
+  padding: 14px 20px;
+  margin: auto;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 button[type=submit]:hover {
   background-color: #45a049;
 }
 */
+
+Select {
+display: inline-block;
+}
+
 
 .center {
   display: flex;
@@ -105,6 +121,30 @@ h1 {
 <div class="center">
       <button class="btn btn-primary" type="save" id="saveBtn">Save</button>
       <button class="btn btn-primary" type="save" id="editBtn">Edit</button>
+</div>
+
+<br><br>
+
+<div>
+ <label for="box1">Faculty:</label>
+      <select id="box1">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+      
+<br><br>
+      
+      <label for="box2">Courses:</label>
+      <select id="box2">
+        <option value="option4">Option 4</option>
+        <option value="option5">Option 5</option>
+        <option value="option6">Option 6</option>
+      </select>
+
+      <button class="center" type="delete" id="removeBtn">Delete</button>
+
+
 </div>
 
 
