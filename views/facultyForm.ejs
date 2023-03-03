@@ -8,6 +8,42 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 
+<style>
+  input[type=text], select {
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  Select {
+  display: inline-block;
+  }
+  
+  
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+  }
+  
+  .background {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    padding: 1%;
+  }
+
+  </style>
+
 <body>
 
 	<h1>Add and Edit Faculty</h1>
@@ -38,6 +74,11 @@
     <input type="text" id="lname" name="lastname" placeholder="Last Name">
 
   </form>
+</div>
+
+<div class="center">
+  <button class="btn btn-primary" type="save" id="saveBtn">Save</button>
+  <button class="btn btn-primary" type="save" id="editBtn">Delete</button>
 </div>
 
 </body>
