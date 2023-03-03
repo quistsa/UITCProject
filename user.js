@@ -24,11 +24,11 @@ class User {
             this.errors.push("User must have a last name");
         }
 
-        if(this.fName.length < 3){
+        if(this.fName.length < 2){
             this.errors.push("User's first name must be at least 2 characters long");
         }
 
-        if(this.lName.length < 3){
+        if(this.lName.length < 2){
             this.errors.push("User's last name must be at least 2 characters long");
         }
         
