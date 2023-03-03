@@ -4,8 +4,10 @@ class User {
     constructor(description){
         if (description) {
             this.id = description.id;
+            this.userID = description.userID;
             this.fName = description.fName;
             this.lName = description.lName;
+            this.guest = description.guest;
         }
         
         this.errors = [];
@@ -23,11 +25,11 @@ class User {
         }
 
         if(this.fName.length < 3){
-            this.errors.push("User's first name must be at least 3 characters long");
+            this.errors.push("User's first name must be at least 2 characters long");
         }
 
         if(this.lName.length < 3){
-            this.errors.push("User's last name must be at least 3 characters long");
+            this.errors.push("User's last name must be at least 2 characters long");
         }
         
         return this.errors.length <= 0;
