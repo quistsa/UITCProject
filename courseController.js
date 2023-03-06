@@ -11,7 +11,6 @@ class CourseController{
         res.render('courseIndex', { courses: courses });
     }
 
-    //this should not be necessary
     async show(req, res) {
         let id = req.params.id;
         let course = await courseDB.findCourse(id);

@@ -76,14 +76,14 @@ class UserController{
     }
 
     async edit(req, res) {
-        //let id = req.params.id;
-        //let user = await userDB.findUser(id);
+        let id = req.params.id;
+        let user = await userDB.findUser(id);
 
-        //if (!user) {
-        //    res.send("Couldn't find a user with id " + id);
-        //} else {
+        if (!user) {
+            res.send("Couldn't find a user with id " + id);
+        } else {
             res.render('adminEdit'); //, { user: user }
-       // }
+        }
     }
 
     async update(req, res) {
@@ -91,26 +91,26 @@ class UserController{
         //update variables for a user
         //[TODO] add variables to be changed when database is set
 
-        //    console.log("Updating user");
-        //    userDB.update(user);
+            console.log("Updating user");
+            userDB.update(user);
 
-        //    res.writeHead(302, { 'Location': `/users/${user.id}` });
-        //    res.end();
+           res.writeHead(302, { 'Location': `/users/${user.id}` });
+           res.end();
     }
 
     async delete(req, res) {
         console.log("delete :)")
-        //let id = req.params.id;
-        //let user = await userDB.findUser(id);
+        let id = req.params.id;
+        let user = await userDB.findUser(id);
         
 
-        //if (!user) {
-        //    res.send("Couldn't find a user with id " + id);
-        //} else {
-        //   userDB.removeUser(user);
-        //    let users = await userDB.allUsers();
-        //    res.render('userIndex', { users: users });
-        //}
+        if (!user) {
+            res.send("Couldn't find a user with id " + id);
+        } else {
+            userDB.removeUser(user);
+            let users = await userDB.allUsers();
+            res.render('userIndex', { users: users });
+        }
     }
 
     async rawIndex(req, res) {
