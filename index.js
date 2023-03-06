@@ -50,6 +50,7 @@ app.get('/', (req, res) =>{
     loginController.loginPage(req, res);
 })
 
+//////////////////////////////////////////
 //login redirects
 /////////////////////////////////////////
 app.get('/login', (req, res) => {
@@ -64,9 +65,9 @@ app.get('/logout', (req, res) => {
     loginController.logout(req, res); // this doesnt work yet :)
 })
 //////////////////////////////////////////
-
 //admin redirects
 //////////////////////////////////////////
+
 app.get('/adminFaculty', isAuthenticated, (req, res) => {
     //when an admin logs in, use the userController to send them to the admin view, which lists all courses and faculty responses
     userController.adminFaculty(req, res);
@@ -88,8 +89,8 @@ app.get('/facultyForm', isAuthenticated, (req, res) => {
     //create new admin on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
 //    userController.newAdmin(req, res);
 //})
-/////////////////////////////////////////
 
+/////////////////////////////////////////
 //faculty redirects
 /////////////////////////////////////////
 app.get('/faculty', isAuthenticated, (req, res) => {
@@ -101,8 +102,8 @@ app.post('/faculty', (req, res) => {
     //create new faculty on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
     userController.newFaculty(req, res);
 })
-//////////////////////////////////////////
 
+//////////////////////////////////////////
 //courses redirects
 //////////////////////////////////////////
 app.get('/courses', (req, res) => {
@@ -120,7 +121,17 @@ app.get('/courses/new', (req, res) => {
     //display form for creating a new course 
     courseController.newCourse(req, res);
 })
+
 //////////////////////////////////////////
+//error redirects
+//////////////////////////////////////////
+app.get('/404', (req, res) => {
+    userController.error404(req, res);
+});
+
+app.get('/401', (req, res) => {
+    userController.error401(req, res);
+});
 
 /////////////////////
 //launch the server//

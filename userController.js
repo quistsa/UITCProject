@@ -11,6 +11,16 @@ class UserController{
         res.render('userList', { users: users });
     }
 
+    //redirect for 404 and 401 errors
+    async error404(req, res) {
+        res.render('404error');
+    }    
+
+    async error401(req, res) {
+        res.render('401error');
+    }
+
+    //admin functions
     async adminFaculty(req, res) {
         //let users = await userDB.allFaculty();
         res.render('adminFaculty'); //, { users: users }
