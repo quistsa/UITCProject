@@ -7,6 +7,9 @@ const session = require('express-session');
 const UserController = require('./userController');
 const userController = new UserController();
 
+const CourseController = require('./courseController');
+const courseController = new CourseController();
+
 const LoginController = require('./loginController');
 const loginController = new LoginController();
 
@@ -103,6 +106,15 @@ app.post('/faculty', (req, res) => {
     userController.newFaculty(req, res);
 })
 
+app.get('/facultyList', (req, res) => {
+    userController.index(req, res);
+})
+
+app.get('/faculty/init', (req, res) => {
+    require('./userDB').initialize();
+    res.send("Initialized");
+})
+
 //////////////////////////////////////////
 //courses redirects
 //////////////////////////////////////////
@@ -120,6 +132,12 @@ app.post('/courses', (req, res) => {
 app.get('/courses/new', (req, res) => {
     //display form for creating a new course 
     courseController.newCourse(req, res);
+})
+
+//initilization for testing
+app.get('/courses/init', (req, res) => {
+    require('./courseDB').initialize();
+    res.send("Initialized");
 })
 
 //////////////////////////////////////////

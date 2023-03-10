@@ -4,9 +4,22 @@ var sqlite3 = require('sqlite3').verbose();
 let Course = require('./course');
 
 class CourseDB {
+
+    static initialize() {
+        this.db.serialize(() => {
+            this.db.run('DROP TABLE IF EXISTS Courses');
+            this.db.run(`CREATE TABLE Courses (id INTEGER PRIMARY KEY, courseID TEXT NOT NULL, name TEXT NOT NULL);`);
+            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS 101", "Introduction to Computing");');
+            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS 160", "Learn to Code Python");');
+            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS 260", "Application Development in Visual Basic");');
+            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS 450", "IS Project Management");');
+            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS 463", "Information Technology Project");');
+        });
+    }
+
 //function to import users from a csv
     static import() {
-
+        //[TODO]
     }
 
     static allCourses() {

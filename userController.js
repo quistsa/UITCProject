@@ -8,7 +8,7 @@ class UserController{
     //retun list of all users
     async index(req, res) {
         let users = await userDB.allUsers();
-        res.render('userList', { users: users });
+        res.render('facultyList', { users: users });
     }
 
     //redirect for 404 and 401 errors
@@ -89,7 +89,24 @@ class UserController{
     async update(req, res) {
         console.log("update")
         //update variables for a user
-        //[TODO] add variables to be changed when database is set
+            let id = req.params.id;
+            let user = await userDB.findUser(id);
+
+            let testUser = new User(req.body.car);
+            if (!testUser.isValid()) {
+                testUser.id = user.id;
+                res.render('facultyForm', { user: testUser });
+            }
+
+            if (!user) {
+                res.send("Could not find user with id of " + id);
+            } else {
+                user.userID = req.body.user.userID;
+                user.fName = req.body.user.fName;
+                user.lName = req.body.user.lName;
+                user.guest = req.body.user.guest;
+                
+            }
 
             console.log("Updating user");
             userDB.update(user);

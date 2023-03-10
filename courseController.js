@@ -8,7 +8,7 @@ class CourseController{
     //return list of all courses
     async index(req, res) {
         let courses = await courseDB.allCourses();
-        res.render('courseIndex', { courses: courses });
+        res.render('courseList', { courses: courses });
     }
 
     async show(req, res) {
