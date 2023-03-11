@@ -5,7 +5,11 @@ class Score {
     constructor(description){
         if (description) {
             this.id = description.id;
-            this.value = description.value;
+            this.courseID = description.courseID;
+            this.facultyID = description.facultyID;
+            this.prepValue = description.prepValue;
+            this.prefValue = description.prefValue;
+            this.notes = description.notes; 
         }
         
         this.errors = [];
