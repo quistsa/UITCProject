@@ -48,34 +48,16 @@
 				
 				<tr><!--Row 2-->
 					<td>				  
-						 <select >
-							<!--[TODO] iterate to list all courses-->
-							<option>CIS 101</option>
-							<option>CIS 150</option>
-							<option>CIS 159</option>
-							<option>CIS 160</option>
-							<option>CIS 161</option>
-							<option>CIS 162</option>
-							<option>CIS 163</option>
-							<option>CIS 180</option>
-							<option>CIS 221</option>
-							<option>CIS 230</option>
-							<option>CIS 231</option>
-							<option>CIS 233</option>
-							<option>CIS 237</option>
-							<option>CIS 238</option>
-							<option>CIS 241</option>
-							<option>CIS 250</option>
-							<option>CIS 253</option>
-							<option>CIS 258</option>
-							<option>CIS 260</option>
-							<option>CIS 263</option>
-							<option>CIS 280</option>
-							<option>CIS 290</option>
-							<option>CIS 310</option>
-							<option>CIS 320</option>						
-						  </select> </td>
-						  <!--iterate to list all professors and their rankings-->
+						 <select>
+							<!--iterate through list of courses to print IDs-->
+							<% courses.forEach(course => { %>
+								<option><%=course.courseID %></option>
+							<% }); %>
+						
+						 </select> 
+					</td>
+
+					<!--iterate to list all professors and their rankings-->
 					<td>Professor Name</td>
 					<td>0-3</td>
 					<td>0-3</td>
@@ -83,7 +65,7 @@
 				</tr> 		
 					
 				<tr><!--Row 3-->
-					<td></td>
+					<td></td> <!-- might have to add a button here to update records-->
 					<td>Professor Name</td>
 					<td>0-3</td>
 					<td>0-3</td>

@@ -3,6 +3,9 @@
 const { test } = require('media-typer');
 const User = require('./User');
 const userDB = require('./userDB');
+const course = require('./course');
+const courseDB = require('./courseDB');
+
 
 class UserController{
     //retun list of all users
@@ -22,12 +25,13 @@ class UserController{
 
     //admin functions
     async adminFaculty(req, res) {
-        //let users = await userDB.allFaculty();
-        res.render('adminFaculty'); //, { users: users }
+        let users = await userDB.allUsers();
+        res.render('adminFaculty', { users: users });
     }
 
     async adminCourse(req, res) { 
-        res.render('adminCourse');
+        let courses = await courseDB.allCourses();
+        res.render('adminCourse', {courses: courses});
     }
 
     async adminEdit(req, res) {

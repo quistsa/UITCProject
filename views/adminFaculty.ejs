@@ -50,57 +50,10 @@
 				<tr><!--Row 2-->
 					<td>				  
 						 <select >
-							<!--[TODO] iterate through list of users to list the users-->
-							<option>D. Robert Adams</option>
-							<option>Jamal Alsabbagh</option>
-							<option>Allison Bazaire</option>
-							<option>Branson Beach</option>
-							<option>Vijay Bhuse</option>
-							<option>Denton Bobeldyk</option>
-							<option>Sorio Boit</option>
-							<option>Nathaniel Bowman</option>
-							<option>Xiang Cao </option>
-							<option>Erin Carrier</option>
-							<option>Craig Clay </option>
-							<option>Zachary DeBruine</option>
-							<option>Byron DeVries</option>
-							<option>Jie Du</option>
-							<option>Hans Dulimarta</option>
-							<option>Mostafa El-Said</option>
-							<option>Jonathan Engelsma</option>
-							<option>Erik Fredericks</option>
-							<option>Scott Grissom</option>
-							<option>Kim Hawkins</option>
-							<option>Alison Hodgson</option>
-							<option>Andrew Kalafut</option>
-							<option>Cheryl Kautz</option>
-							<option>Larry Kotman</option>
-							<option>Zachary Kurmas</option>
-							<option>Alexander Lalejini</option>
-							<option>David Lange</option>
-							<option>Anthony Langley</option>
-							<option>Jonathan Leidig</option>
-							<option>Paul Leidig</option>						
-							<option>Rodd Lowell</option>
-							<option>Samah Mansour</option>
-							<option>Fatma Mili</option>
-							<option>Catherine Molloseau</option>
-							<option>Jared Moore</option>
-							<option>Jagadeesh Nandigam</option>
-							<option>Rajvardhan Patil</option>
-							<option>Ana Posada</option>
-							<option>Rahat Rafiq</option>
-							<option>John Reynolds</option>
-							<option>Suhila Sawesi</option>
-							<option>Gregory Schymik</option>
-							<option>Sara Sutton</option>
-							<option>Yonglei Tao</option>
-							<option>Christian Trefftz</option>
-							<option>Guenter Tusch</option>
-							<option>Xinli Wang</option>
-							<option>Gregory Wolffe</option>
-							<option>Alisha Woodman</option>
-							<option>Ira Woodring</option>
+							<!--iterate through list of faculty to list the faculty-->
+							<% users.forEach(user => { %>
+								<option><%=user.lName %>, <%= user.fName %></option>
+							<% }); %>
 						  </select> </td>
 						  <!--[TODO] iterate to list all courses and faculty's rankings-->
 					<td>Course Number</td>
