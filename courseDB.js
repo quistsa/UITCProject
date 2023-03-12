@@ -41,6 +41,7 @@ class CourseDB {
             });
         });
     }
+    
 
     static createCourse(desc) {
         let newCourse = new Course(desc);

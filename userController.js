@@ -31,8 +31,11 @@ class UserController{
 
     async adminCourse(req, res) { 
         let courses = await courseDB.allCourses();
-        res.render('adminCourse', {courses: courses});
+        res.render('adminCourse', { courses: courses });
     }
+
+    //search list of users by course
+
 
     async adminEdit(req, res) {
         res.render('adminEdit');

@@ -115,6 +115,10 @@ app.get('/faculty/init', (req, res) => {
     res.send("Initialized");
 })
 
+app.get('/users/:id', (req, res) => {
+    courseController.searchByCourse(req, res);
+})
+
 //////////////////////////////////////////
 //courses redirects
 //////////////////////////////////////////
@@ -138,6 +142,10 @@ app.get('/courses/new', (req, res) => {
 app.get('/courses/init', (req, res) => {
     require('./courseDB').initialize();
     res.send("Initialized");
+})
+
+app.get('/courses/:id', (req, res) => {
+    courseController.searchByUser(req, res);
 })
 
 //////////////////////////////////////////

@@ -37,6 +37,20 @@ class ScoresDB {
         });
     }
 
+    //return list of scores for every user for a specified course [id]
+    static searchByCourse(id) {
+        return new Promise((resolve, reject) => {
+            this.db.all(`SELECT * FROM Scores WHERE `)
+        })
+    }
+
+    //return list of scores for every course for a specified user [id]
+    static searchByUser(id) {
+        return new Promise((resolve, reject) => {
+            this.db.all(`SELECT * FROM Scores WHERE `)
+        })
+    }
+
     static addScore(desc) {
         let newScore = new Score(desc);
         if (newScore.isValid()) {

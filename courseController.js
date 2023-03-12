@@ -11,6 +11,30 @@ class CourseController{
         res.render('courseList', { courses: courses });
     }
 
+    //search list of courses by user
+    async searchByUser(req, res) {
+        let id = req.params.id;
+        let courses = await courseDB.searchByUser(id);
+
+        if (!user) {
+            res.send("Couldn't find a user with ID of " + id);
+        } else {
+            res.render('adminFaculty', { courses: courses });
+        }
+    }
+
+    async searchByCourse(req, res) {
+        let id = req.params.id;
+        let users = await courseDB.searchByCourse(id);
+
+        
+        if (!user) {
+            res.send("Couldn't find a course with ID of " + id);
+        } else {
+            res.render('adminCourse', { users: users });
+        }
+    }
+
     async show(req, res) {
         let id = req.params.id;
         let course = await courseDB.findCourse(id);
