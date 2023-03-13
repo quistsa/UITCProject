@@ -71,12 +71,12 @@ app.get('/logout', (req, res) => {
 //admin redirects
 //////////////////////////////////////////
 
-app.get('/adminFaculty', isAuthenticated, (req, res) => {
+app.get('/adminFaculty',  (req, res) => { //[TODO] add isAuthenticated later
     //when an admin logs in, use the userController to send them to the admin view, which lists all courses and faculty responses
     userController.adminFaculty(req, res);
 })
 
-app.get('/adminCourse', isAuthenticated, (req, res) => {
+app.get('/adminCourse', (req, res) => { //[TODO] add isAuthenticated later
     userController.adminCourse(req, res);
 })
 
@@ -146,6 +146,15 @@ app.get('/courses/init', (req, res) => {
 
 app.get('/courses/:id', (req, res) => {
     courseController.searchByUser(req, res);
+})
+
+//////////////////////////////////////////
+//scores redirects
+//////////////////////////////////////////
+//initilization for testing
+app.get('/scores/init', (req, res) => {
+    require('./scoresDB').initialize();
+    res.send("Initialized");
 })
 
 //////////////////////////////////////////

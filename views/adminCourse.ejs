@@ -36,87 +36,39 @@
 
 			<p class="center"> Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> 
 
+
+			<select>
+				<!--iterate through list of courses to print IDs-->
+				<% courses.forEach(course => { %>
+					<option><%=course.courseID %></option>
+				<% }); %>
+			
+			</select> 
+
+			<!-- button to search that uses the value from the list (selectedIndex?) -->
+
 			<table><!--Starting Table--> 
 			
 				<tr><!--Row 1 -->
-					<th>Course Number</th>
 					<th>Faculty Name</th>
 					<th>Ranking</th>
 					<th>Desire</th>
 					<th>Notes</th> 
 				</tr>	
 				
-				<tr><!--Row 2-->
-					<td>				  
-						 <select>
-							<!--iterate through list of courses to print IDs-->
-							<% courses.forEach(course => { %>
-								<option><%=course.courseID %></option>
-							<% }); %>
-						
-						 </select> 
-					</td>
-
-					<!--iterate to list all professors and their rankings-->
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr> 		
-					
-				<tr><!--Row 3-->
-					<td></td> <!-- might have to add a button here to update records-->
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>
-			
-				<tr><!--Row 4-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>
-			
-				<tr><!--Row 5-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>		
-				
-				<tr><!--Row 6-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>
-			
-				<tr><!--Row 7-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>		
-				
-				<tr><!--Row 8-->
-					<td></td>
-					<td>Professor Name</td>
-					<td>0-3</td>
-					<td>0-3</td>
-					<td>Notes here...</td>
-				</tr>
+				<!-- iterate through list of users and print scores for each -->
+				<% scores.forEach(score => { %>
+					<tr>
+						<td><%= score.userID%></td>
+						<td><%= user.Ranking %></td>
+						<td><%= user.Desire %></td>
+						<td><%= user.notes %></td>
+					</tr> 	
+				<% }); %> <!-- end for loop -->
 				
 			</table>
-	
 		</div>
 	</main>
-	
 </body>
 
    <!--Bootstrap Imports-->

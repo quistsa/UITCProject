@@ -1,8 +1,12 @@
 // used to perform operations on courses (create, edit, show)
 
 const { test } = require('media-typer');
+
 const Course = require('./course');
+
 const courseDB = require('./courseDB');
+const scoresDB = require('./scoresDB')
+const userDB = require('./UserDB');
 
 class CourseController{
     //return list of all courses
@@ -14,24 +18,25 @@ class CourseController{
     //search list of courses by user
     async searchByUser(req, res) {
         let id = req.params.id;
-        let courses = await courseDB.searchByUser(id);
+        let scores = await scoresDB.searchByUser(id);
+        let users = await userDB.allUsers();
 
         if (!user) {
             res.send("Couldn't find a user with ID of " + id);
         } else {
-            res.render('adminFaculty', { courses: courses });
+            res.render('adminFaculty', { scores: scores, users: users});
         }
     }
 
     async searchByCourse(req, res) {
         let id = req.params.id;
-        let users = await courseDB.searchByCourse(id);
+        let scores = await scoresDB.searchByCourse(id);
+        let courses = await courseDB.allCourses();
 
-        
-        if (!user) {
+        if (!course) {
             res.send("Couldn't find a course with ID of " + id);
         } else {
-            res.render('adminCourse', { users: users });
+            res.render('adminCourse', { scores: scores, courses: courses });
         }
     }
 
@@ -42,12 +47,12 @@ class CourseController{
         if (!course) {
             res.send("Couldn't find a course with ID of " + id);
         } else {
-            res.render('showCourse', { course: course  });
+            res.render('showCourse', { course: course });
         }
     }
 
     newCourse(req, res) {
-        res.render('newCourse', {course: new Course()});
+        res.render('newCourse', { course: new Course() });
     }
 
     async create(req, res) {
@@ -56,7 +61,7 @@ class CourseController{
         let newCourse = await courseDB.createCourse(req.body.course);
 
         if (newCourse.isValid()) {
-            res.writeHead(302, { 'Location': `/courses/${newCourse.id}`});
+            res.writeHead(302, { 'Location': `/courses/${ newCourse.id }`});
             res.end();
         } else {
             res.render('newCourse', { course: newCourse });

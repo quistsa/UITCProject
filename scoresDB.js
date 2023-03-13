@@ -15,19 +15,21 @@ class ScoresDB {
     static initialize() {
         this.db.serialize(() => {
             this.db.run('DROP TABLE IF EXISTS Scores');
-            this.db.run(`CREATE TABLE Scores (id INTEGER PRIMARY KEY, facultyID FOREIGN KEY NOT NULL, courseID FOREIGN KEY NOT NULL, prepValue INTEGER NOT NULL, prefValue INTEGER NOT NULL, notes TEXT);`);
-            this.db.run('INSERT INTO Courses (facultyID, courseID, prepValue, prefValue, notes) VALUES ("quistsa", "CIS 101", "1", "2", "no notes");');
+            this.db.run(`CREATE TABLE Scores (id INTEGER PRIMARY KEY, userID INTEGER NOT NULL, courseID INTEGER NOT NULL, ranking INTEGER NOT NULL, desire INTEGER NOT NULL, notes TEXT);`);
+            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("quistsa", "CIS 101", "1", "2", "no notes");');
+            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("kinneyni", "CIS 450", "2", "2", "some notes");');
+            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("cades", "CIS 160", "1", "3", "notenstnot");');
         });
     }
 
-//function to import users from a csv
+    //function to import users from a csv
     static import() {
         //[TODO]
     }
     
-    static findScore(facultyID, courseID) {
+    static findScore(userID, courseID) {
         return new Promise((resolve, reject) => {
-            this.db.all(`SELECT * FROM Scores WHERE (facultyID == ${facultyID}) AND (courseID == ${courseID})`, (err, rows) => {
+            this.db.all(`SELECT * FROM Scores WHERE (userID == ${userID}) AND (courseID == ${courseID})`, (err, rows) => {
                 if (rows.length >= 1) {
                     resolve(new Score(rows[0]));
                 } else {
@@ -40,22 +42,36 @@ class ScoresDB {
     //return list of scores for every user for a specified course [id]
     static searchByCourse(id) {
         return new Promise((resolve, reject) => {
-            this.db.all(`SELECT * FROM Scores WHERE `)
-        })
+            //Users might have to be accessed a different way
+            this.db.all(`SELECT fName, lName, ranking, desire, notes FROM Scores INNER JOIN Users ON Users.userID = Scores.userID WHERE Users.id == ${id}`, (err, rows) => {
+                if (rows.length >= 1) {
+                    resolve(response.map((item) => new Course(item)));
+                } else {
+                    reject(`Course ID ${id} not found`);
+                }
+            });
+        });
     }
 
     //return list of scores for every course for a specified user [id]
     static searchByUser(id) {
-        return new Promise((resolve, reject) => {
-            this.db.all(`SELECT * FROM Scores WHERE `)
-        })
+            return new Promise((resolve, reject) => {
+            //Courses might have to be accessed a different way
+            this.db.all(`SELECT courseID, ranking, desire FROM Scores INNER JOIN Courses ON Courses.courseID = Scores.courseID WHERE Users.userID == ${id}`, (err, rows) => {
+                if (rows.length >= 1) {
+                    resolve(response.map((item) => new Course(item)));
+                } else {
+                    reject(`User ID ${id} not found`);
+                }
+            });
+        });
     }
 
     static addScore(desc) {
         let newScore = new Score(desc);
         if (newScore.isValid()) {
             return new Promise((resolve, reject) => {
-                    this.db.run(`INSERT INTO Scores (facultyID, courseID, prepVal, prefVal, notes) VALUES ("${newScore.facultyID}", "${newScore.courseID}", "${newScore.prepValue}", "${newScore.prepValue}", "${newScore.notes}");`,
+                    this.db.run(`INSERT INTO Scores (userID, courseID, prepVal, prefVal, notes) VALUES ("${newScore.userID}", "${newScore.courseID}", "${newScore.ranking}", "${newScore.ranking}", "${newScore.notes}");`,
                     function(err, data) {
                         newScore.id = this.lastID;
                         resolve(newScore);
@@ -67,7 +83,7 @@ class ScoresDB {
     }
 
     static updateScore(score) {
-        this.db.run(`UPDATE Courses SET facultyID="${score.facultyID}, courseID="${score.courseID}", prepValue="${score.prepValue}", prefValue="${score.prefValue}, notes="${score.notes}`);
+        this.db.run(`UPDATE Courses SET userID="${score.userID}, courseID="${score.courseID}", ranking="${score.ranking}", desire="${score.desire}, notes="${score.notes}`);
     }
 
     static removeScore(score) {
@@ -76,4 +92,5 @@ class ScoresDB {
     }
 }
 
+ScoresDB.db = new sqlite3.Database('scores.sqlite');
 module.exports = ScoresDB;

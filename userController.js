@@ -26,12 +26,14 @@ class UserController{
     //admin functions
     async adminFaculty(req, res) {
         let users = await userDB.allUsers();
-        res.render('adminFaculty', { users: users });
+        let courses = await courseDB.allCourses();
+        res.render('adminFaculty', { users: users,  courses:courses });
     }
 
     async adminCourse(req, res) { 
         let courses = await courseDB.allCourses();
-        res.render('adminCourse', { courses: courses });
+        let users = await userDB.allUsers();
+        res.render('adminCourse', { courses: courses, users: users });
     }
 
     //search list of users by course

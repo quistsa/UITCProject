@@ -66,5 +66,5 @@ class UserDB {
     }
 }
 
-UserDB.db = new sqlite3.Database('users.sqlite');
+UserDB.db = new sqlite3.Database('scores.sqlite');
 module.exports = UserDB;

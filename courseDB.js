@@ -41,7 +41,6 @@ class CourseDB {
             });
         });
     }
-    
 
     static createCourse(desc) {
         let newCourse = new Course(desc);
@@ -67,6 +66,6 @@ class CourseDB {
     }
 }
 
-CourseDB.db = new sqlite3.Database('users.sqlite');
+CourseDB.db = new sqlite3.Database('scores.sqlite');
 
 module.exports = CourseDB;
