@@ -16,7 +16,7 @@ body {
 }
 
 h1, caption { 
-  padding: 0 1em;
+  padding: 1em;
   color: #0032A0;
   font-family: 'Quicksand', sans-serif;	
 }
@@ -87,9 +87,6 @@ img {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 } 
 
 /*centering the page and creating a width for page*/
@@ -102,16 +99,6 @@ img {
 /*Button*/
 button{
   text-align: right; 
-}
-
-.left{
-  display: block;
-  float: left;
-}
-
-.right {
-  display: block;
-  float: right;
 }
 
 /*button itself*/
@@ -140,6 +127,15 @@ button{
   display: block;
 }
 
+.left{
+  display: block;
+  float: left;
+}
+
+.right {
+  display: block;
+  float: right;
+}
 
 /*Table Designing*/ 
 table {
@@ -184,7 +180,6 @@ li{
   margin: 0;
 }
 
-/*Style for input box */
 input[type=text], select {
   padding: 12px 20px;
   margin: 8px 0;
@@ -194,19 +189,21 @@ input[type=text], select {
   box-sizing: border-box;
 }
 
-/*Styling for Admin Edit Page */
-Select {
-  display: inline-block;
-}
-
-.background {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
+.errorCodeH1 {
+  Text-align: center;
+  Font-size: 200px;
+  Font-weight: bold;
+  }
   
-/*.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+  .errorCodeH2 {
+  Text-align: center;
+  Font-size: 75px;
+  }
+  
+  .errorCodeP {
+  Text-align: center;
+  Font-size: 30px;
+  }
+  
+
+
