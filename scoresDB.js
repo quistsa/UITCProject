@@ -3,11 +3,6 @@
 var sqlite3 = require('sqlite3').verbose();
 
 let Score = require('./score');
-let User = require('./User');
-let Course = require('./course')
-
-let userDB = require('./userDB');
-let courseDB = require('./courseDB');
 
 class ScoresDB {
 //Database methods to store and edit courses
@@ -43,8 +38,8 @@ class ScoresDB {
                             FROM Scores 
                             INNER JOIN Users ON Users.userID == Scores.userID
                             INNER JOIN Courses ON Courses.courseID == Scores.courseID
-                            WHERE Courses.id = ${id}`, (err, rows) => { 
-                //[FIX] currently returning error with response not being defined
+                            WHERE Courses.id = ${id}`, (err, rows, response) => { 
+                //[FIX] currently returning error with undefined 'reading map'
                 if (rows.length >= 1) {
                     resolve(response.map((item) => new Score(item)));
                 } else {
@@ -62,8 +57,8 @@ class ScoresDB {
                             FROM Scores 
                             INNER JOIN Courses ON Courses.courseID == Scores.courseID 
                             INNER JOIN Users ON Users.userID == Scores.userID
-                            WHERE Users.userID == ${id}`, (err, rows) => { 
-                //[FIX] currently returning error with response not being defined 
+                            WHERE Users.userID == ${id}`, (err, rows, response) => { 
+                //[FIX] currently returning error with undefined 'reading map'
                 if (rows.length >= 1) {
                     resolve(response.map((item) => new Score(item)));
                 } else {
@@ -78,7 +73,7 @@ class ScoresDB {
         return new Promise((resolve, reject) => {
             this.db.all(`SELECT * FROM Scores 
                             INNER JOIN Courses ON Courses.courseID == Scores.courseID
-                            WHERE userID == ${id}`, (err, rows) => {
+                            WHERE userID == ${id}`, (err, rows, response) => {
                                 //probably returning an error rn
                 if (rows.length >= 1) {
                     resolve(response.map((item) => new Score(item)));
