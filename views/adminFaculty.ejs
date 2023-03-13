@@ -12,8 +12,7 @@
 
 <body>
 	<main class="content">
-		<h1> Welcome Back, admin</h1>
-		<button  class= "right" type="button" onclick="alert('You have successfully logged out. You may now close this window.')">Logout</button> 
+		<!-- <button  class= "right" type="button" onclick="alert('You have successfully logged out. You may now close this window.')">Logout</button> -->
 				
 		<div class="wrapper">
 			
@@ -36,19 +35,13 @@
 
 			<p class="center"> Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> 
 
-			<select >
+			<select id="select">
 				<!--iterate through list of faculty to list the faculty-->
 				<% users.forEach(user => { %>
 					<option><%=user.lName %>, <%= user.fName %></option>
 				<% }); %>
 			  </select>
-				
-				<tr>
-					<th>Courses</th>
-					<th>Ranking</th>
-					<th>Desire</th>
-					<th>Notes</th> 
-				</tr>	
+	
 						
 				<table><!--Starting Table--> 
 			

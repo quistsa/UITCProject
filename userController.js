@@ -38,9 +38,6 @@ class UserController{
         res.render('adminCourse', { courses: courses, users: users, scores: scores });
     }
 
-    //search list of users by course
-
-
     async adminEdit(req, res) {
         res.render('adminEdit');
     }
@@ -54,8 +51,16 @@ class UserController{
     }
 
     async faculty(req, res) {
-        //let classes = await userDB.allClasses();
-        res.render('faculty'); //, { classes: classes }
+        //let id = req.params.id;
+
+        let courses = await courseDB.allCourses();
+        //let user = await userDB.findUser(id);
+        //let scores = await scoresDB.scoresForUser(id);
+        //if (!user) {
+        //    res.send("Couldn't find a user with ID of " + id);
+        //} else {
+            res.render('faculty', { courses: courses }); //, user: user, scores: scores 
+        //}
     }
 
     async show(req, res) {

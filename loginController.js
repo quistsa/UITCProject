@@ -25,8 +25,7 @@ class LoginController {
                 if (req.body.username == admin){
                     res.redirect('/adminCourse'); //only if user is admin, otherwise /faculty
                 } else {
-                    res.redirect('/faculty');
-                    //[TODO] redirect to specific faculty member's page once faculty validation is done
+                    res.redirect('/faculty/' + req.body.username);
                 }
             })
         }

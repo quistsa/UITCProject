@@ -34,30 +34,18 @@ class ScoresDB {
             });
          });
     }
-    
-    static findScore(userID, courseID) {
-        return new Promise((resolve, reject) => {
-            this.db.all(`SELECT * FROM Scores 
-                            WHERE (userID == ${userID}) 
-                            AND (courseID == ${courseID})`, (err, rows) => {
-                if (rows.length >= 1) {
-                    resolve(new Score(rows[0]));
-                } else {
-                    reject(`Id ${id} not found`);
-                }
-            });
-        });
-    }
 
     //return list of scores for every user for a specified course [id]
     static searchByCourse(id) {
         return new Promise((resolve, reject) => {
             //Users might have to be accessed a different way
-            this.db.all(`SELECT Courses.id, fName, lName, ranking, desire, notes 
+            this.db.all(`SELECT *
                             FROM Scores 
-                            INNER JOIN Users ON Users.userID = Scores.userID`, (err, rows) => {
+                            INNER JOIN Users ON Users.userID == Scores.userID
+                            WHERE Courses.id = ${id}`, (err, rows) => {
+                //[FIX] currently returning error with rows.length
                 if (rows.length >= 1) {
-                    resolve(response.map((item) => new Course(item)));
+                    resolve(response.map((item) => new Score(item)));
                 } else {
                     reject(`Course ID ${id} not found`);
                 }
@@ -69,13 +57,31 @@ class ScoresDB {
     static searchByUser(id) {
             return new Promise((resolve, reject) => {
             //Courses might have to be accessed a different way
-            this.db.all(`SELECT courseID, ranking, desire 
+            this.db.all(`SELECT *
                             FROM Scores 
                             INNER JOIN Courses 
-                            ON Courses.courseID = Scores.courseID 
-                            WHERE Courses.courseID == ${id}`, (err, rows) => {
+                            ON Courses.courseID == Scores.courseID 
+                            WHERE Users.userID == ${id}`, (err, rows) => {
+                //[FIX] currently returning error with rows.length 
                 if (rows.length >= 1) {
-                    resolve(response.map((item) => new Course(item)));
+                    resolve(response.map((item) => new Score(item)));
+                } else {
+                    reject(`User ID ${id} not found`);
+                }
+            });
+        });
+    }
+
+    //return scores for a particular user, given an id
+    static scoresForUser(id) {
+        return new Promise((resolve, reject) => {
+            this.db.all(`SELECT * FROM Scores 
+                            INNER JOIN Courses 
+                            ON Courses.courseID == Scores.courseID
+                            WHERE userID == ${id}`, (err, rows) => {
+                //[FIX] currently returning error with rows.length
+                if (rows.length >= 1) {
+                    resolve(response.map((item) => new Score(item)));
                 } else {
                     reject(`User ID ${id} not found`);
                 }

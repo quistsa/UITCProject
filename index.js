@@ -96,7 +96,7 @@ app.get('/facultyForm', isAuthenticated, (req, res) => {
 /////////////////////////////////////////
 //faculty redirects
 /////////////////////////////////////////
-app.get('/faculty', isAuthenticated, (req, res) => {
+app.get('/faculty/:id', (req, res) => { //add isAuthenticated later
     //when a faculty user logs in, use the userController to send them to the faculty view, which should match the user's responses with their ID using mongoDB
     userController.faculty(req, res);
 })
@@ -115,6 +115,7 @@ app.get('/faculty/init', (req, res) => {
     res.send("Initialized");
 })
 
+//[TODO] change this reference, doesn't make sense as users
 app.get('/users/:id', (req, res) => {
     courseController.searchByCourse(req, res);
 })
