@@ -16,7 +16,7 @@ body {
 }
 
 h1, caption { 
-  padding: 1em;
+  padding: 0 1em;
   color: #0032A0;
   font-family: 'Quicksand', sans-serif;	
 }
@@ -87,6 +87,9 @@ img {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 } 
 
 /*centering the page and creating a width for page*/
@@ -99,6 +102,16 @@ img {
 /*Button*/
 button{
   text-align: right; 
+}
+
+.left{
+  display: block;
+  float: left;
+}
+
+.right {
+  display: block;
+  float: right;
 }
 
 /*button itself*/
@@ -127,15 +140,6 @@ button{
   display: block;
 }
 
-.left{
-  display: block;
-  float: left;
-}
-
-.right {
-  display: block;
-  float: right;
-}
 
 /*Table Designing*/ 
 table {
@@ -180,6 +184,7 @@ li{
   margin: 0;
 }
 
+/*Style for input box */
 input[type=text], select {
   padding: 12px 20px;
   margin: 8px 0;
@@ -188,3 +193,20 @@ input[type=text], select {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+/*Styling for Admin Edit Page */
+Select {
+  display: inline-block;
+}
+
+.background {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+  
+/*.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
