@@ -3,8 +3,8 @@
 const { test } = require('media-typer');
 const User = require('./User');
 const userDB = require('./userDB');
-const course = require('./course');
 const courseDB = require('./courseDB');
+const scoresDB = require('./scoresDB');
 
 
 class UserController{
@@ -27,13 +27,15 @@ class UserController{
     async adminFaculty(req, res) {
         let users = await userDB.allUsers();
         let courses = await courseDB.allCourses();
-        res.render('adminFaculty', { users: users,  courses:courses });
+        let scores = await scoresDB.allScores();
+        res.render('adminFaculty', { users: users,  courses: courses, scores: scores });
     }
 
     async adminCourse(req, res) { 
         let courses = await courseDB.allCourses();
         let users = await userDB.allUsers();
-        res.render('adminCourse', { courses: courses, users: users });
+        let scores = await scoresDB.allScores();
+        res.render('adminCourse', { courses: courses, users: users, scores: scores });
     }
 
     //search list of users by course
