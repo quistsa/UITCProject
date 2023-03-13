@@ -6,7 +6,7 @@ const Course = require('./course');
 
 const courseDB = require('./courseDB');
 const scoresDB = require('./scoresDB')
-const userDB = require('./UserDB');
+const userDB = require('./userDB');
 
 class CourseController{
     //return list of all courses

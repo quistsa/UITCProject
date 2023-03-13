@@ -7,8 +7,8 @@ class Score {
             this.id = description.id;
             this.courseID = description.courseID;
             this.facultyID = description.facultyID;
-            this.prepValue = description.prepValue;
-            this.prefValue = description.prefValue;
+            this.ranking = description.ranking;
+            this.desire = description.desire;
             this.notes = description.notes; 
         }
         

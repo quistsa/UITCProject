@@ -42,8 +42,9 @@ class ScoresDB {
             this.db.all(`SELECT *
                             FROM Scores 
                             INNER JOIN Users ON Users.userID == Scores.userID
-                            WHERE Courses.id = ${id}`, (err, rows) => {
-                //[FIX] currently returning error with rows.length
+                            INNER JOIN Courses ON Courses.courseID == Scores.courseID
+                            WHERE Courses.id = ${id}`, (err, rows) => { 
+                //[FIX] currently returning error with response not being defined
                 if (rows.length >= 1) {
                     resolve(response.map((item) => new Score(item)));
                 } else {
@@ -59,10 +60,10 @@ class ScoresDB {
             //Courses might have to be accessed a different way
             this.db.all(`SELECT *
                             FROM Scores 
-                            INNER JOIN Courses 
-                            ON Courses.courseID == Scores.courseID 
-                            WHERE Users.userID == ${id}`, (err, rows) => {
-                //[FIX] currently returning error with rows.length 
+                            INNER JOIN Courses ON Courses.courseID == Scores.courseID 
+                            INNER JOIN Users ON Users.userID == Scores.userID
+                            WHERE Users.userID == ${id}`, (err, rows) => { 
+                //[FIX] currently returning error with response not being defined 
                 if (rows.length >= 1) {
                     resolve(response.map((item) => new Score(item)));
                 } else {
@@ -76,10 +77,9 @@ class ScoresDB {
     static scoresForUser(id) {
         return new Promise((resolve, reject) => {
             this.db.all(`SELECT * FROM Scores 
-                            INNER JOIN Courses 
-                            ON Courses.courseID == Scores.courseID
+                            INNER JOIN Courses ON Courses.courseID == Scores.courseID
                             WHERE userID == ${id}`, (err, rows) => {
-                //[FIX] currently returning error with rows.length
+                                //probably returning an error rn
                 if (rows.length >= 1) {
                     resolve(response.map((item) => new Score(item)));
                 } else {

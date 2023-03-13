@@ -27,7 +27,7 @@ app.use(session({
     secret: 'abcdefghijklmnopqrstuvwxzy'
 }));
 
-//create public folder for css files
+//create public folder for css and image files
 app.use(express.static(__dirname + '/public'));
 
 //check if users have logged in when requesting login-required pages
@@ -96,7 +96,7 @@ app.get('/facultyForm', isAuthenticated, (req, res) => {
 /////////////////////////////////////////
 //faculty redirects
 /////////////////////////////////////////
-app.get('/faculty/:id', (req, res) => { //add isAuthenticated later
+app.get('/faculty', (req, res) => { //add isAuthenticated later
     //when a faculty user logs in, use the userController to send them to the faculty view, which should match the user's responses with their ID using mongoDB
     userController.faculty(req, res);
 })
