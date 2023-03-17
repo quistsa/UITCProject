@@ -3,6 +3,7 @@
 
 const express = require('express');
 const session = require('express-session');
+const favicon = require('express-favicon');
 
 const UserController = require('./userController');
 const userController = new UserController();
@@ -29,6 +30,7 @@ app.use(session({
 
 //create public folder for css and image files
 app.use(express.static(__dirname + '/public'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 //check if users have logged in when requesting login-required pages
 function isAuthenticated(req, res, next) {

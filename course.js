@@ -4,8 +4,8 @@ class Course {
     constructor(description){
         if (description) {
             this.id = description.id;
-            this.courseID = description.courseID.trim().toUpperCase();
-            this.name = description.name.trim();
+            this.courseID = description.courseID;
+            this.name = description.name;
         }
         
         this.errors = [];

@@ -1,4 +1,7 @@
 //define score and validate inputs
+let User = require('./user');
+let Course = require('./course');
+
 class Score {
 
 
@@ -10,6 +13,8 @@ class Score {
             this.ranking = description.ranking;
             this.desire = description.desire;
             this.notes = description.notes; 
+            this.User = new User(description);
+            this.Course = new Course(description);
         }
         
         this.errors = [];

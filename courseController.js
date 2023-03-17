@@ -21,7 +21,7 @@ class CourseController{
         let scores = await scoresDB.searchByUser(id);
         let users = await userDB.allUsers();
 
-        if (!user) {
+        if (!scores) {
             res.send("Couldn't find a user with ID of " + id);
         } else {
             res.render('adminFaculty', { scores: scores, users: users});
@@ -33,7 +33,7 @@ class CourseController{
         let scores = await scoresDB.searchByCourse(id);
         let courses = await courseDB.allCourses();
 
-        if (!course) {
+        if (!scores) {
             res.send("Couldn't find a course with ID of " + id);
         } else {
             res.render('adminCourse', { scores: scores, courses: courses });

@@ -1,7 +1,7 @@
 // used to perform operations on users (create, edit, show)
 
 const { test } = require('media-typer');
-const User = require('./User');
+const User = require('./user');
 const userDB = require('./userDB');
 const courseDB = require('./courseDB');
 const scoresDB = require('./scoresDB');
