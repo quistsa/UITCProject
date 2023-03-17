@@ -38,10 +38,12 @@
 
 			<select id = "select">
 				<!--iterate through list of courses to print IDs-->
+				
 				<% courses.forEach(course => { %>
 					<option><%= course.courseID %></option>
-				<% }); %>
-			
+				<% }); %>	
+
+				<input id="search" typ="text" class="input" placeholder="Search"/>
 			</select> 
 
 			<table><!--Starting Table--> 
