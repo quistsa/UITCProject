@@ -18,6 +18,11 @@ class CourseController{
     //search list of courses by user
     async searchByUser(req, res) {
         let id = req.params.id;
+
+        if (!id){ 
+            id = 1;
+        }
+
         let scores = await scoresDB.searchByUser(id);
         let users = await userDB.allUsers();
 
@@ -30,6 +35,11 @@ class CourseController{
 
     async searchByCourse(req, res) {
         let id = req.params.id;
+        
+        if (!id){ 
+            id = 1;
+        }
+
         let scores = await scoresDB.searchByCourse(id);
         let courses = await courseDB.allCourses();
 

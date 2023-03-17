@@ -29,8 +29,8 @@ app.use(session({
 }));
 
 //create public folder for css and image files
-app.use(express.static(__dirname + '/public'));
-app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(express.static(__dirname + '/views/public'));
+app.use(favicon(__dirname + '/views/public/images/favicon.ico'));
 
 //check if users have logged in when requesting login-required pages
 function isAuthenticated(req, res, next) {
@@ -79,7 +79,7 @@ app.get('/adminFaculty',  (req, res) => { //[TODO] add isAuthenticated later
 })
 
 app.get('/adminCourse', (req, res) => { //[TODO] add isAuthenticated later
-    userController.adminCourse(req, res);
+    courseController.searchByCourse(req, res);
 })
 
 app.get('/courseForm', isAuthenticated, (req, res) => {
