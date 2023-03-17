@@ -38,12 +38,13 @@
 
 			<select id = "select">
 				<!--iterate through list of courses to print IDs-->
-				
 				<% courses.forEach(course => { %>
 					<option><%= course.courseID %></option>
 				<% }); %>	
 
-				<input id="search" typ="text" class="input" placeholder="Search"/>
+				<input type="text" id="input" onkeyup="filterFunction()" placeholder="Search for faculty">
+				
+				<!--<input id="search" typ="text" class="input" onkeyup="myFunction()" placeholder="Search"/> -->
 			</select> 
 
 			<table><!--Starting Table--> 
@@ -83,6 +84,22 @@
 			const index = selectElem.selectedIndex + 1;
 			window.location.href = "/users/" + index;
 		});
+
+		function filterFunction() {
+			var input, filter, ul, li, a, i;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			div = document.getElementById("myDropdown");
+			a = div.getElementsByTagName("a");
+			for (i = 0; i < a.length; i++) {
+				txtValue = a[i].textContent || a[i].innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				a[i].style.display = "";
+				} else {
+				a[i].style.display = "none";
+				}
+			}
+			}
 
 	</script>
 
