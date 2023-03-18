@@ -28,8 +28,9 @@ class CourseController{
 
         if (!scores) {
             res.send("Couldn't find a user with ID of " + id);
+            //[TODO] 404 redirect
         } else {
-            res.render('adminFaculty', { scores: scores, users: users});
+            res.render('adminFaculty', { scores: scores, users: users });
         }
     }
 
@@ -45,6 +46,7 @@ class CourseController{
 
         if (!scores) {
             res.send("Couldn't find a course with ID of " + id);
+            //[TODO] 404 redirect
         } else {
             res.render('adminCourse', { scores: scores, courses: courses });
         }
@@ -56,6 +58,7 @@ class CourseController{
 
         if (!course) {
             res.send("Couldn't find a course with ID of " + id);
+            //[TODO] 404 redirect
         } else {
             res.render('showCourse', { course: course });
         }
@@ -84,6 +87,7 @@ class CourseController{
 
         if (!course) {
             res.send("Couldn't find a course with id " + id);
+            //[TODO] 404 redirect
         } else {
             res.render('courseEdit', { course: course });
         }
@@ -102,6 +106,7 @@ class CourseController{
 
         if (!course) {
             res.send("Could not find course with id of " + id);
+            //[TODO] 404 redirect
         } else {
             course.name = req.body.course.name;
 
@@ -120,6 +125,7 @@ class CourseController{
 
         if (!course) {
             res.send("Couldn't find a course with id " + id);
+            //[TODO] 404 redirect
         } else {
             courseDB.removeCourse(course);
             let courses = await courseDB.allCourses();

@@ -108,7 +108,7 @@ app.post('/faculty', (req, res) => {
     userController.newFaculty(req, res);
 })
 
-app.get('/facultyList', (req, res) => {
+app.get('/users', (req, res) => {
     userController.index(req, res);
 })
 

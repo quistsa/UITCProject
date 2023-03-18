@@ -58,6 +58,7 @@ class UserController{
         //let scores = await scoresDB.scoresForUser(id);
         //if (!user) {
         //    res.send("Couldn't find a user with ID of " + id);
+              //[TODO] 404 redirect
         //} else {
             res.render('faculty', { courses: courses }); //, user: user, scores: scores 
         //}
@@ -69,6 +70,7 @@ class UserController{
 
         if (!user) {
             res.send("Couldn't find a user with ID of " + id);
+            //[TODO] 404 redirect
         } else {
             res.render('showUser', { user: user  });
         }
@@ -97,6 +99,7 @@ class UserController{
 
         if (!user) {
             res.send("Couldn't find a user with id " + id);
+            //[TODO] 404 redirect
         } else {
             res.render('adminEdit'); //, { user: user }
         }
@@ -116,6 +119,7 @@ class UserController{
 
             if (!user) {
                 res.send("Could not find user with id of " + id);
+                //[TODO] 404 redirect
             } else {
                 user.userID = req.body.user.userID;
                 user.fName = req.body.user.fName;
@@ -139,6 +143,7 @@ class UserController{
 
         if (!user) {
             res.send("Couldn't find a user with id " + id);
+            //[TODO] 404 redirect
         } else {
             userDB.removeUser(user);
             let users = await userDB.allUsers();
