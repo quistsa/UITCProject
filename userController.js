@@ -38,10 +38,6 @@ class UserController{
         res.render('admin/adminCourse', { courses: courses, users: users, scores: scores });
     }
 
-    async adminEdit(req, res) {
-        res.render('admin/adminEdit');
-    }
-
     async courseForm(req, res) {
         res.render('course/courseForm');
     }
@@ -78,7 +74,7 @@ class UserController{
     }
 
     newUser(req, res) {
-        res.render('faculty/facultyNew', {user: new User()});
+        res.render('faculty/facultyForm', {user: new User()});
     }
 
     async create(req, res) {
@@ -90,7 +86,7 @@ class UserController{
             res.writeHead(302, { 'Location': `/users/${newUser.id}`});
             res.end();
         } else {
-            res.render('faculty/facultyNew', { user: newUser });
+            res.render('faculty/facultyForm', { user: newUser });
         }
     }
 
@@ -102,7 +98,7 @@ class UserController{
             res.send("Couldn't find a user with id " + id);
             //[TODO] 404 redirect
         } else {
-            res.render('admin/adminEdit'); //, { user: user }
+            res.render('faculty/facultyForm'); //, { user: user }
         }
     }
 

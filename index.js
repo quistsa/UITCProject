@@ -29,7 +29,7 @@ app.use(session({
 }));
 
 //create public folder for css and image files
-app.use(express.static(__dirname + '/views/public'));
+app.use(express.static(__dirname + '/public'));
 
 //favicon handling
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
@@ -84,23 +84,6 @@ app.get('/adminCourse', (req, res) => { //[TODO] add isAuthenticated later
     courseController.searchByCourse(req, res);
 })
 
-app.get('/courseForm', isAuthenticated, (req, res) => {
-    userController.courseForm(req, res);
-})
-
-app.get('/facultyForm', isAuthenticated, (req, res) => {
-    userController.facultyForm(req, res);
-})
-
-app.get('/courses/:id/edit', (req, res) => {
-    //display form for updating a course 
-    courseController.edit(req, res);
-})
-
-app.get('/courses/new', (req, res) =>{ 
-    //display form for creating a new course 
-    courseController.create(req, res);
-})
 
 //app.post('/admin', (req, res) => {
     //create new admin on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
@@ -120,14 +103,23 @@ app.post('/faculty', (req, res) => {
     userController.newFaculty(req, res);
 })
 
-app.get('/users', (req, res) => {
-    userController.index(req, res);
-})
-
 app.get('/faculty/init', (req, res) => {
     require('./userDB').initialize();
     res.send("Initialized");
 })
+
+app.get('/facultyForm', isAuthenticated, (req, res) => {
+    userController.facultyForm(req, res);
+})
+
+app.get('/users', (req, res) => {
+    userController.index(req, res);
+})
+
+app.get('/users/new', (req, res) => {
+    userController.newUser(req, res);
+})
+
 
 //[TODO] change this reference, doesn't make sense as users
 app.get('/users/:id', (req, res) => {
@@ -158,8 +150,26 @@ app.get('/courses/init', (req, res) => {
     res.send("Initialized");
 })
 
+app.get('/courses/new', (req, res) =>{ 
+    //display form for creating a new course 
+    courseController.newCourse(req, res);
+})
+
+app.get('/courseForm', isAuthenticated, (req, res) => {
+    userController.courseForm(req, res);
+})
+
 app.get('/courses/:id', (req, res) => {
     courseController.searchByUser(req, res);
+})
+
+app.post('/courses/:id', (req, res) => {
+    courseController.update(req, res);
+})
+
+app.get('/courses/:id/edit', (req, res) => {
+    //display form for updating a course 
+    courseController.edit(req, res);
 })
 
 //////////////////////////////////////////

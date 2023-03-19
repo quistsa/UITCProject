@@ -23,6 +23,18 @@
 			 
 			<h1 class="center">GVSU School of Computing Course Listing</h1> 
 
+			<nav>		
+				<ul>
+					<li class="center">  	
+						<!--Nav bar-->
+							<a class="btn btn-primary" href="/adminFaculty">Search by Professor</a> 
+							<a class="btn btn-primary" href="/adminCourse">Search by Course</a> 
+							<a class="btn btn-primary" href="/courses">Course List</a>
+							<a class="btn btn-primary" href="/users">Faculty List</a>
+					</li>
+				</ul>		
+			</nav> 
+
 			<table>
 				<tr>
 					<th>Name</th>
@@ -53,6 +65,8 @@
 				<% }); %>
 
 			</table>
+
+			<a class="btn btn-primary" href="/users/new">New Faculty</a>
 
         </div>
     </main>

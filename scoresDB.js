@@ -33,7 +33,7 @@ class ScoresDB {
     //return list of scores for every user for a specified course [id]
     static searchByCourse(id) {
         return new Promise((resolve, reject) => {
-          this.db.all(`SELECT * FROM Scores INNER JOIN Users ON Users.userID == Scores.userID INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE Courses.id = ${id}`, (err, rows, response) => {
+          this.db.all(`SELECT * FROM Scores INNER JOIN Users ON Users.userID == Scores.userID INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE Courses.courseID = ${id}`, (err, rows, response) => {
             if (err) {
               console.error(err);
               reject(err);
