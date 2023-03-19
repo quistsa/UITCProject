@@ -12,7 +12,7 @@ class CourseController{
     //return list of all courses
     async index(req, res) {
         let courses = await courseDB.allCourses();
-        res.render('courseList', { courses: courses });
+        res.render('course/courseList', { courses: courses });
     }
 
     //search list of courses by user
@@ -30,7 +30,7 @@ class CourseController{
             res.send("Couldn't find a user with ID of " + id);
             //[TODO] 404 redirect
         } else {
-            res.render('adminFaculty', { scores: scores, users: users });
+            res.render('course/adminFaculty', { scores: scores, users: users, facultyID: id });
         }
     }
 
@@ -48,10 +48,11 @@ class CourseController{
             res.send("Couldn't find a course with ID of " + id);
             //[TODO] 404 redirect
         } else {
-            res.render('adminCourse', { scores: scores, courses: courses });
+            res.render('course/adminCourse', { scores: scores, courses: courses, courseID: id });
         }
     }
 
+    //not currently used or necessary
     async show(req, res) {
         let id = req.params.id;
         let course = await courseDB.findCourse(id);
@@ -77,7 +78,7 @@ class CourseController{
             res.writeHead(302, { 'Location': `/courses/${ newCourse.id }`});
             res.end();
         } else {
-            res.render('newCourse', { course: newCourse });
+            res.render('course/newCourse', { course: newCourse });
         }
     }
 
@@ -89,7 +90,7 @@ class CourseController{
             res.send("Couldn't find a course with id " + id);
             //[TODO] 404 redirect
         } else {
-            res.render('courseEdit', { course: course });
+            res.render('course/courseEdit', { course: course });
         }
     }
 
@@ -100,7 +101,7 @@ class CourseController{
         let testCourse = new Course(req.body.course);
         if (!testCourse.isValid()) {
             testCourse.id = course.id;
-            res.render('courseEdit', { course: testCourse });
+            res.render('course/courseEdit', { course: testCourse });
             return;
         }
 
@@ -129,7 +130,7 @@ class CourseController{
         } else {
             courseDB.removeCourse(course);
             let courses = await courseDB.allCourses();
-            res.render('courseIndex', { courses: courses });
+            res.render('course/courseList', { courses: courses });
         }
     }
 

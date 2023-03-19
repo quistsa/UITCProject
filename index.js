@@ -30,7 +30,9 @@ app.use(session({
 
 //create public folder for css and image files
 app.use(express.static(__dirname + '/views/public'));
-app.use(favicon(__dirname + '/views/public/images/favicon.ico'));
+
+//favicon handling
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 //check if users have logged in when requesting login-required pages
 function isAuthenticated(req, res, next) {
@@ -90,6 +92,16 @@ app.get('/facultyForm', isAuthenticated, (req, res) => {
     userController.facultyForm(req, res);
 })
 
+app.get('/courses/:id/edit', (req, res) => {
+    //display form for updating a course 
+    courseController.edit(req, res);
+})
+
+app.get('/courses/new', (req, res) =>{ 
+    //display form for creating a new course 
+    courseController.create(req, res);
+})
+
 //app.post('/admin', (req, res) => {
     //create new admin on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
 //    userController.newAdmin(req, res);
@@ -122,6 +134,10 @@ app.get('/users/:id', (req, res) => {
     courseController.searchByCourse(req, res);
 })
 
+app.get('/users/:id/edit', (req, res) => {
+    userController.edit(req, res);
+})
+
 //////////////////////////////////////////
 //courses redirects
 //////////////////////////////////////////
@@ -134,11 +150,6 @@ app.get('/courses', (req, res) => {
 app.post('/courses', (req, res) => {
     //create new course on post request for /courses
     courseController.create(req, res);
-})
-
-app.get('/courses/new', (req, res) => {
-    //display form for creating a new course 
-    courseController.newCourse(req, res);
 })
 
 //initilization for testing
@@ -169,6 +180,13 @@ app.get('/404', (req, res) => {
 
 app.get('/401', (req, res) => {
     userController.error401(req, res);
+});
+
+//handling 404 redirects
+app.use((req, res, next) => {
+    res.status(404).render('404error', {
+      pageTitle: 'Page Not Found'
+    });
 });
 
 /////////////////////

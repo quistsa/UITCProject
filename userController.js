@@ -11,7 +11,7 @@ class UserController{
     //retun list of all users
     async index(req, res) {
         let users = await userDB.allUsers();
-        res.render('facultyList', { users: users });
+        res.render('faculty/facultyList', { users: users });
     }
 
     //redirect for 404 and 401 errors
@@ -28,26 +28,26 @@ class UserController{
         let users = await userDB.allUsers();
         let courses = await courseDB.allCourses();
         let scores = await scoresDB.allScores();
-        res.render('adminFaculty', { users: users,  courses: courses, scores: scores });
+        res.render('admin/adminFaculty', { users: users,  courses: courses, scores: scores });
     }
 
     async adminCourse(req, res) { 
         let courses = await courseDB.allCourses();
         let users = await userDB.allUsers();
         let scores = await scoresDB.allScores();
-        res.render('adminCourse', { courses: courses, users: users, scores: scores });
+        res.render('admin/adminCourse', { courses: courses, users: users, scores: scores });
     }
 
     async adminEdit(req, res) {
-        res.render('adminEdit');
+        res.render('admin/adminEdit');
     }
 
     async courseForm(req, res) {
-        res.render('courseForm');
+        res.render('course/courseForm');
     }
 
     async facultyForm(req, res) {
-        res.render('facultyForm');
+        res.render('faculty/facultyForm');
     }
 
     async faculty(req, res) {
@@ -60,10 +60,11 @@ class UserController{
         //    res.send("Couldn't find a user with ID of " + id);
               //[TODO] 404 redirect
         //} else {
-            res.render('faculty', { courses: courses }); //, user: user, scores: scores 
+            res.render('faculty/faculty', { courses: courses }); //, user: user, scores: scores 
         //}
     }
 
+    //not currently used or necessary
     async show(req, res) {
         let id = req.params.id;
         let user = await userDB.findUser(id);
@@ -72,12 +73,12 @@ class UserController{
             res.send("Couldn't find a user with ID of " + id);
             //[TODO] 404 redirect
         } else {
-            res.render('showUser', { user: user  });
+            res.render('faculty/facultyShow', { user: user  });
         }
     }
 
     newUser(req, res) {
-        res.render('newUser', {user: new User()});
+        res.render('faculty/facultyNew', {user: new User()});
     }
 
     async create(req, res) {
@@ -89,7 +90,7 @@ class UserController{
             res.writeHead(302, { 'Location': `/users/${newUser.id}`});
             res.end();
         } else {
-            res.render('newUser', { user: newUser });
+            res.render('faculty/facultyNew', { user: newUser });
         }
     }
 
@@ -101,7 +102,7 @@ class UserController{
             res.send("Couldn't find a user with id " + id);
             //[TODO] 404 redirect
         } else {
-            res.render('adminEdit'); //, { user: user }
+            res.render('admin/adminEdit'); //, { user: user }
         }
     }
 
@@ -114,7 +115,7 @@ class UserController{
             let testUser = new User(req.body.car);
             if (!testUser.isValid()) {
                 testUser.id = user.id;
-                res.render('facultyForm', { user: testUser });
+                res.render('faculty/facultyForm', { user: testUser });
             }
 
             if (!user) {
@@ -147,7 +148,7 @@ class UserController{
         } else {
             userDB.removeUser(user);
             let users = await userDB.allUsers();
-            res.render('userIndex', { users: users });
+            res.render('faculty/facultyList', { users: users });
         }
     }
 
