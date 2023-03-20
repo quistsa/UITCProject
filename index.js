@@ -75,15 +75,18 @@ app.get('/logout', (req, res) => {
 //admin redirects
 //////////////////////////////////////////
 
-app.get('/adminFaculty',  (req, res) => { //[TODO] add isAuthenticated later
+app.get('/facultySearch',  (req, res) => { //[TODO] add isAuthenticated later
     //when an admin logs in, use the userController to send them to the admin view, which lists all courses and faculty responses
     userController.adminFaculty(req, res);
 })
 
-app.get('/adminCourse', (req, res) => { //[TODO] add isAuthenticated later
+app.get('/courseSearch', (req, res) => { //[TODO] add isAuthenticated later
     courseController.searchByCourse(req, res);
 })
 
+app.get('/courseSearch/:id', (req, res) => {
+    courseController.searchByCourse(req, res);
+})
 
 //app.post('/admin', (req, res) => {
     //create new admin on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
@@ -124,11 +127,6 @@ app.get('/users/:id/edit', (req, res) => {
     userController.edit(req, res);
 })
 
-//[TODO] change this reference, doesn't make sense as users
-app.get('/courseSearch/:id', (req, res) => {
-    courseController.searchByCourse(req, res);
-})
-
 app.get('/users/:id/edit', (req, res) => {
     userController.edit(req, res);
 })
@@ -138,7 +136,6 @@ app.get('/users/:id/edit', (req, res) => {
 //////////////////////////////////////////
 app.get('/courses', (req, res) => {
     //when the course list is requested, use courseController to retrieve all courses
-    //[not sure if necessary]
     courseController.index(req, res);
 })
 
@@ -198,6 +195,12 @@ app.get('/401', (req, res) => {
 //handling 404 redirects
 app.use((req, res, next) => {
     res.status(404).render('404error', {
+      pageTitle: 'Page Not Found'
+    });
+});
+
+app.use((req, res, next) => {
+    res.status(401).render('401error', {
       pageTitle: 'Page Not Found'
     });
 });
