@@ -129,6 +129,10 @@ app.get('/courseSearch/:id', (req, res) => {
     courseController.searchByCourse(req, res);
 })
 
+app.get('/users/:id/edit', (req, res) => {
+    userController.edit(req, res);
+})
+
 //////////////////////////////////////////
 //courses redirects
 //////////////////////////////////////////
