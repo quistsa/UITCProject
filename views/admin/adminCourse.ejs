@@ -116,82 +116,37 @@
 			}
 			}
 
-			/*rules for sortable table for ranking and desire part 1 (not sure which one will work)
-
-			const dataTable = document.getElementById("dataTable")
-			const tableButtons = document.querySelectorAll("thButton");
-
-			const sortData = (data, param, direction = "asc") => {
-				const sortedData =
-				direction == "asc"
-					? [...data].sort(function (a, b) {
-						if (a[param] < b[param]) {
-							return -1;
-						}
-						if (a[param] > b[param]) {
-							return 1;
-						}
-						return 0;
-						})
-					: [...data].sort(function (a, b) {
-						if (b[param] < a[param]) {
-							return -1;
-						}
-						if (b[param] > a[param]) {
-							return 1;
-						}
-						return 0;
-						});
-				getDataTable(sortedData);
-				};
-
-			window.addEventListener("load", () => {
-					[...tableButtons].map((button) => {
-					button.addEventListener("click", (e) => {
-						
-					if (e.target.getAttribute("data-dir") == "desc") {
-						sortData(response.pokedata, e.target.id, "desc");
-						e.target.setAttribute("data-dir", "asc");
-					} else {
-						sortData(response.pokedata, e.target.id, "asc");
-						e.target.setAttribute("data-dir", "desc");
-					}
-					
-					});
-				});
-				}); */
-
-				//rules for sortable table for ranking and desire part 2 (not sure which one will work)
+		//rules for sortable table for ranking and desire part 2 (not sure which one will work)
 				
-				/**
-				 *  @param {HTMLTableElement}
-				 * @param {number}
-				 * @param {boolean}
-				 */
-				/*function sortTable(table, column, asc = true) {
-					const tBody = table.tBodies[0];
-					const rows = Array.from(tBody.querySelectorALL("tr"));
-					const dirModify = asc ? 1 : -1;
+		/**
+			 *  @param {HTMLTableElement}
+			 * @param {number}
+			 * @param {boolean}
+			 */
+		/*function sortTable(table, column, asc = true) {
+			const tBody = table.tBodies[0];
+			const rows = Array.from(tBody.querySelectorALL("tr"));
+			const dirModify = asc ? 1 : -1;
 
-					const sortedRows = rows.sort((a, b) => {
-						const aColText = a.querySelector('td:nth-child(${column + 1})').textContent.trim();
-						const bColText = b.querySelector('td:nth-child(${column + 1})').textContent.trim();
+			const sortedRows = rows.sort((a, b) => {
+			const aColText = a.querySelector('td:nth-child(${column + 1})').textContent.trim();
+			const bColText = b.querySelector('td:nth-child(${column + 1})').textContent.trim();
 
-						return aColText > bColText ? (1 * dirModify) : (-1 * dirModify);
-					});
+			return aColText > bColText ? (1 * dirModify) : (-1 * dirModify);
+		});
 
-					while (Body.firstChild) {
-						tBody.removeChild(tBody.firstChild);
-					}
+		while (Body.firstChild) {
+			tBody.removeChild(tBody.firstChild);
+		}
 
-					tBody.append(...sortedRows);
+		tBody.append(...sortedRows);
 
-					table.querySelectorALL("th").forEach(th =>th.classList.remove("th-sort-asc", "th-sort-desc"));
-					table.querySelector('th:nth-child(${column + 1})').classList.toggle("th-sort-asc", asc);
-					table.querySelector('th:nth-child(${column + 1})').classList.toggle("th-sort-desc", !asc);
-				}
+		table.querySelectorALL("th").forEach(th =>th.classList.remove("th-sort-asc", "th-sort-desc"));
+		table.querySelector('th:nth-child(${column + 1})').classList.toggle("th-sort-asc", asc);
+		table.querySelector('th:nth-child(${column + 1})').classList.toggle("th-sort-desc", !asc);
+		}
 
-			sortTable(document.querySelector("table"), 1, false); */
+		sortTable(document.querySelector("table"), 1, false); */
 
 	</script>
 
