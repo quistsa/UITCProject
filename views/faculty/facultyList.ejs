@@ -39,7 +39,6 @@
 				<tr>
 					<th>Name</th>
                     <th>userID</th>
-					<th>Guest?</th>
 					<th>Actions</th>
 				</tr>
 
@@ -50,13 +49,6 @@
 						</td>
 						<td>
 							<%= user.userID %>
-						</td>
-                        <td>
-							<% if (user.guest == "0"){ %>
-                                false
-                            <% } else { %>
-                                true
-                            <% } %>
 						</td>
 						<td>
 							<a class="btn btn-primary" href="/users/<%= user.id%>/edit">Edit</a>
