@@ -14,6 +14,7 @@ class ScoresDB {
             this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("quistsa", "CIS 101", "1", "2", "no notes");');
             this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("kinneyni", "CIS 450", "2", "2", "some notes");');
             this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("cades", "CIS 160", "1", "3", "notenstnot");');
+            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("skrobotr", "CIS 260", "3", "1", "a note");');
         });
     }
 
@@ -33,7 +34,8 @@ class ScoresDB {
     //return list of scores for every user for a specified course [id]
     static searchByCourse(id) {
         return new Promise((resolve, reject) => {
-          this.db.all(`SELECT * FROM Scores INNER JOIN Users ON Users.userID == Scores.userID INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE Courses.id = ${id}`, (err, rows, response) => {
+          //join Users and Scores tables together in order to get first and last names of users in the same table, selecting only where courseID matches the given id
+          this.db.all(`SELECT * FROM Scores INNER JOIN Users ON Users.userID == Scores.userID INNER JOIN Courses ON Courses.courseID == Scores.courseID`, (err, rows, response) => {
             if (err) {
               console.error(err);
               reject(err);
@@ -53,8 +55,8 @@ class ScoresDB {
     //return list of scores for every course for a specified user [id]
     static searchByUser(id) {
             return new Promise((resolve, reject) => {
-            //Courses might have to be accessed a different way
-            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID INNER JOIN Users ON Users.userID == Scores.userID WHERE Users.userID == ${id}`, (err, rows, response) => { 
+            //need to select things only where courseID = id still
+            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID INNER JOIN Users ON Users.userID == Scores.userID`, (err, rows, response) => { 
                 if (err) {
                     console.error(err);
                     reject(err);
@@ -64,7 +66,7 @@ class ScoresDB {
                     if (rows.length >= 1) {
                         resolve(rows.map((item) => new Score(item)));
                     } else {
-                        reject(`Course ID ${id} not found`);
+                        reject(`User ID ${id} not found`);
                     }
                     }
                 });
@@ -75,7 +77,6 @@ class ScoresDB {
     static scoresForUser(id) {
         return new Promise((resolve, reject) => {
             this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE userID == ${id}`, (err, rows, response) => {
-                                //probably returning an error rn
                 if (rows.length >= 1) {
                     resolve(response.map((item) => new Score(item)));
                 } else {

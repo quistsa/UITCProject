@@ -9,11 +9,11 @@ class CourseDB {
         this.db.serialize(() => {
             this.db.run('DROP TABLE IF EXISTS Courses');
             this.db.run(`CREATE TABLE Courses (id INTEGER PRIMARY KEY, courseID TEXT NOT NULL, name TEXT NOT NULL);`);
-            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS 101", "Introduction to Computing");');
-            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS 160", "Learn to Code Python");');
-            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS 260", "Application Development in Visual Basic");');
-            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS 450", "IS Project Management");');
-            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS 463", "Information Technology Project");');
+            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS101", "Introduction to Computing");');
+            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS160", "Learn to Code Python");');
+            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS260", "Application Development in Visual Basic");');
+            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS450", "IS Project Management");');
+            this.db.run('INSERT INTO Courses (courseID, name) VALUES ("CIS463", "Information Technology Project");');
         });
     }
 
@@ -42,7 +42,7 @@ class CourseDB {
         });
     }
 
-    static createCourse(desc) {
+    static create(desc) {
         let newCourse = new Course(desc);
         if (newCourse.isValid()) {
             return new Promise((resolve, reject) => {
@@ -57,11 +57,11 @@ class CourseDB {
         }
     }
 
-    static updateCourse(course) {
+    static update(course) {
         this.db.run(`UPDATE Courses SET courseID="${course.courseID}", name="${course.name}"`);
     }
 
-    static removeCourse(course) {
+    static remove(course) {
         this.db.run(`DELETE FROM Courses WHERE id="${course.id}`);
     }
 }

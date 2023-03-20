@@ -29,8 +29,10 @@ app.use(session({
 }));
 
 //create public folder for css and image files
-app.use(express.static(__dirname + '/views/public'));
-app.use(favicon(__dirname + '/views/public/images/favicon.ico'));
+app.use(express.static(__dirname + '/public'));
+
+//favicon handling
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 //check if users have logged in when requesting login-required pages
 function isAuthenticated(req, res, next) {
@@ -82,13 +84,6 @@ app.get('/adminCourse', (req, res) => { //[TODO] add isAuthenticated later
     courseController.searchByCourse(req, res);
 })
 
-app.get('/courseForm', isAuthenticated, (req, res) => {
-    userController.courseForm(req, res);
-})
-
-app.get('/facultyForm', isAuthenticated, (req, res) => {
-    userController.facultyForm(req, res);
-})
 
 //app.post('/admin', (req, res) => {
     //create new admin on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
@@ -108,17 +103,29 @@ app.post('/faculty', (req, res) => {
     userController.newFaculty(req, res);
 })
 
-app.get('/users', (req, res) => {
-    userController.index(req, res);
-})
-
 app.get('/faculty/init', (req, res) => {
     require('./userDB').initialize();
     res.send("Initialized");
 })
 
+app.get('/facultyForm', isAuthenticated, (req, res) => {
+    userController.facultyForm(req, res);
+})
+
+app.get('/users', (req, res) => {
+    userController.index(req, res);
+})
+
+app.get('/users/new', (req, res) => {
+    userController.newUser(req, res);
+})
+
+app.get('/users/:id/edit', (req, res) => {
+    userController.edit(req, res);
+})
+
 //[TODO] change this reference, doesn't make sense as users
-app.get('/users/:id', (req, res) => {
+app.get('/courseSearch/:id', (req, res) => {
     courseController.searchByCourse(req, res);
 })
 
@@ -136,19 +143,32 @@ app.post('/courses', (req, res) => {
     courseController.create(req, res);
 })
 
-app.get('/courses/new', (req, res) => {
-    //display form for creating a new course 
-    courseController.newCourse(req, res);
-})
-
 //initilization for testing
 app.get('/courses/init', (req, res) => {
     require('./courseDB').initialize();
     res.send("Initialized");
 })
 
+app.get('/courses/new', (req, res) =>{ 
+    //display form for creating a new course 
+    courseController.newCourse(req, res);
+})
+
+app.get('/courseForm', isAuthenticated, (req, res) => {
+    userController.courseForm(req, res);
+})
+
 app.get('/courses/:id', (req, res) => {
     courseController.searchByUser(req, res);
+})
+
+app.post('/courses/:id', (req, res) => {
+    courseController.update(req, res);
+})
+
+app.get('/courses/:id/edit', (req, res) => {
+    //display form for updating a course 
+    courseController.edit(req, res);
 })
 
 //////////////////////////////////////////
@@ -169,6 +189,13 @@ app.get('/404', (req, res) => {
 
 app.get('/401', (req, res) => {
     userController.error401(req, res);
+});
+
+//handling 404 redirects
+app.use((req, res, next) => {
+    res.status(404).render('404error', {
+      pageTitle: 'Page Not Found'
+    });
 });
 
 /////////////////////
