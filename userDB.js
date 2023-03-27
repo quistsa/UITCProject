@@ -11,7 +11,7 @@ class UserDB {
             this.db.run(`CREATE TABLE Users (id INTEGER PRIMARY KEY, userID TEXT NOT NULL, fName TEXT NOT NULL, lName TEXT NOT NULL, guest INTEGER NOT NULL);`);
             this.db.run('INSERT INTO Users (userID, fName, lName, guest) VALUES ("quistsa", "Sam", "Quist", "0");');
             this.db.run('INSERT INTO Users (userID, fName, lName, guest) VALUES ("cades", "Selena", "Cade", "0");');
-            this.db.run('INSERT INTO Users (userID, fName, lName, guest) VALUES ("kinneyni", "Nichole", "Kinney", "0");');
+            this.db.run('INSERT INTO Users (userID, fName, lName, guest) VALUES ("kinneyni", "Nicole", "Kinney", "0");');
             this.db.run('INSERT INTO Users (userID, fName, lName, guest) VALUES ("skrobotr", "Ryan", "Skrobot", "0");');
             
         });

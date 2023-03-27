@@ -25,7 +25,7 @@ class LoginController {
                 if (req.body.username == admin){
                     res.redirect('/courseSearch'); //only if user is admin, otherwise /faculty
                 } else {
-                    res.redirect('/faculty/' + req.body.username);
+                    res.redirect('/faculty/'); // + req.body.username
                 }
             })
         }

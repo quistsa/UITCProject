@@ -38,7 +38,7 @@ class CourseController{
         let id = req.params.id;
         
         if (!id){ 
-            id = CIS101;
+            id = "CIS101";
         }
 
         let scores = await scoresDB.searchByCourse(id);

@@ -1,4 +1,4 @@
-//index.js verifies authentication and handles web requests to redirect users to the different pages
+    //index.js verifies authentication and handles web requests to redirect users to the different pages
 //Sam Quist, Up In The Cloud Computing
 
 const express = require('express');
@@ -77,7 +77,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/facultySearch',  (req, res) => { //[TODO] add isAuthenticated later
     //when an admin logs in, use the userController to send them to the admin view, which lists all courses and faculty responses
-    userController.adminFaculty(req, res);
+    userController.searchByFaculty(req, res);
 })
 
 app.get('/courseSearch', (req, res) => { //[TODO] add isAuthenticated later
