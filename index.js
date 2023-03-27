@@ -71,6 +71,7 @@ app.post('/login', (req, res) => {
 app.get('/logout', (req, res) => {
     loginController.logout(req, res); // this doesnt work yet :)
 })
+
 //////////////////////////////////////////
 //admin redirects
 //////////////////////////////////////////

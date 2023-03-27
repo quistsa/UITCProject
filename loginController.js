@@ -15,7 +15,7 @@ class LoginController {
         const admin = "admin"; //these can go away once user verification works properly
         const faculty = "faculty";
         if (req.body.username !== admin && req.body.username !== faculty) {
-            res.render("login", { message: 'Incorrect userID' });
+            res.render("login", { message: 'Incorrect user ID' });
         } else {
             console.log("Creating new session");
             req.session.regenerate((err) => {
