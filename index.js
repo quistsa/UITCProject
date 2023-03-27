@@ -77,7 +77,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/facultySearch',  (req, res) => { //[TODO] add isAuthenticated later
     //when an admin logs in, use the userController to send them to the admin view, which lists all courses and faculty responses
-    userController.searchByFaculty(req, res);
+    courseController.searchByUser(req, res);
 })
 
 app.get('/courseSearch', (req, res) => { //[TODO] add isAuthenticated later

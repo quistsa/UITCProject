@@ -30,7 +30,7 @@ class CourseController{
             res.send("Couldn't find a user with ID of " + id);
             //[TODO] redirect to adminFaculty with error message
         } else {
-            res.render('course/adminFaculty', { scores: scores, users: users, facultyID: id });
+            res.render('admin/adminFaculty', { scores: scores, users: users, facultyID: id });
         }
     }
 
