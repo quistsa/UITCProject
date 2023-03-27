@@ -35,15 +35,15 @@
 			</nav> 
 
 			<p class="center"> Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> 
-
-			<select id="select">
-				<!--iterate through list of courses to print IDs-->
-					<% courses.forEach(course => { %>
-						<option id="<%= course.courseID %>"><%= course.courseID %></option>
-					<% }); %>	
-					<input type="text" id="input" onkeyup="filterFunction()" placeholder="Search">
-
-			</select> 
+			<div>
+				<input type="text" id="input" onkeyup="filterFunction()" placeholder="Search..">
+				<select id="select">
+					<!--iterate through list of courses to print IDs-->
+						<% courses.forEach(course => { %>
+							<option id="<%= course.courseID %>"><%= course.courseID %></option>
+						<% }); %>	
+				</select> 
+			</div>
 		
 
 			<table id="dataTable"><!--Starting Table--> 
@@ -98,12 +98,13 @@
 			}
 		setCourse(document.getElementById('select'),"<%=courseID%>");
 
+		//rules for search bar (almost completed need help on select)
 		function filterFunction() {
 			var input, filter, ul, li, a, i;
-			input = document.getElementById("myInput");
+			input = document.getElementById("input");
 			filter = input.value.toUpperCase();
-			div = document.getElementById("myDropdown");
-			a = div.getElementsByTagName("a");
+			select = document.getElementById("select");
+			
 			for (i = 0; i < a.length; i++) {
 				txtValue = a[i].textContent || a[i].innerText;
 				if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -114,12 +115,6 @@
 			}
 			}
 
-		//rules for search bar
-		let select = document.getElementById('select')
-
-		select.onclick = function() {
-			list.classList.toggle()
-		}
 
 		//rules for sortable table for ranking and desire (need to fix numerical asc but works)
 			function sortTable(n) {
