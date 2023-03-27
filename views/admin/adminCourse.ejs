@@ -34,15 +34,22 @@
 				</ul>		
 			</nav> 
 
-			<p class="center"> Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> 
-			<div>
-				<input type="text" id="input" onkeyup="filterFunction()" placeholder="Search..">
+			<p class="center"> Ranking Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away
+			</br> Desire Key: 0 = can't teach, 1 = don't want to teach , 2 = somewhat would love to teach, 3 = would love to teach</p>
+	
+
+			<div class="input-group">
+				<ul>
+					<li>
+						<div>
+							<input type="text" id="searchInput" onkeyup="filterFunction()" placeholder="Search..">
 				<select id="select">
 					<!--iterate through list of courses to print IDs-->
 						<% courses.forEach(course => { %>
-							<option id="<%= course.courseID %>"><%= course.courseID %></option>
+							<option id="<%= course.courseID %>"><a href="#"><%= course.courseID %></a></option>
 						<% }); %>	
 				</select> 
+				</ul>
 			</div>
 		
 
@@ -99,21 +106,47 @@
 		setCourse(document.getElementById('select'),"<%=courseID%>");
 
 		//rules for search bar (almost completed need help on select)
-		function filterFunction() {
-			var input, filter, ul, li, a, i;
+		/*function filterFunction() {
+			var input, filter, select, option, a, i;
 			input = document.getElementById("input");
 			filter = input.value.toUpperCase();
 			select = document.getElementById("select");
-			
-			for (i = 0; i < a.length; i++) {
-				txtValue = a[i].textContent || a[i].innerText;
-				if (txtValue.toUpperCase().indexOf(filter) > -1) {
-				a[i].style.display = "";
+			option = select.getElementsByTagName("option");
+			for (i = 0; i < option.length; i++) {
+				a = option[i].getElementsByTagName("a")[0];
+				if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+					option[i].style.display = "";
 				} else {
-				a[i].style.display = "none";
+					option[i].style.display = "none";
 				}
 			}
+			} */
+
+			const searchInputDropdown = document.getElementById('search-input-dropdown');
+			const dropdownOptions = document.querySelectorAll('.input-group-dropdown-item');
+
+			searchInputDropdown.addEventListener('input', () => {
+			const filter = searchInputDropdown.value.toLowerCase();
+			showOptions();
+			const valueExist = !!filter.length;
+
+			if (valueExist) {
+				dropdownOptions.forEach((el) => {
+				const elText = el.textContent.trim().toLowerCase();
+				const isIncluded = elText.includes(filter);
+				if (!isIncluded) {
+					el.style.display = 'none';
+				}
+				});
 			}
+			});
+
+			const showOptions = () => {
+			dropdownOptions.forEach((el) => {
+				el.style.display = 'flex';
+			})
+			}
+		
 
 
 		//rules for sortable table for ranking and desire (need to fix numerical asc but works)
