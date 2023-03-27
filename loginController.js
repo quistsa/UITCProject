@@ -23,7 +23,7 @@ class LoginController {
                 req.session.user = req.body.username;
                 console.log('here!');
                 if (req.body.username == admin){
-                    res.redirect('/adminCourse'); //only if user is admin, otherwise /faculty
+                    res.redirect('/courseSearch'); //only if user is admin, otherwise /faculty
                 } else {
                     res.redirect('/faculty/' + req.body.username);
                 }
