@@ -59,7 +59,7 @@ class CourseDB {
     }
 
     static update(course) {
-        this.db.run(`UPDATE Courses SET courseID="${course.courseID}", name="${course.name}"`);
+        this.db.run(`UPDATE Courses SET courseID="${course.courseID}", name="${course.name}" WHERE id="${course.id}"`);
     }
 
     static remove(course) {
