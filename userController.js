@@ -103,33 +103,31 @@ class UserController{
     }
 
     async update(req, res) {
-        console.log("update")
         //update variables for a user
-            let id = req.params.id;
-            let user = await userDB.findUser(id);
+        let id = req.params.id;
+        let user = await userDB.findUser(id);
 
-            let testUser = new User(req.body.car);
-            if (!testUser.isValid()) {
-                testUser.id = user.id;
-                res.render('faculty/facultyForm', { user: testUser });
-            }
+        let testUser = new User(req.body.car);
+        if (!testUser.isValid()) {
+            testUser.id = user.id;
+            res.render('faculty/facultyForm', { user: testUser });
+        }
 
-            if (!user) {
-                res.send("Could not find user with id of " + id);
-                //[TODO] redirect to facultyForm with error message
-            } else {
-                user.userID = req.body.user.userID;
-                user.fName = req.body.user.fName;
-                user.lName = req.body.user.lName;
-                user.guest = req.body.user.guest;
-                
-            }
+        if (!user) {
+            res.send("Could not find user with id of " + id);
+            //[TODO] redirect to facultyForm with error message
+        } else {
+            user.fName = req.body.user.fName;
+            user.lName = req.body.user.lName;
+            user.userID = req.body.user.userID;
+            user.guest = req.body.user.guest;
+        }
 
-            console.log("Updating user");
-            userDB.update(user);
+        console.log("Updating user");
+        userDB.updateUser(user);
 
-           res.writeHead(302, { 'Location': `/users/${user.id}` });
-           res.end();
+        res.writeHead(302, { 'Location': `/users` });
+        res.end();
     }
 
     async delete(req, res) {

@@ -95,6 +95,7 @@ class CourseController{
     }
 
     async update(req, res) {
+        //update variables for a course
         let id = req.params.id;
         let course = await courseDB.findCourse(id);
 

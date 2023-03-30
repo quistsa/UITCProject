@@ -58,11 +58,11 @@ class UserDB {
     }
 
     static updateUser(user) {
-        this.db.run(`UPDATE Users SET userID="${user.userID}", fName="${user.fName}", lName="${user.lName}", guest="${user.guest}"`);
+        this.db.run(`UPDATE Users SET userID="${user.userID}", fName="${user.fName}", lName="${user.lName}", guest="${user.guest}" WHERE id="${user.id}"`);
     }
 
     static removeUser(user) {
-        this.db.run(`DELETE FROM Users WHERE id="${user.id}`);
+        this.db.run(`DELETE FROM Users WHERE id="${user.id}"`);
     }
 }
 
