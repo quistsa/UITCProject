@@ -45,15 +45,13 @@
 	  text-align: center;
 	  padding: 1%;
 	}
-	</style>
+</style>
 
 	<% 
 		if (course.id) {
 			submitLabel = "Update Course";
-			route = `/courses/${course.id}`;
 		} else {
 			submitLabel = "Create Course";
-			route = "/courses";
 		}
 	%>
 
@@ -72,18 +70,29 @@
 		</li>
 	  </ul>		
 	</nav> 
+
+	<% if (course.errors.length > 0) { %>
+        <% console.log("Errors occurred"); console.log(course.errors); %>
+
+            <div>
+                <p>Errors:</p>
+                <ul>
+                    <%- course.errors.map((item) => `<li>${item}</li>`).join("\n"); %>
+                </ul>
+            </div>
+	<% } %>
 	
 	<div class="background">
-	  <form action="<%=route%>" accept-charset="UTF-8" method="post" class="form">
+	  <form action="/courses/" accept-charset="UTF-8" method="post" class="form">
 	
 		<div class="field">
-			<label for="coursePrefix">Course ID</label>
-			<input type="text" id="courseID" name="courseID" placeholder="CIS 101" value="<%= course.courseID %>">
+			<label for="course_courseID">Course ID</label>
+			<input type="text" id="course_courseID" name="course[courseID]" placeholder="CIS101" value="<%= course.courseID %>">
 		</div>
 
 		<div class="field">
-			<label for="cNumber">Course Name</label>
-			<input type="text" id="courseName" name="courseName" placeholder="Introduction to Computing" value="<%= course.name %>">
+			<label for="course_name">Course Name</label>
+			<input type="text" id="course_name" name="course[name]" placeholder="Introduction to Computing" value="<%= course.name %>">
 		</div>
 
 		<div class="actions">

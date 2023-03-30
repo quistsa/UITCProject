@@ -71,14 +71,10 @@ app.post('/login', (req, res) => {
 app.get('/logout', (req, res) => {
     loginController.logout(req, res); // this doesnt work yet :)
 })
+
 //////////////////////////////////////////
 //admin redirects
 //////////////////////////////////////////
-
-app.get('/facultySearch',  (req, res) => { //[TODO] add isAuthenticated later
-    //when an admin logs in, use the userController to send them to the admin view, which lists all courses and faculty responses
-    userController.searchByFaculty(req, res);
-})
 
 app.get('/courseSearch', (req, res) => { //[TODO] add isAuthenticated later
     courseController.searchByCourse(req, res);
@@ -86,6 +82,14 @@ app.get('/courseSearch', (req, res) => { //[TODO] add isAuthenticated later
 
 app.get('/courseSearch/:id', (req, res) => {
     courseController.searchByCourse(req, res);
+})
+
+app.get('/userSearch/', (req, res) => {
+    courseController.searchByUser(req, res);
+})
+
+app.get('/userSearch/:id', (req, res) => {
+    courseController.searchByUser(req, res);
 })
 
 //app.post('/admin', (req, res) => {
@@ -160,7 +164,7 @@ app.get('/courseForm', isAuthenticated, (req, res) => {
 })
 
 app.get('/courses/:id', (req, res) => {
-    courseController.searchByUser(req, res);
+    courseController.index(req, res);
 })
 
 app.post('/courses/:id', (req, res) => {

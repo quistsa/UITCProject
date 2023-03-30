@@ -24,7 +24,7 @@ class CourseDB {
 
     static allCourses() {
         return new Promise((resolve, reject) => {
-            this.db.all('SELECT * from Courses', (err, response) => {
+            this.db.all('SELECT * from Courses ORDER BY courseID ASC', (err, response) => {
                    resolve(response.map((item) => new Course(item)));
             });
          });
@@ -51,6 +51,7 @@ class CourseDB {
                         newCourse.id = this.lastID;
                         resolve(newCourse);
                     });
+                    console.log("Course Created");
             });
         } else {
             return newCourse;

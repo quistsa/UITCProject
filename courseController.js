@@ -29,7 +29,7 @@ class CourseController{
         if (!scores) {
             res.send("Couldn't find a user with ID of " + id);
         } else {
-            res.render('course/adminFaculty', { scores: scores, users: users, facultyID: id });
+            res.render('admin/adminFaculty', { scores: scores, users: users, facultyID: id });
         }
     }
 
@@ -70,7 +70,7 @@ class CourseController{
     async create(req, res) {
         console.log("Creating new course");
         
-        let newCourse = await courseDB.createCourse(req.body.course);
+        let newCourse = await courseDB.create(req.body.course);
 
         if (newCourse.isValid()) {
             res.writeHead(302, { 'Location': `/courses/${ newCourse.id }`});
