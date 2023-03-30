@@ -63,7 +63,7 @@ class CourseDB {
     }
 
     static remove(course) {
-        this.db.run(`DELETE FROM Courses WHERE id="${course.id}`);
+        this.db.run(`DELETE FROM Courses WHERE id="${course.id}"`);
     }
 }
 

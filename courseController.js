@@ -129,7 +129,7 @@ class CourseController{
             res.send("Couldn't find a course with id " + id);
             //[TODO] redirect to courseList with error message
         } else {
-            courseDB.removeCourse(course);
+            courseDB.remove(course);
             let courses = await courseDB.allCourses();
             res.render('course/courseList', { courses: courses });
         }

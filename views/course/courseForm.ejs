@@ -50,8 +50,11 @@
 	<% 
 		if (course.id) {
 			submitLabel = "Update Course";
+			route = `/courses/${course.id}`;
+			edit = true;
 		} else {
 			submitLabel = "Create Course";
+			route = "/courses";
 		}
 	%>
 
@@ -83,7 +86,7 @@
 	<% } %>
 	
 	<div class="background">
-	  <form action="/courses/" accept-charset="UTF-8" method="post" class="form">
+	  <form action="<%=route%>" accept-charset="UTF-8" method="post" class="form">
 	
 		<div class="field">
 			<label for="course_courseID">Course ID</label>
@@ -97,7 +100,12 @@
 
 		<div class="actions">
 			<input type="submit" name="commit" value="<%= submitLabel %>" class="btn btn-primary"/>
+			<% if(edit) { %>
+				<a class="btn btn-danger" href="/courses/<%= course.id %>/delete">Delete Course</a>
+				<!--[TODO] add page for "are you sure?" -->
+			<% } %>
 		</div>
+
 	   </form>
 	</div>
 	

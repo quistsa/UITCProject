@@ -176,6 +176,11 @@ app.get('/courses/:id/edit', (req, res) => {
     courseController.edit(req, res);
 })
 
+app.get('/courses/:id/delete', (req, res) => {
+    //display form for updating a course 
+    courseController.delete(req, res);
+})
+
 //////////////////////////////////////////
 //scores redirects
 //////////////////////////////////////////
