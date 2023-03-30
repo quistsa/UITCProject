@@ -16,19 +16,19 @@ class User {
     isValid(){
         this.errors = [];
         
-        if (!this.fName || this.model.length <= 0){
+        if (!this.fName || String(this.fName).length <= 0){
             this.errors.push("User must have a first name");
         }
 
-        if (!this.lName || this.model.length <= 0){
+        if (!this.lName || String(this.lName).length <= 0){
             this.errors.push("User must have a last name");
         }
 
-        if(this.fName.length < 2){
+        if(String(this.fName).length < 2){
             this.errors.push("User's first name must be at least 2 characters long");
         }
 
-        if(this.lName.length < 2){
+        if(String(this.lName).length < 2){
             this.errors.push("User's last name must be at least 2 characters long");
         }
         

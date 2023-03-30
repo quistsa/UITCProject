@@ -14,12 +14,8 @@ class Course {
     isValid(){
         this.errors = [];
 
-        if (!String(this.courseID).startsWith("CIS")){
-            this.errors.push("Course ID must follow the format: CIS### 1" + this.courseID);
-        }
-
-        if (!String(this.courseID).indexOf(" ") == -1){
-            this.errors.push("Course ID must follow the format: CIS### 2");
+        if (!String(this.courseID).startsWith("CIS") || !String(this.courseID).indexOf(" ") == -1){
+            this.errors.push("Course ID must follow the format: CIS###");
         }
             
         if (!String(this.name)) {

@@ -49,9 +49,11 @@
   if (user.id) {
     submitLabel = "Update User";
     route = `/users/${user.id}`;
+    edit = true;
   } else {
     submitLabel = "Create User";
     route = "/users";
+    edit = false;
   }
   %>
 
@@ -73,18 +75,28 @@
 
 
 <div class="background">
-  <form>
+  <form action="<%=route%>" accept-charset="UTF-8" method="post" class="form">
 
-    <label for="fname">First Name</label>
-    <input type="text" id="fName" name="fName" placeholder="First Name" value="<%= user.fName %>">
+    <label for="user_fname">First Name</label>
+    <input type="text" id="user_fName" name="user[fName]" placeholder="First Name" value="<%= user.fName %>">
 
-    <label for="lname">Last Name</label>
-    <input type="text" id="lName" name="lName" placeholder="Last Name" value="<%= user.lName %>">
+    <label for="user_lname">Last Name</label>
+    <input type="text" id="user_lName" name="user[lName]" placeholder="Last Name" value="<%= user.lName %>">
 
-    <!-- [TODO] add field for userID and a check box for guest -->
+    <label for="user_lname">User ID</label>
+    <input type="text" id="user_userID" name="user[userID]" placeholder="smithJoe" value="<%= user.userID %>">
+
+    <div class="form-check">
+			<label for="course_name">User is a Guest</label>
+			<input type="checkbox" id="user_guest" name="user[guest]" value="<%= user.guest %>">
+		</div>
 
     <div class="actions">
 			<input type="submit" name="commit" value="<%= submitLabel %>" class="btn btn-primary"/>
+      <% if(edit) { %>
+				<a class="btn btn-danger" href="/users/<%= user.id %>/delete">Delete User</a>
+				<!--[TODO] add page for "are you sure?" -->
+			<% } %>
 		</div>
   </form>
 </div>

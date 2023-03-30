@@ -105,12 +105,7 @@ app.get('/faculty', (req, res) => { //add isAuthenticated later
     userController.faculty(req, res);
 })
 
-app.post('/faculty', (req, res) => {
-    //create new faculty on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
-    userController.newFaculty(req, res);
-})
-
-app.get('/faculty/init', (req, res) => {
+app.get('/users/init', (req, res) => {
     require('./userDB').initialize();
     res.send("Initialized");
 })
@@ -123,16 +118,28 @@ app.get('/users', (req, res) => {
     userController.index(req, res);
 })
 
+app.post('/users', (req, res) => {
+    userController.create(req, res);
+})
+
 app.get('/users/new', (req, res) => {
     userController.newUser(req, res);
 })
 
-app.get('/users/:id/edit', (req, res) => {
-    userController.edit(req, res);
+app.get('/users/:id', (req, res) => {
+    userController.index(req, res);
+})
+
+app.post('/users/:id', (req, res) => {
+    userController.update(req, res);
 })
 
 app.get('/users/:id/edit', (req, res) => {
     userController.edit(req, res);
+})
+
+app.get('/users/:id/delete', (req, res) => {
+    userController.delete(req, res);
 })
 
 //////////////////////////////////////////

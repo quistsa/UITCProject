@@ -133,7 +133,6 @@ class UserController{
     }
 
     async delete(req, res) {
-        console.log("delete :)")
         let id = req.params.id;
         let user = await userDB.findUser(id);
         

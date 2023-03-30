@@ -42,6 +42,19 @@ class CourseDB {
         });
     }
 
+    //use for error checking to reduce application crashes
+    static exists(id) {
+        new Promise((resolve, reject) => {
+            this.db.all(`SELECT * from Courses where (courseID == ${id})`, (err, rows) => {
+                if (rows.length >= 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+    }
+
     static create(desc) {
         let newCourse = new Course(desc);
         if (newCourse.isValid()) {
