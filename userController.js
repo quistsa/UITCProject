@@ -96,7 +96,7 @@ class UserController{
 
         if (!user) {
             res.send("Couldn't find a user with id " + id);
-            //[TODO] 404 redirect
+            //[TODO] redirect to facultyForm with error message
         } else {
             res.render('faculty/facultyForm', { user: user });
         }
@@ -116,7 +116,7 @@ class UserController{
 
             if (!user) {
                 res.send("Could not find user with id of " + id);
-                //[TODO] 404 redirect
+                //[TODO] redirect to facultyForm with error message
             } else {
                 user.userID = req.body.user.userID;
                 user.fName = req.body.user.fName;
@@ -140,7 +140,7 @@ class UserController{
 
         if (!user) {
             res.send("Couldn't find a user with id " + id);
-            //[TODO] 404 redirect
+            //[TODO] redirect to facultyList with error message
         } else {
             userDB.removeUser(user);
             let users = await userDB.allUsers();
