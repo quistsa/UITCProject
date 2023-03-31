@@ -84,11 +84,11 @@ app.get('/courseSearch/:id', (req, res) => {
     courseController.searchByCourse(req, res);
 })
 
-app.get('/userSearch/', (req, res) => {
+app.get('/facultySearch/', (req, res) => {
     courseController.searchByUser(req, res);
 })
 
-app.get('/userSearch/:id', (req, res) => {
+app.get('/facultySearch/:id', (req, res) => {
     courseController.searchByUser(req, res);
 })
 
