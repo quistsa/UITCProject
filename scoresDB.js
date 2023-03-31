@@ -11,10 +11,10 @@ class ScoresDB {
         this.db.serialize(() => {
             this.db.run('DROP TABLE IF EXISTS Scores');
             this.db.run(`CREATE TABLE Scores (id INTEGER PRIMARY KEY, userID INTEGER NOT NULL, courseID INTEGER NOT NULL, ranking INTEGER NOT NULL, desire INTEGER NOT NULL, notes TEXT);`);
-            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("quistsa", "CIS 101", "1", "2", "no notes");');
-            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("kinneyni", "CIS 450", "2", "2", "some notes");');
-            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("cades", "CIS 160", "1", "3", "notenstnot");');
-            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("skrobotr", "CIS 260", "3", "1", "a note");');
+            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("quistsa", "CIS101", "1", "2", "no notes");');
+            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("kinneyni", "CIS450", "2", "2", "some notes");');
+            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("cades", "CIS160", "1", "3", "notenstnot");');
+            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("skrobotr", "CIS260", "3", "1", "a note");');
         });
     }
 
