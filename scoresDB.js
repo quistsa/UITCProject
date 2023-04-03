@@ -35,7 +35,7 @@ class ScoresDB {
     static searchByCourse(id) {
         return new Promise((resolve, reject) => {
           //join Users and Scores tables together in order to get first and last names of users in the same table, selecting only where courseID matches the given id
-          this.db.all(`SELECT * FROM Scores INNER JOIN Users ON Users.userID == Scores.userID INNER JOIN Courses ON Courses.courseID == Scores.courseID`, (err, rows, response) => {
+          this.db.all(`SELECT * FROM Scores INNER JOIN Users ON Users.userID == Scores.userID INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (Courses.courseID == ?)`,[id] , (err, rows, response) => {
             if (err) {
               console.error(err);
               reject(err);
@@ -56,7 +56,7 @@ class ScoresDB {
     static searchByUser(id) {
             return new Promise((resolve, reject) => {
             //need to select things only where courseID = id still
-            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID INNER JOIN Users ON Users.userID == Scores.userID`, (err, rows, response) => { 
+            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID INNER JOIN Users ON Users.userID == Scores.userID WHERE (Users.id == ?)`,[id], (err, rows, response) => { 
                 if (err) {
                     console.error(err);
                     reject(err);
@@ -76,7 +76,7 @@ class ScoresDB {
     //return scores for a particular user, given an id
     static scoresForUser(id) {
         return new Promise((resolve, reject) => {
-            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE userID == ${id}`, (err, rows, response) => {
+            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (userID == ?)`,[id] , (err, rows, response) => {
                 if (rows.length >= 1) {
                     resolve(response.map((item) => new Score(item)));
                 } else {

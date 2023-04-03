@@ -197,6 +197,8 @@ app.get('/scores/init', (req, res) => {
     res.send("Initialized");
 })
 
+//[TODO] scores create, update
+
 //////////////////////////////////////////
 //error redirects
 //////////////////////////////////////////
