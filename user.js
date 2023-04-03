@@ -8,6 +8,7 @@ class User {
             this.fName = description.fName;
             this.lName = description.lName;
             this.guest = description.guest;
+            // should add boolean for admin later
         }
         
         this.errors = [];
