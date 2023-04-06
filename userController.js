@@ -107,10 +107,11 @@ class UserController{
         let id = req.params.id;
         let user = await userDB.findUser(id);
 
-        let testUser = new User(req.body.car);
+        let testUser = new User(req.body.user);
         if (!testUser.isValid()) {
             testUser.id = user.id;
             res.render('faculty/facultyForm', { user: testUser });
+            return;
         }
 
         if (!user) {
@@ -121,13 +122,13 @@ class UserController{
             user.lName = req.body.user.lName;
             user.userID = req.body.user.userID;
             user.guest = req.body.user.guest;
+
+            console.log("Updating user");
+            userDB.updateUser(user);
+
+            res.writeHead(302, { 'Location': `/users/${user.id}` });
+            res.end();
         }
-
-        console.log("Updating user");
-        userDB.updateUser(user);
-
-        res.writeHead(302, { 'Location': `/users` });
-        res.end();
     }
 
     async delete(req, res) {

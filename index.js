@@ -84,21 +84,16 @@ app.get('/courseSearch/:id', (req, res) => {
     courseController.searchByCourse(req, res);
 })
 
-app.get('/userSearch/', (req, res) => {
+app.get('/facultySearch/', (req, res) => {
     courseController.searchByUser(req, res);
 })
 
-app.get('/userSearch/:id', (req, res) => {
+app.get('/facultySearch/:id', (req, res) => {
     courseController.searchByUser(req, res);
 })
-
-//app.post('/admin', (req, res) => {
-    //create new admin on post request, [TODO] make sure user is an admin, faculty should not be able to create new users
-//    userController.newAdmin(req, res);
-//})
 
 /////////////////////////////////////////
-//faculty redirects
+//faculty/users redirects
 /////////////////////////////////////////
 app.get('/faculty', (req, res) => { //add isAuthenticated later
     //when a faculty user logs in, use the userController to send them to the faculty view, which should match the user's responses with their ID using mongoDB
@@ -110,14 +105,21 @@ app.get('/users/init', (req, res) => {
     res.send("Initialized");
 })
 
+//form for creating/updating a user
 app.get('/facultyForm', isAuthenticated, (req, res) => {
     userController.facultyForm(req, res);
 })
 
+//get list of users
 app.get('/users', (req, res) => {
     userController.index(req, res);
 })
 
+app.get('/users/:id', (req, res) => {
+    userController.index(req, res);
+})
+
+//create a new user
 app.post('/users', (req, res) => {
     userController.create(req, res);
 })
@@ -126,10 +128,7 @@ app.get('/users/new', (req, res) => {
     userController.newUser(req, res);
 })
 
-app.get('/users/:id', (req, res) => {
-    userController.index(req, res);
-})
-
+//update an existing user
 app.post('/users/:id', (req, res) => {
     userController.update(req, res);
 })
@@ -138,6 +137,7 @@ app.get('/users/:id/edit', (req, res) => {
     userController.edit(req, res);
 })
 
+//delete a user
 app.get('/users/:id/delete', (req, res) => {
     userController.delete(req, res);
 })
@@ -145,9 +145,13 @@ app.get('/users/:id/delete', (req, res) => {
 //////////////////////////////////////////
 //courses redirects
 //////////////////////////////////////////
+//get list of courses
 app.get('/courses', (req, res) => {
-    //when the course list is requested, use courseController to retrieve all courses
     courseController.index(req, res);
+})
+
+app.get('/users/:id', (req, res) => {
+    userController.index(req, res);
 })
 
 app.post('/courses', (req, res) => {
@@ -168,10 +172,6 @@ app.get('/courses/new', (req, res) =>{
 
 app.get('/courseForm', isAuthenticated, (req, res) => {
     userController.courseForm(req, res);
-})
-
-app.get('/courses/:id', (req, res) => {
-    courseController.index(req, res);
 })
 
 app.post('/courses/:id', (req, res) => {
@@ -197,6 +197,8 @@ app.get('/scores/init', (req, res) => {
     res.send("Initialized");
 })
 
+//[TODO] Scores create, update
+
 //////////////////////////////////////////
 //error redirects
 //////////////////////////////////////////
@@ -208,7 +210,7 @@ app.get('/401', (req, res) => {
     userController.error401(req, res);
 });
 
-//handling 404 redirects
+// error handling redirects
 app.use((req, res, next) => {
     res.status(404).render('404error', {
       pageTitle: 'Page Not Found'

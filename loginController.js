@@ -1,4 +1,4 @@
-var Users = require ('./userDB'); //for checking user IDs
+var userDB = require ('./userDB'); //for checking user IDs
 
 class LoginController {
 
