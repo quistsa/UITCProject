@@ -5,7 +5,7 @@ const { test } = require('media-typer');
 const Course = require('./course');
 
 const courseDB = require('./courseDB');
-const scoresDB = require('./scoresDB')
+const scoresDB = require('./scoresDB');
 const userDB = require('./userDB');
 
 class CourseController{
@@ -15,6 +15,7 @@ class CourseController{
         res.render('course/courseList', { courses: courses });
     }
 
+    //move searchByUser and searchByCourse to scoresController
     //search list of courses by user
     async searchByUser(req, res) {
         let id = req.params.id;
