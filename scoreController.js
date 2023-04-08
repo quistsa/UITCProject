@@ -1,7 +1,9 @@
 
-const scoresDB = require('./scoresDB')
+const scoresDB = require('./scoresDB');
+const courseDB = require('./courseDB');
+const userDB = require('./userDB');
 
-class scoreController {
+class ScoreController {
     //search list of scores by user
     async searchByUser(req, res) {
         let id = req.params.id;
@@ -39,6 +41,19 @@ class scoreController {
         }
     }
 
+    async faculty(req, res) {
+        //let id = req.params.id;
+
+        let courses = await courseDB.allCourses();
+        //let user = await userDB.findUser(id);
+        //let scores = await scoresDB.scoresForUser(id);
+        //if (!user) {
+        //    res.send("Couldn't find a user with ID of " + id);
+              //[TODO] 404 redirect
+        //} else {
+            res.render('faculty/faculty', { courses: courses }); //, user: user, scores: scores 
+        //}
+    }
 
     newScore(req, res) {
         res.render('score/scoreForm', { score: new Score() });

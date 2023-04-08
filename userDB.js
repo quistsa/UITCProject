@@ -17,11 +17,6 @@ class UserDB {
         });
     }
 
-    //function to import users from a csv
-    static import() {
-
-    }
-
     static allUsers() {
         return new Promise((resolve, reject) => {
             this.db.all('SELECT * from Users', (err, response) => {
@@ -32,11 +27,12 @@ class UserDB {
     
     static findUser(id) {
         return new Promise((resolve, reject) => {
-            this.db.all(`SELECT * FROM Users WHERE id == ${id}`, (err, rows) => {
+            this.db.all(`SELECT * FROM Users WHERE userID == "${id}"`, (err, rows) => {
                 if (rows.length >= 1) {
                     resolve(new User(rows[0]));
                 } else {
-                    reject(`Id ${id} not found`);
+                    console.log(`Id ${id} not found`);
+                    resolve(null);
                 }
             });
         });
