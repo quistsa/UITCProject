@@ -118,17 +118,9 @@ app.get('/users/init', (req, res) => {
     res.send("Initialized");
 })
 
-//form for creating/updating a user
-app.get('/facultyForm', (req, res) => {
-    userController.facultyForm(req, res);
-})
-
 //get list of users
 app.get('/users', (req, res) => {
-    userController.index(req, res);
-})
-
-app.get('/users/:id', (req, res) => {
+    console.log("get list of users");
     userController.index(req, res);
 })
 
@@ -137,7 +129,8 @@ app.post('/users', (req, res) => {
     userController.create(req, res);
 })
 
-app.get('/users/new', (req, res) => {
+app.get('/users/new', (req, res) =>{
+    //display form for creating a new user 
     userController.newUser(req, res);
 })
 
@@ -163,10 +156,6 @@ app.get('/courses', (req, res) => {
     courseController.index(req, res);
 })
 
-app.get('/users/:id', (req, res) => {
-    userController.index(req, res);
-})
-
 app.post('/courses', (req, res) => {
     //create new course on post request for /courses
     courseController.create(req, res);
@@ -181,10 +170,6 @@ app.get('/courses/init', (req, res) => {
 app.get('/courses/new', (req, res) =>{ 
     //display form for creating a new course 
     courseController.newCourse(req, res);
-})
-
-app.get('/courseForm', (req, res) => {
-    userController.courseForm(req, res);
 })
 
 app.post('/courses/:id', (req, res) => {
