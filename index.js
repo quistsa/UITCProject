@@ -7,9 +7,10 @@ const favicon = require('express-favicon');
 
 const UserController = require('./userController');
 const userController = new UserController();
-
 const CourseController = require('./courseController');
 const courseController = new CourseController();
+const ScoreController = require('./scoreController');
+const scoreController = new ScoreController();
 
 const LoginController = require('./loginController');
 const loginController = new LoginController();
@@ -25,7 +26,7 @@ const port = 3000;
 app.use(session({
     resave: false,
     saveUninitialized: false,
-    secret: 'abcdefghijklmnopqrstuvwxzy'
+    secret: 'TsloscsOcTcH4PJdjse8I6293OlhYDs5'
 }));
 
 //create public folder for css and image files
@@ -37,13 +38,25 @@ app.use(favicon(__dirname + '/public/images/favicon.ico'));
 //check if users have logged in when requesting login-required pages
 function isAuthenticated(req, res, next) {
 
-    console.log('Enter isAuthenticated')
+    console.log('Authenticating user')
     console.log(req.session)
     if (req.session.user) {
-        console.log("Already logged in :)")
+        console.log("User already logged in")
         next()
     } else {
-        console.log("redirecting to login page")
+        console.log("User is not logged in")
+        res.redirect('/login')
+    }
+}
+
+function isAdmin(req, res, next) {
+    console.log('Authenticating admin')
+    console.log(req.session)
+    if (req.session.user.userID == "UITCAdmin2023") {
+        console.log("User is an admin")
+        next()
+    } else {
+        console.log("User is not an admin or not logged in")
         res.redirect('/login')
     }
 }
@@ -78,28 +91,27 @@ app.get('/logout', (req, res) => {
 //////////////////////////////////////////
 
 app.get('/courseSearch', (req, res) => { //[TODO] add isAuthenticated later
-    courseController.searchByCourse(req, res);
+    scoreController.searchByCourse(req, res);
 })
 
 app.get('/courseSearch/:id', (req, res) => {
-    courseController.searchByCourse(req, res);
+    scoreController.searchByCourse(req, res);
 })
 
 app.get('/facultySearch/', (req, res) => {
-    courseController.searchByUser(req, res);
+    scoreController.searchByUser(req, res);
 })
 
 app.get('/facultySearch/:id', (req, res) => {
-    courseController.searchByUser(req, res);
+    scoreController.searchByUser(req, res);
 })
 
 /////////////////////////////////////////
 //faculty/users redirects
 /////////////////////////////////////////
-
-app.get('/faculty', (req, res) => { //add isAuthenticated later
+app.get('/faculty/:id', (req, res) => { //add isAuthenticated later
     //when a faculty user logs in, use the userController to send them to the faculty view, which should match the user's responses with their ID using mongoDB
-    userController.faculty(req, res);
+    scoreController.faculty(req, res);
 })
 
 app.get('/users/init', (req, res) => {
@@ -107,17 +119,9 @@ app.get('/users/init', (req, res) => {
     res.send("Initialized");
 })
 
-//form for creating/updating a user
-app.get('/facultyForm', isAuthenticated, (req, res) => {
-    userController.facultyForm(req, res);
-})
-
 //get list of users
 app.get('/users', (req, res) => {
-    userController.index(req, res);
-})
-
-app.get('/users/:id', (req, res) => {
+    console.log("get list of users");
     userController.index(req, res);
 })
 
@@ -126,7 +130,8 @@ app.post('/users', (req, res) => {
     userController.create(req, res);
 })
 
-app.get('/users/new', (req, res) => {
+app.get('/users/new', (req, res) =>{
+    //display form for creating a new user 
     userController.newUser(req, res);
 })
 
@@ -153,10 +158,6 @@ app.get('/courses', (req, res) => {
     courseController.index(req, res);
 })
 
-app.get('/users/:id', (req, res) => {
-    userController.index(req, res);
-})
-
 app.post('/courses', (req, res) => {
     //create new course on post request for /courses
     courseController.create(req, res);
@@ -171,10 +172,6 @@ app.get('/courses/init', (req, res) => {
 app.get('/courses/new', (req, res) =>{ 
     //display form for creating a new course 
     courseController.newCourse(req, res);
-})
-
-app.get('/courseForm', isAuthenticated, (req, res) => {
-    userController.courseForm(req, res);
 })
 
 app.post('/courses/:id', (req, res) => {

@@ -101,6 +101,13 @@
 			<input type="checkbox" id="user_guest" name="user[guest]" value="<%= user.guest %>">
 		</div>
 
+    <!-- Form element to add checkbox to make user and Admin, for if more admin logins are required in the future
+      <div class="form-check">
+        <label for="course_name">User is an Admin</label>
+        <input type="checkbox" id="user_admin" name="user[admin]" value="<%= user.admin %>">
+      </div>
+    -->
+
     <div class="actions">
 			<input type="submit" name="commit" value="<%= submitLabel %>" class="btn btn-primary"/>
       <% if(edit) { %>

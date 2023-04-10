@@ -8,7 +8,7 @@ class User {
             this.fName = description.fName;
             this.lName = description.lName;
             this.guest = description.guest;
-            // should add boolean for admin later
+            this.admin = false; //set to description.admin if more admin logins are required in the future
         }
         
         this.errors = [];
@@ -31,6 +31,11 @@ class User {
 
         if(String(this.lName).length < 2){
             this.errors.push("User's last name must be at least 2 characters long");
+        }
+
+        //error validation for if more admin users are added in the future
+        if(this.admin && this.guest){
+            this.errors.push("User cannot be an admin and a guest");
         }
         
         return this.errors.length <= 0;

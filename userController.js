@@ -23,7 +23,7 @@ class UserController{
         res.render('401error');
     }
 
-    //admin functions
+    //admin functions, [TODO] delete once it's made sure they're not necessary
     async adminFaculty(req, res) {
         let users = await userDB.allUsers();
         let courses = await courseDB.allCourses();
@@ -36,28 +36,6 @@ class UserController{
         let users = await userDB.allUsers();
         let scores = await scoresDB.allScores();
         res.render('admin/adminCourse', { courses: courses, users: users, scores: scores });
-    }
-
-    async courseForm(req, res) {
-        res.render('course/courseForm');
-    }
-
-    async facultyForm(req, res) {
-        res.render('faculty/facultyForm');
-    }
-
-    async faculty(req, res) {
-        //let id = req.params.id;
-
-        let courses = await courseDB.allCourses();
-        //let user = await userDB.findUser(id);
-        //let scores = await scoresDB.scoresForUser(id);
-        //if (!user) {
-        //    res.send("Couldn't find a user with ID of " + id);
-              //[TODO] 404 redirect
-        //} else {
-            res.render('faculty/faculty', { courses: courses }); //, user: user, scores: scores 
-        //}
     }
 
     //not currently used or necessary
@@ -74,7 +52,8 @@ class UserController{
     }
 
     newUser(req, res) {
-        res.render('faculty/facultyForm', {user: new User()});
+        console.log("rendering faculty form");
+        res.render('faculty/facultyForm', { user: new User() });
     }
 
     async create(req, res) {
