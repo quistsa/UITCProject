@@ -114,11 +114,6 @@ app.get('/faculty/:id', (req, res) => { //add isAuthenticated later
     scoreController.faculty(req, res);
 })
 
-app.get('/users/init', (req, res) => {
-    require('./userDB').initialize();
-    res.send("Initialized");
-})
-
 //get list of users
 app.get('/users', (req, res) => {
     console.log("get list of users");
@@ -163,12 +158,6 @@ app.post('/courses', (req, res) => {
     courseController.create(req, res);
 })
 
-//initilization for testing
-app.get('/courses/init', (req, res) => {
-    require('./courseDB').initialize();
-    res.send("Initialized");
-})
-
 app.get('/courses/new', (req, res) =>{ 
     //display form for creating a new course 
     courseController.newCourse(req, res);
@@ -192,13 +181,25 @@ app.get('/courses/:id/delete', (req, res) => {
 //scores redirects
 //////////////////////////////////////////
 
-//initilization for testing
-app.get('/scores/init', (req, res) => {
-    require('./scoresDB').initialize();
-    res.send("Initialized");
+app.get('/scores/new', (req, res) =>{ 
+    //display form for creating a new score 
+    scoreController.newScore(req, res);
 })
 
-//[TODO] Scores create, update
+app.post('/scores/:id', (req, res) => {
+    //display a form with current info for updating a scores
+    scoreController.update(req, res);
+})
+
+app.get('/scores/:id/edit', (req, res) => {
+    //display form for updating a score 
+    scoreController.edit(req, res);
+})
+
+app.get('/scores/:id/delete', (req, res) => {
+    //display form for updating a score 
+    scoreController.delete(req, res);
+})
 
 //////////////////////////////////////////
 //error redirects
