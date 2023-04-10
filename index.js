@@ -1,4 +1,4 @@
-    //index.js verifies authentication and handles web requests to redirect users to the different pages
+//index.js verifies authentication and handles web requests to redirect users to the different pages
 //Sam Quist, Up In The Cloud Computing
 
 const express = require('express');
