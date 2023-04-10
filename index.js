@@ -60,6 +60,7 @@ app.get('/', (req, res) =>{
 //////////////////////////////////////////
 //login redirects
 /////////////////////////////////////////
+
 app.get('/login', (req, res) => {
     loginController.loginPage(req, res);
 })
@@ -95,6 +96,7 @@ app.get('/facultySearch/:id', (req, res) => {
 /////////////////////////////////////////
 //faculty/users redirects
 /////////////////////////////////////////
+
 app.get('/faculty', (req, res) => { //add isAuthenticated later
     //when a faculty user logs in, use the userController to send them to the faculty view, which should match the user's responses with their ID using mongoDB
     userController.faculty(req, res);
@@ -145,6 +147,7 @@ app.get('/users/:id/delete', (req, res) => {
 //////////////////////////////////////////
 //courses redirects
 //////////////////////////////////////////
+
 //get list of courses
 app.get('/courses', (req, res) => {
     courseController.index(req, res);
@@ -191,6 +194,7 @@ app.get('/courses/:id/delete', (req, res) => {
 //////////////////////////////////////////
 //scores redirects
 //////////////////////////////////////////
+
 //initilization for testing
 app.get('/scores/init', (req, res) => {
     require('./scoresDB').initialize();
@@ -202,6 +206,7 @@ app.get('/scores/init', (req, res) => {
 //////////////////////////////////////////
 //error redirects
 //////////////////////////////////////////
+
 app.get('/404', (req, res) => {
     userController.error404(req, res);
 });
