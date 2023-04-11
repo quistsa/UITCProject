@@ -9,11 +9,11 @@ class ScoresDB {
     static initialize() {
         this.db.serialize(() => {
             this.db.run('DROP TABLE IF EXISTS Scores');
-            this.db.run(`CREATE TABLE Scores (id INTEGER PRIMARY KEY, userID INTEGER NOT NULL, courseID INTEGER NOT NULL, ranking INTEGER NOT NULL, desire INTEGER NOT NULL, notes TEXT);`);
-            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("quistsa", "CIS101", "1", "2", "no notes");');
-            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("kinneyni", "CIS450", "2", "2", "some notes");');
-            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("cades", "CIS160", "1", "3", "notenstnot");');
-            this.db.run('INSERT INTO Scores (userID, courseID, ranking, desire, notes) VALUES ("skrobotr", "CIS260", "3", "1", "a note");');
+            this.db.run(`CREATE TABLE Scores (id INTEGER PRIMARY KEY, facultyID INTEGER NOT NULL, courseID INTEGER NOT NULL, ranking INTEGER NOT NULL, desire INTEGER NOT NULL, notes TEXT);`);
+            this.db.run('INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("quistsa", "CIS101", "1", "2", "no notes");');
+            this.db.run('INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("kinneyni", "CIS450", "2", "2", "some notes");');
+            this.db.run('INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("cades", "CIS160", "1", "3", "notenstnot");');
+            this.db.run('INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("skrobotr", "CIS260", "3", "1", "a note");');
         });
     }
 
@@ -46,7 +46,7 @@ class ScoresDB {
     static searchByCourse(id) {
         return new Promise((resolve, reject) => {
           //join Users and Scores tables together in order to get first and last names of users in the same table, selecting only where courseID matches the given id
-          this.db.all(`SELECT * FROM Scores INNER JOIN Users ON Users.userID == Scores.userID INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (Courses.courseID == ?)`,[id] , (err, rows, response) => {
+          this.db.all(`SELECT * FROM Scores INNER JOIN Users ON Users.userID == Scores.facultyID INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (Courses.courseID == ?)`,[id] , (err, rows, response) => {
             if (err) {
               console.error(err);
               reject(err);
@@ -67,7 +67,7 @@ class ScoresDB {
     static searchByUser(id) {
             return new Promise((resolve, reject) => {
             //need to select things only where courseID = id still
-            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID INNER JOIN Users ON Users.userID == Scores.userID WHERE (Users.id == ?)`,[id], (err, rows, response) => { 
+            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID INNER JOIN Users ON Users.userID == Scores.facultyID WHERE (Users.id == ?)`,[id], (err, rows, response) => { 
                 if (err) {
                     console.error(err);
                     reject(err);
@@ -87,7 +87,7 @@ class ScoresDB {
     //return scores for a particular user, given an id
     static scoresForUser(id) {
         return new Promise((resolve, reject) => {
-            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (Scores.userID == ?)`,[id] , (err, rows, response) => {
+            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (Scores.facultyID == ?)`,[id] , (err, rows, response) => {
                 if (err) {
                     console.error(err);
                     reject(err);
@@ -108,7 +108,7 @@ class ScoresDB {
         let newScore = new Score(desc);
         if (newScore.isValid()) {
             return new Promise((resolve, reject) => {
-                    this.db.run(`INSERT INTO Scores (userID, courseID, prepVal, prefVal, notes) VALUES ("${newScore.userID}", "${newScore.courseID}", "${newScore.ranking}", "${newScore.ranking}", "${newScore.notes}");`,
+                    this.db.run(`INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("${newScore.facultyID}", "${newScore.courseID}", "${newScore.ranking}", "${newScore.ranking}", "${newScore.notes}");`,
                     function(err, data) {
                         newScore.id = this.lastID;
                         resolve(newScore);
@@ -119,13 +119,13 @@ class ScoresDB {
         }
     }
 
-    static updateScore(score) {
-        this.db.run(`UPDATE Courses SET userID="${score.userID}, courseID="${score.courseID}", ranking="${score.ranking}", desire="${score.desire}, notes="${score.notes}`);
+    static update(score) {
+        this.db.run(`UPDATE Courses SET facultyID="${score.facultyID}", courseID="${score.courseID}", ranking="${score.ranking}", desire="${score.desire}", notes="${score.notes}"`);
     }
 
     static removeScore(score) {
         //might experiment with setting all values to 0 rather than deleting entry
-        this.db.run(`DELETE FROM Courses WHERE id="${score.id}`);
+        this.db.run(`DELETE FROM Courses WHERE id="${score.id}"`);
     }
 }
 

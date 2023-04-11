@@ -5,6 +5,11 @@ const courseDB = require('./courseDB');
 const userDB = require('./userDB');
 
 class ScoreController {
+
+    async init(req, res) {
+        scoresDB.initialize();
+    }
+
     //search list of scores by user
     async searchByUser(req, res) {
         let id = req.params.id;
@@ -101,8 +106,8 @@ class ScoreController {
             //[TODO] redirect to scoreForm with error message
         } else {
             //[TODO] update to be scores variables
+            score.facultyID = req.body.score.facultyID;
             score.courseID = req.body.score.courseID;
-            score.facultyID = req.body.user.userID; // [TODO] not sure about this one
             score.ranking = req.body.score.ranking;
             score.desire = req.body.score.desire;
             score.notes = req.body.score.notes;

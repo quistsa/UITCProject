@@ -23,10 +23,10 @@
 				
 				<h1 class="center">GVSU School of Computing Course Listing</h1> 
 
+				<h3>Course Search for <%=user.fName%> <%=user.lName%></h3>
+
 				<p class="center"> Prep Score Key: <b>0</b> = default, <b>1</b> = teach in more than a year, <b>2</b> = teach in less than 6 months, <b>3</b> = teach right away
 				</br> Desire Key: <b>0</b> = can't teach, <b>1</b> = don't want to teach, <b>2</b> = somewhat would like to teach, <b>3</b> = would love to teach</p>
-				
-				<!--<h3>Course Search for user.fName user.lName</h3> [TODO] reference user's first and last names with js --> 
 
 				<!--dummy frame for submitting forms without redirecting-->
 				<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
@@ -45,11 +45,13 @@
 								<form action="<%=route%>" target="dummyframe" accept-charset="UTF-8" method="post" class="form">
 									<tr>
 										<td class="center"><b><%= score.courseID %></b><br><%= score.Course.name %></td>
-										<td><input type="text" id="ranking" value="<%=score.ranking%>" class="form-control w-50" placeholder="0-3"/></td>
-										<td><input type="text" id="desire" value="<%=score.desire%>" class="form-control w-50" placeholder="0-3"/></td>
-										<td><input type="text" tabindex="-1" id="notes" value="<%=score.notes%>" class="form-control" placeholder="Notes"/></td>
+										<td><input type="text" id="score_ranking" name="score[ranking]" value="<%=score.ranking%>" class="form-control w-50" placeholder="0-3"/></td>
+										<td><input type="text" id="score_desire" name="score[desire]" value="<%=score.desire%>" class="form-control w-50" placeholder="0-3"/></td>
+										<td><input type="text" tabindex="-1" id="score_notes" name="score[notes]" value="<%=score.notes%>" class="form-control" placeholder="Notes"/></td>
 										<td><input type="submit" name="commit" value="Update Score" class="btn btn-primary"/></td>
 									</tr>
+									<input type="hidden" id="score_facultyID" name="score[facultyID]" value="<%=score.facultyID%>">
+									<input type="hidden" id="score_courseID" name="score[courseID]" value="<%=score.courseID%>">
 								</form>
 							<% }); %>
 					</table><!-- End Table -->
