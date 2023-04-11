@@ -1,4 +1,4 @@
-    //index.js verifies authentication and handles web requests to redirect users to the different pages
+//index.js verifies authentication and handles web requests to redirect users to the different pages
 //Sam Quist, Up In The Cloud Computing
 
 const express = require('express');
@@ -20,7 +20,7 @@ const { response } = require('express');
 
 //start server
 const app = express();
-const port = 3000;
+const port = 3500;
 
 //session info
 app.use(session({
@@ -73,6 +73,7 @@ app.get('/', (req, res) =>{
 //////////////////////////////////////////
 //login redirects
 /////////////////////////////////////////
+
 app.get('/login', (req, res) => {
     loginController.loginPage(req, res);
 })
@@ -113,11 +114,6 @@ app.get('/faculty/:id', (req, res) => { //add isAuthenticated later
     scoreController.faculty(req, res);
 })
 
-app.get('/users/init', (req, res) => {
-    require('./userDB').initialize();
-    res.send("Initialized");
-})
-
 //get list of users
 app.get('/users', (req, res) => {
     console.log("get list of users");
@@ -151,6 +147,7 @@ app.get('/users/:id/delete', (req, res) => {
 //////////////////////////////////////////
 //courses redirects
 //////////////////////////////////////////
+
 //get list of courses
 app.get('/courses', (req, res) => {
     courseController.index(req, res);
@@ -159,12 +156,6 @@ app.get('/courses', (req, res) => {
 app.post('/courses', (req, res) => {
     //create new course on post request for /courses
     courseController.create(req, res);
-})
-
-//initilization for testing
-app.get('/courses/init', (req, res) => {
-    require('./courseDB').initialize();
-    res.send("Initialized");
 })
 
 app.get('/courses/new', (req, res) =>{ 
@@ -189,17 +180,31 @@ app.get('/courses/:id/delete', (req, res) => {
 //////////////////////////////////////////
 //scores redirects
 //////////////////////////////////////////
-//initilization for testing
-app.get('/scores/init', (req, res) => {
-    require('./scoresDB').initialize();
-    res.send("Initialized");
+
+app.get('/scores/new', (req, res) =>{ 
+    //display form for creating a new score 
+    scoreController.newScore(req, res);
 })
 
-//[TODO] Scores create, update
+app.post('/scores/:id', (req, res) => {
+    //display a form with current info for updating a scores
+    scoreController.update(req, res);
+})
+
+app.get('/scores/:id/edit', (req, res) => {
+    //display form for updating a score 
+    scoreController.edit(req, res);
+})
+
+app.get('/scores/:id/delete', (req, res) => {
+    //display form for updating a score 
+    scoreController.delete(req, res);
+})
 
 //////////////////////////////////////////
 //error redirects
 //////////////////////////////////////////
+
 app.get('/404', (req, res) => {
     userController.error404(req, res);
 });
