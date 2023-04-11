@@ -30,6 +30,18 @@ class ScoresDB {
          });
     }
 
+    static findScore(id) {
+        return new Promise((resolve, reject) => {
+            this.db.all(`SELECT * from Scores where (id == ${id})`, (err, rows) => {
+                if (rows.length >= 1) {
+                    resolve(new Score(rows[0]));
+                } else {
+                    reject(`Id ${id} not found`);
+                }
+            });
+        });
+    }
+
     //return list of scores for every user for a specified course [id]
     static searchByCourse(id) {
         return new Promise((resolve, reject) => {

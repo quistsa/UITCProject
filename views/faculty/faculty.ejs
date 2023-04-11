@@ -23,8 +23,8 @@
 				
 				<h1 class="center">GVSU School of Computing Course Listing</h1> 
 
-				<p class="center"> Ranking Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away
-				</br> Desire Key: 0 = can't teach, 1 = don't want to teach, 2 = somewhat would love to teach, 3 = would love to teach</p>
+				<p class="center"> Prep Score Key: <b>0</b> = default, <b>1</b> = teach in more than a year, <b>2</b> = teach in less than 6 months, <b>3</b> = teach right away
+				</br> Desire Key: <b>0</b> = can't teach, <b>1</b> = don't want to teach, <b>2</b> = somewhat would like to teach, <b>3</b> = would love to teach</p>
 				
 				<!--<h3>Course Search for user.fName user.lName</h3> [TODO] reference user's first and last names with js --> 
 
@@ -44,10 +44,10 @@
 								<% route = `/scores/${score.id}` %>
 								<form action="<%=route%>" target="dummyframe" accept-charset="UTF-8" method="post" class="form">
 									<tr>
-										<td><%= score.courseID %></td>
-										<td><input type="text" id="ranking" class="form-control w-25" placeholder="<%=score.ranking%>"/></td>
-										<td><input type="text" id="desire" class="form-control w-25" placeholder="<%=score.desire%>"/></td>
-										<td><input type="text" tabindex="-1" id="notes" class="form-control" placeholder="<%=score.notes%>"/></td>
+										<td class="center"><b><%= score.courseID %></b><br><%= score.Course.name %></td>
+										<td><input type="text" id="ranking" value="<%=score.ranking%>" class="form-control w-50" placeholder="0-3"/></td>
+										<td><input type="text" id="desire" value="<%=score.desire%>" class="form-control w-50" placeholder="0-3"/></td>
+										<td><input type="text" tabindex="-1" id="notes" value="<%=score.notes%>" class="form-control" placeholder="Notes"/></td>
 										<td><input type="submit" name="commit" value="Update Score" class="btn btn-primary"/></td>
 									</tr>
 								</form>

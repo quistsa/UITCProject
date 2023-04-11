@@ -1,3 +1,4 @@
+const Score = require('./score');
 
 const scoresDB = require('./scoresDB');
 const courseDB = require('./courseDB');
@@ -61,7 +62,7 @@ class ScoreController {
     async create(req, res) {
         console.log("Creating new score");
         
-        let newScore = await scoreDB.create(req.body.score);
+        let newScore = await scoresDB.create(req.body.score);
 
         if (newScore.isValid()) {
             res.writeHead(302, { 'Location': `/scores/${ newScore.id }`});
@@ -73,7 +74,7 @@ class ScoreController {
 
     async edit(req, res) {
         let id = req.params.id;
-        let score = await scoreDB.findScore(id);
+        let score = await scoresDB.findScore(id);
 
         if (!score) {
             console.log("no score with ID of " + id);
@@ -86,7 +87,7 @@ class ScoreController {
     async update(req, res) {
         //update variables for a score
         let id = req.params.id;
-        let score = await scoreDB.findScore(id);
+        let score = await scoresDB.findScore(id);
 
         let testScore = new Score(req.body.score);
         if (!testScore.isValid()) {
@@ -100,28 +101,31 @@ class ScoreController {
             //[TODO] redirect to scoreForm with error message
         } else {
             //[TODO] update to be scores variables
-            score.scoreID = req.body.score.scoreID;
-            score.name = req.body.score.name;
+            score.courseID = req.body.score.courseID;
+            score.facultyID = req.body.user.userID; // [TODO] not sure about this one
+            score.ranking = req.body.score.ranking;
+            score.desire = req.body.score.desire;
+            score.notes = req.body.score.notes;
 
             console.log("Updating score");
-            scoreDB.update(score);
+            scoresDB.update(score);
 
             res.writeHead(302, { 'Location': `/scores` });
             res.end();
         }
     }
 
+    // [TODO] dont think this will be used
     async delete(req, res) {
         let id = req.params.id;
-        let score = await scoreDB.findScore(id);
+        let score = await scoresDB.findScore(id);
         
-
         if (!score) {
             res.send("Couldn't find a score with id " + id);
             //[TODO] redirect to scoreList with error message
         } else {
-            scoreDB.remove(score);
-            let scores = await scoreDB.allScores();
+            scoresDB.remove(score);
+            let scores = await scoresDB.allScores();
             res.render('score/scoreList', { scores: scores });
         }
     }
