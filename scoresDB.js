@@ -56,6 +56,7 @@ class ScoresDB {
               if (rows.length >= 1) {
                 resolve(rows.map((item) => new Score(item)));
               } else {
+                console.log(id);
                 reject(`Course ID ${id} not found`);
               }
             }

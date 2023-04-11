@@ -37,7 +37,6 @@
 			<p class="center"> Ranking Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away
 			</br> Desire Key: 0 = can't teach, 1 = don't want to teach , 2 = somewhat would love to teach, 3 = would love to teach</p>
 	
-
 			<div class="input-group">
 				<ul>
 					<li>
@@ -94,16 +93,16 @@
 		});
 
 		//update dropdown to show selected course [FIX] not doing anything :(
-		function setCourse(dropdown, id) {
-			console.log("courseID" + id);
-				for (let i = 0; i < dropdown.options.length; i++) {
-					if (dropdown.options[i].id == id) {
-						dropdown.options[i].selected = true;
-						return;
-					}
-				}
-			}
-		setCourse(document.getElementById('select'),"<%=courseID%>");
+		//function setCourse(dropdown, id) {
+		//	console.log("courseID" + id);
+		//		for (let i = 0; i < dropdown.options.length; i++) {
+		//			if (dropdown.options[i].id == id) {
+		//				dropdown.options[i].selected = true;
+		//				return;
+		//			}
+		//		}
+		//	}
+		//setCourse(document.getElementById('select'),"<%=courseID%>");
 
 		//rules for search bar (almost completed need help on select)
 		/*function filterFunction() {
