@@ -76,12 +76,19 @@ class ScoresDB {
     //return scores for a particular user, given an id
     static scoresForUser(id) {
         return new Promise((resolve, reject) => {
-            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (userID == ?)`,[id] , (err, rows, response) => {
-                if (rows.length >= 1) {
-                    resolve(response.map((item) => new Score(item)));
-                } else {
-                    reject(`User ID ${id} not found`);
-                }
+            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (Scores.userID == ?)`,[id] , (err, rows, response) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                  } else {
+                    console.log(rows);
+                    console.log(response);
+                    if (rows.length >= 1) {
+                      resolve(rows.map((item) => new Score(item)));
+                    } else {
+                      reject(`User ID ${id} not found`);
+                    }
+                  }
             });
         });
     }

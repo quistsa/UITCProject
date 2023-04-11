@@ -27,26 +27,33 @@
 				</br> Desire Key: 0 = can't teach, 1 = don't want to teach , 2 = somewhat would love to teach, 3 = would love to teach</p>
 				
 				<!--<h3>Course Search for user.fName user.lName</h3> [TODO] reference user's first and last names with js --> 
-					
-				<form>
+
+				<!--dummy frame for submitting forms without redirecting-->
+				<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+
 					<table class="table"><!--Start Table -->
 							<tr>
 								<th>Course Number</th>
 								<th>Prep Score</th>
 								<th>Desire</th>
 								<th>Notes</th>
+								<th>Submit</th>
 							</tr>
-							<% courses.forEach(course => { %>
-								<tr>
-									<td><%= course.courseID %></td>
-									<td><input type="text" id="ranking" class="form-control w-25" placeholder="0-3"/></td>
-									<td><input type="text" id="desire" class="form-control w-25" placeholder="0-3"/></td>
-									<td><input type="text" id="notes" class="form-control" placeholder="Notes"/></td>
-								</tr>
+
+							<% scores.forEach(score => { %>
+								<% route = `/scores/${score.id}` %>
+								<form action="<%=route%>" target="dummyframe" accept-charset="UTF-8" method="post" class="form">
+									<tr>
+										<td><%= score.courseID %></td>
+										<td><input type="text" id="ranking" class="form-control w-25" placeholder="<%=score.ranking%>"/></td>
+										<td><input type="text" id="desire" class="form-control w-25" placeholder="<%=score.desire%>"/></td>
+										<td><input type="text" id="notes" class="form-control" placeholder="<%=score.notes%>"/></td>
+										<td><input type="submit" name="commit" value="Update Score" class="btn btn-primary"/></td>
+									</tr>
+								</form>
 							<% }); %>
 					</table><!-- End Table -->
 					<button class="btn btn-primary" type="save" id="saveBtn">Save</button> <!-- [TODO] make the save button do something, also maybe make it float on the right side to be more user friendly -->
-				</form>
 			</div>		
 		</main> 			
 </body>
