@@ -32,13 +32,15 @@ class ScoresDB {
          });
     }
 
+    //[TODO] dont think this is necessary
     static findScore(id) {
         return new Promise((resolve, reject) => {
             this.db.all(`SELECT * from Scores where (id == ${id})`, (err, rows) => {
                 if (rows.length >= 1) {
                     resolve(new Score(rows[0]));
                 } else {
-                    reject(`Id ${id} not found`);
+                    console.log(`Score id ${id} not found [scoresDB.findScore]`);
+                    resolve(null);
                 }
             });
         });
@@ -58,8 +60,8 @@ class ScoresDB {
               if (rows.length >= 1) {
                 resolve(rows.map((item) => new Score(item)));
               } else {
-                console.log(id);
-                reject(`Course ID ${id} not found`);
+                console.log(`Course id ${id} not found [scoresDB.searchByCourse]`);
+                resolve(null);
               }
             }
           });
@@ -80,7 +82,8 @@ class ScoresDB {
                     if (rows.length >= 1) {
                         resolve(rows.map((item) => new Score(item)));
                     } else {
-                        reject(`User ID ${id} not found`);
+                        console.log(`User id ${id} not found [scoresDB.searchByUser]`);
+                        resolve(null);
                     }
                     }
                 });
@@ -100,7 +103,8 @@ class ScoresDB {
                     if (rows.length >= 1) {
                       resolve(rows.map((item) => new Score(item)));
                     } else {
-                      reject(`User ID ${id} not found`);
+                        console.log(`User id ${id} not found [scoresDB.scoresForUser]`);
+                        resolve(null);
                     }
                   }
             });

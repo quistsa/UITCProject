@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>404 Redirect</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width-device-width, initial-scale=1">
+	<link rel="stylesheet" href="styles/style.css">
+</head>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+      color: #444;
+    }
+    
+    #error-container {
+      width: 80%;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 50px;
+    }
+    
+    h1 {
+      font-size: 4em;
+      margin-bottom: 0;
+    }
+    
+    p {
+      font-size: 1.2em;
+      margin-top: 0;
+    }
+    
+    a {
+      color: #008CBA;
+    }
+    
+    .button {
+      display: inline-block;
+      background-color: #008CBA;
+      color: #fff;
+      font-size: 1.2em;
+      padding: 10px 20px;
+      text-decoration: none;
+      margin-top: 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .button:hover {
+      background-color: #005F6B;
+    }
+  </style>
+<body>
+  <div id="error-container">
+    <h1>404</h1>
+    <p>Oops! Page not found.</p>
+    <p><%= errormsg %></p>
+    <a href="<%=btnPath%>" class="button"><%=btnmsg%></a>
+  </div>
+</body>
+</html>

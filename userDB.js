@@ -31,7 +31,7 @@ class UserDB {
                 if (rows.length >= 1) {
                     resolve(new User(rows[0]));
                 } else {
-                    console.log(`Id ${id} not found`);
+                    console.log(`User id ${id} not found [userDB.findUser]`);
                     resolve(null);
                 }
             });

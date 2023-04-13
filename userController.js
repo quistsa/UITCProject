@@ -28,9 +28,11 @@ class UserController{
         let id = req.params.id;
         let user = await userDB.findUser(id);
 
-        if (!user) {
-            res.send("Couldn't find a user with ID of " + id);
-            //[TODO] 404 redirect
+        if (user == null) {
+            let errormsg = "Could not find a user with an ID of " + id;
+            let btnmsg = "Return to faculty list";
+            let btnPath = "/users";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             res.render('faculty/facultyShow', { user: user  });
         }
@@ -58,9 +60,11 @@ class UserController{
         let id = req.params.id;
         let user = await userDB.findUser(id);
 
-        if (!user) {
-            res.send("Couldn't find a user with id " + id);
-            //[TODO] redirect to facultyForm with error message
+        if (user == null) {
+            let errormsg = "Could not find a user with an ID of " + id;
+            let btnmsg = "Return to faculty list";
+            let btnPath = "/users";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             res.render('faculty/facultyForm', { user: user });
         }
@@ -78,9 +82,11 @@ class UserController{
             return;
         }
 
-        if (!user) {
-            res.send("Could not find user with id of " + id);
-            //[TODO] redirect to facultyForm with error message
+        if (user == null) {
+            let errormsg = "Could not find a user with an ID of " + id;
+            let btnmsg = "Return to faculty list";
+            let btnPath = "/users";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             user.fName = req.body.user.fName;
             user.lName = req.body.user.lName;
@@ -100,9 +106,11 @@ class UserController{
         let user = await userDB.findUser(id);
         
 
-        if (!user) {
-            res.send("Couldn't find a user with id " + id);
-            //[TODO] redirect to facultyList with error message
+        if (user == null) {
+            let errormsg = "Could not find a user with an ID of " + id;
+            let btnmsg = "Return to faculty list";
+            let btnPath = "/users";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             userDB.removeUser(user);
             scoresDB.removeUserScores(user);

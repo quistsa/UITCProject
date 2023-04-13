@@ -188,9 +188,9 @@ app.get('/courses/:id/delete', (req, res) => {
 //scores redirects
 //////////////////////////////////////////
 
-app.get('/scores/new', (req, res) =>{ 
+app.post('/scores', (req, res) =>{ 
     //display form for creating a new score 
-    scoreController.newScore(req, res);
+    scoreController.create(req, res);
 })
 
 app.post('/scores/:id', (req, res) => {

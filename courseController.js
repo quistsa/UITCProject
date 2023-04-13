@@ -20,9 +20,9 @@ class CourseController{
         let id = req.params.id;
         let course = await courseDB.findCourse(id);
 
-        if (!course) {
-            res.send("Couldn't find a course with ID of " + id);
-            //[TODO] 404 redirect
+        if (course == null) {
+            errormsg = "There is no course with an ID of " + id;
+            res.render('notFoundError', { errormsg: errormsg});
         } else {
             res.render('showCourse', { course: course });
         }
@@ -49,9 +49,9 @@ class CourseController{
         let id = req.params.id;
         let course = await courseDB.findCourse(id);
 
-        if (!course) {
-            console.log("no course with ID of " + id);
-            //[TODO] redirect to courseForm with error message
+        if (course == null) {
+            errormsg = "There is no course with an ID of " + id;
+            res.render('notFoundError', { errormsg: errormsg});
         } else {
             res.render('course/courseForm', { course: course });
         }
@@ -69,9 +69,9 @@ class CourseController{
             return;
         }
 
-        if (!course) {
-            res.send("Could not find course with id of " + id);
-            //[TODO] redirect to courseForm with error message
+        if (course == null) {
+            errormsg = "There is no course with an ID of " + id;
+            res.render('notFoundError', { errormsg: errormsg});
         } else {
             course.courseID = req.body.course.courseID;
             course.name = req.body.course.name;
@@ -89,9 +89,9 @@ class CourseController{
         let course = await courseDB.findCourse(id);
         
 
-        if (!course) {
-            res.send("Couldn't find a course with id " + id);
-            //[TODO] redirect to courseList with error message
+        if (course == null) {
+            errormsg = "There is no course with an ID of " + id;
+            res.render('notFoundError', { errormsg: errormsg});
         } else {
             courseDB.remove(course);
             let courses = await courseDB.allCourses();

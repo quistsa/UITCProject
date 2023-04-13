@@ -21,9 +21,11 @@ class ScoreController {
         let scores = await scoresDB.searchByUser(id);
         let users = await userDB.allUsers();
 
-        if (!scores) {
-            res.send("Couldn't find a user with ID of " + id);
-            //[TODO] redirect to adminFaculty with error message
+        if (scores == null) {
+            let errormsg = "There is no user with an ID of '" + id + "' or the requested user has no entered scores.";
+            let btnmsg = "Return to course search";
+            let btnPath = "/facultySearch/";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             res.render('admin/adminFaculty', { scores: scores, users: users, facultyID: id });
         }
@@ -39,9 +41,11 @@ class ScoreController {
         let scores = await scoresDB.searchByCourse(id);
         let courses = await courseDB.allCourses();
 
-        if (!scores) {
-            res.send("Couldn't find a course with ID of " + id);
-            //[TODO] redirect to adminCourse with error message
+        if (scores == null) {
+            let errormsg = "There is no course with an ID of '" + id + "' or the requested course has no entered scores.";
+            let btnmsg = "Return to course search";
+            let btnPath = "/courseSearch/";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             res.render('admin/adminCourse', { scores: scores, courses: courses, courseID: id });
         }
@@ -53,10 +57,15 @@ class ScoreController {
         let courses = await courseDB.allCourses();
         let user = await userDB.findUser(id);
         let scores = await scoresDB.scoresForUser(id);
-        if (!user) {
-            res.send("Couldn't find a user with ID of " + id);
+        let scoreObj = new Score();
+
+        if (user == null) {
+            let errormsg = "There is no user with an ID of '" + id + "' or the requested user has no entered scores.";
+            let btnmsg = "Return to login page";
+            let btnPath = "/login";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
-            res.render('faculty/faculty', { courses: courses, user: user, scores: scores }); 
+            res.render('faculty/faculty', { courses: courses, user: user, scores: scores, scoreObj: scoreObj }); 
         }
     }
 
@@ -67,7 +76,7 @@ class ScoreController {
     async create(req, res) {
         console.log("Creating new score");
         
-        let newScore = await scoresDB.create(req.body.score);
+        let newScore = await scoresDB.addScore(req.body.score);
 
         if (newScore.isValid()) {
             res.writeHead(302, { 'Location': `/scores/${ newScore.id }`});
@@ -82,8 +91,10 @@ class ScoreController {
         let score = await scoresDB.findScore(id);
 
         if (!score) {
-            console.log("no score with ID of " + id);
-            //[TODO] redirect to scoreForm with error message
+            let errormsg = "Could not find a score with an ID of " + id;
+            let btnmsg = "Return to login page";
+            let btnPath = "/login";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             res.render('score/scoreForm', { score: score });
         }
@@ -101,9 +112,11 @@ class ScoreController {
             return;
         }
 
-        if (!score) {
-            res.send("Could not find score with id of " + id);
-            //[TODO] redirect to scoreForm with error message
+        if (score == null) {
+            let errormsg = "Could not find a score with an ID of " + id;
+            let btnmsg = "Return to login page";
+            let btnPath = "/login";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             score.ranking = req.body.score.ranking;
             score.desire = req.body.score.desire;
@@ -122,9 +135,11 @@ class ScoreController {
         let id = req.params.id;
         let score = await scoresDB.findScore(id);
         
-        if (!score) {
-            res.send("Couldn't find a score with id " + id);
-            //[TODO] redirect to scoreList with error message
+        if (score == null) {
+            let errormsg = "Could not find a score with an ID of " + id;
+            let btnmsg = "Return to login page";
+            let btnPath = "/login";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             scoresDB.remove(score);
             let scores = await scoresDB.allScores();

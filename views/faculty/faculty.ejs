@@ -40,15 +40,36 @@
 								<th>Submit</th>
 							</tr>
 
-							<% scores.forEach(score => { %>
-								<% route = `/scores/${score.id}` %>
+							<% courses.forEach(course => { %>
+								<% let score = scoreObj; %>
+								<% score.facultyID = user.userID; %>
+								<% score.courseID = course.courseID; %>
+								<% if (scores != null) { %>
+									<% scores.forEach(scoreSel => { %>
+										<% if (scoreSel.courseID == course.courseID) { %>
+											<% score = scoreSel; %>
+										<% } %>
+									<% }); %>
+								<% } %>
+
+								<% 
+									if (score.id) {
+										submitLabel = "Update Score";
+										route = `/scores/${score.id}`;
+										edit = true;
+									} else {
+										submitLabel = "Add Score";
+										route = "/scores";
+										edit = false;
+									}
+								%>
 								<form action="<%=route%>" target="dummyframe" accept-charset="UTF-8" method="post" class="form">
 									<tr>
-										<td class="center"><b><%= score.courseID %></b><br><%= score.Course.name %></td> 
+										<td class="center"><b><%= course.courseID %></b><br><%= course.name %></td> 
 										<td><input type="text" id="score_ranking" name="score[ranking]" value="<%=score.ranking%>" class="form-control w-50" placeholder="0-3"/></td>
 										<td><input type="text" id="score_desire" name="score[desire]" value="<%=score.desire%>" class="form-control w-50" placeholder="0-3"/></td>
 										<td><input type="text" tabindex="-1" id="score_notes" name="score[notes]" value="<%=score.notes%>" class="form-control" placeholder="Notes"/></td>
-										<td><input type="submit" name="commit" value="Update Score" class="btn btn-primary"/></td>
+										<td><input type="submit" name="commit" value="<%= submitLabel %>" class="btn btn-primary"/></td>
 									</tr>
 									<input type="hidden" id="score_facultyID" name="score[facultyID]" value="<%=score.facultyID%>">
 									<input type="hidden" id="score_courseID" name="score[courseID]" value="<%=score.courseID%>">
