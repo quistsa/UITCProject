@@ -1,3 +1,5 @@
+<!-- Page for displaying form for creating or updating a course -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,43 +11,6 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 
-<style>
-	input[type=text], select {
-	  width: 25%;
-	  padding: 12px 20px;
-	  margin: 8px 0;
-	  display: block;
-	  border: 1px solid #ccc;
-	  border-radius: 4px;
-	  box-sizing: border-box;
-	}
-	
-	Select {
-	display: inline-block;
-	}
-	
-	.center {
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  padding: 5%;
-	}
-
-	.btn {
-		padding: 3%;
-	}
-	
-	.background {
-	  border-radius: 5px;
-	  background-color: #f2f2f2;
-	  padding: 20px;
-	}
-	
-	h1 {
-	  text-align: center;
-	  padding: 1%;
-	}
-</style>
 
 	<% 
 		if (course.id) {
@@ -127,6 +92,41 @@
 		margin: 0; padding: 0; border: 0;
 		}
 
+		input[type=text], select {
+	  width: 25%;
+	  padding: 12px 20px;
+	  margin: 8px 0;
+	  display: block;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  box-sizing: border-box;
+	}
+	
+		Select {
+		display: inline-block;
+		}
+		
+		.center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 5%;
+		}
+
+		.btn {
+			padding: 3%;
+		}
+		
+		.background {
+		border-radius: 5px;
+		background-color: #f2f2f2;
+		padding: 20px;
+		}
+		
+		h1 {
+		text-align: center;
+		padding: 1%;
+		}
 
 		/*Styles for All Pages */
 		body {
