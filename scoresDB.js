@@ -128,15 +128,21 @@ class ScoresDB {
     }
 
     static update(score) {
-        this.db.run(`UPDATE Scores SET ranking="${score.ranking}", desire="${score.desire}", notes="${score.notes}" WHERE id="${score.id}"`);
+        console.log("updating score [update]" + score.facultyID + " " + score.courseID + " " + score.id);
+        this.db.run(`UPDATE Scores SET ranking="${score.ranking}", desire="${score.desire}", notes="${score.notes}" WHERE facultyID="${score.facultyID}" AND courseID="${score.courseID}"`);
     }
 
+    // [TODO] not sure if necessary
     static removeScore(score) {
-        //might experiment with setting all values to 0 rather than deleting entry
         this.db.run(`DELETE FROM Scores WHERE id="${score.id}"`);
     }
 
-    //
+    //when a user is updated, change associated score IDs
+    static updateUserID(user, prevID) {
+        this.db.run(`UPDATE Scores SET facultyID="${user.userID}" WHERE facultyID="${prevID}"`);
+    }
+
+    //when a user is deleted, remove associated scores
     static removeUserScores(user) {
         this.db.run(`DELETE FROM Scores WHERE facultyID="${user.userID}"`)
     }

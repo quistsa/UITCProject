@@ -21,8 +21,10 @@ class CourseController{
         let course = await courseDB.findCourse(id);
 
         if (course == null) {
-            errormsg = "There is no course with an ID of " + id;
-            res.render('notFoundError', { errormsg: errormsg});
+            let errormsg = "Could not find a course with an ID of " + id;
+            let btnmsg = "Return to course list";
+            let btnPath = "/courses";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             res.render('showCourse', { course: course });
         }
@@ -50,8 +52,10 @@ class CourseController{
         let course = await courseDB.findCourse(id);
 
         if (course == null) {
-            errormsg = "There is no course with an ID of " + id;
-            res.render('notFoundError', { errormsg: errormsg});
+            let errormsg = "Could not find a course with an ID of " + id;
+            let btnmsg = "Return to course list";
+            let btnPath = "/courses";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             res.render('course/courseForm', { course: course });
         }
@@ -70,8 +74,10 @@ class CourseController{
         }
 
         if (course == null) {
-            errormsg = "There is no course with an ID of " + id;
-            res.render('notFoundError', { errormsg: errormsg});
+            let errormsg = "Could not find a course with an ID of " + id;
+            let btnmsg = "Return to course list";
+            let btnPath = "/courses";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             course.courseID = req.body.course.courseID;
             course.name = req.body.course.name;
@@ -90,8 +96,10 @@ class CourseController{
         
 
         if (course == null) {
-            errormsg = "There is no course with an ID of " + id;
-            res.render('notFoundError', { errormsg: errormsg});
+            let errormsg = "Could not find a course with an ID of " + id;
+            let btnmsg = "Return to course list";
+            let btnPath = "/courses";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             courseDB.remove(course);
             let courses = await courseDB.allCourses();

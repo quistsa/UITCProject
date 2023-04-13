@@ -111,7 +111,7 @@ app.get('/facultySearch/:id', (req, res) => {
 /////////////////////////////////////////
 app.get('/faculty/:id', (req, res) => { //add isAuthenticated later
     //when a faculty user logs in, use the userController to send them to the faculty view, which should match the user's responses with their ID using mongoDB
-    scoreController.faculty(req, res);
+    scoreController.faculty(req, res,);
 })
 
 //get list of users
@@ -198,10 +198,10 @@ app.post('/scores/:id', (req, res) => {
     scoreController.update(req, res);
 })
 
-app.get('/scores/:id/edit', (req, res) => {
+//app.get('/scores/:id/edit', (req, res) => {
     //display form for updating a score 
-    scoreController.edit(req, res);
-})
+//   scoreController.edit(req, res);
+//})
 
 app.get('/scores/:id/delete', (req, res) => {
     //display form for updating a score 

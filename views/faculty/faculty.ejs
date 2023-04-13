@@ -71,8 +71,8 @@
 										<td><input type="text" tabindex="-1" id="score_notes" name="score[notes]" value="<%=score.notes%>" class="form-control" placeholder="Notes"/></td>
 										<td><input type="submit" name="commit" value="<%= submitLabel %>" class="btn btn-primary"/></td>
 									</tr>
-									<input type="hidden" id="score_facultyID" name="score[facultyID]" value="<%=score.facultyID%>">
-									<input type="hidden" id="score_courseID" name="score[courseID]" value="<%=score.courseID%>">
+									<input type="hidden" id="score_facultyID" name="score[facultyID]" value="<%=user.userID%>">
+									<input type="hidden" id="score_courseID" name="score[courseID]" value="<%=course.courseID%>">
 								</form>
 							<% }); %>
 					</table><!-- End Table -->

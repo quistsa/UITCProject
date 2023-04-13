@@ -69,6 +69,7 @@ class ScoreController {
         }
     }
 
+    // [TODO] not used
     newScore(req, res) {
         res.render('score/scoreForm', { score: new Score() });
     }
@@ -82,10 +83,11 @@ class ScoreController {
             res.writeHead(302, { 'Location': `/scores/${ newScore.id }`});
             res.end();
         } else {
-            res.render('score/scoreForm', { score: newScore });
+            this.faculty(req, res, newScore);
         }
     }
 
+    //[TODO] not used
     async edit(req, res) {
         let id = req.params.id;
         let score = await scoresDB.findScore(id);
@@ -108,7 +110,7 @@ class ScoreController {
         let testScore = new Score(req.body.score);
         if (!testScore.isValid()) {
             testScore.id = score.id;
-            res.render('score/scoreForm', { score: testScore });
+            this.faculty(req, res);
             return;
         }
 
@@ -118,6 +120,8 @@ class ScoreController {
             let btnPath = "/login";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
+            score.facultyID = req.body.score.facultyID;
+            score.courseID = req.body.score.courseID;
             score.ranking = req.body.score.ranking;
             score.desire = req.body.score.desire;
             score.notes = req.body.score.notes;
@@ -125,7 +129,7 @@ class ScoreController {
             console.log("Updating score");
             scoresDB.update(score);
 
-            res.writeHead(302, { 'Location': `/scores` });
+            res.writeHead(302, { 'Location': `/scores/${score.id}` });
             res.end();
         }
     }

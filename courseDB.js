@@ -1,6 +1,7 @@
 //Database methods to store and edit courses
 
 var sqlite3 = require('sqlite3').verbose();
+const { response } = require('express');
 let Course = require('./course');
 
 class CourseDB {
@@ -32,12 +33,19 @@ class CourseDB {
     
     static findCourse(id) {
         return new Promise((resolve, reject) => {
-            this.db.all(`SELECT * from Courses where (id == ${id})`, (err, rows) => {
-                if (rows.length >= 1) {
-                    resolve(new Course(rows[0]));
+            this.db.all(`SELECT * from Courses WHERE (courseID == ?)`,[id], (err, rows) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
                 } else {
-                    console.log(`Course id ${id} not found [courseDB.findCourse]`);
-                    resolve(null);
+                    //console.log(rows);
+                    //console.log(response);
+                    if (rows.length >= 1) {
+                        resolve(new Course(rows[0]));
+                    } else {
+                        console.log(`Course id ${id} not found [courseDB.findCourse]`);
+                        resolve(null);
+                    }
                 }
             });
         });

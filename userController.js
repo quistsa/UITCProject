@@ -88,6 +88,7 @@ class UserController{
             let btnPath = "/users";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
+            let prevID = user.userID;
             user.fName = req.body.user.fName;
             user.lName = req.body.user.lName;
             user.userID = req.body.user.userID;
@@ -95,6 +96,7 @@ class UserController{
 
             console.log("Updating user");
             userDB.updateUser(user);
+            scoresDB.updateUserID(user, prevID);
 
             res.writeHead(302, { 'Location': `/users/${user.id}` });
             res.end();
