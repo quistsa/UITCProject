@@ -95,8 +95,8 @@ class ScoresDB {
                     console.error(err);
                     reject(err);
                   } else {
-                    console.log(rows);
-                    console.log(response);
+                    //console.log(rows);
+                    //console.log(response);
                     if (rows.length >= 1) {
                       resolve(rows.map((item) => new Score(item)));
                     } else {
@@ -107,7 +107,7 @@ class ScoresDB {
         });
     }
 
-    //create a new score, [FIX] not sure if needed
+    //create a new score
     static addScore(desc) {
         let newScore = new Score(desc);
         if (newScore.isValid()) {
@@ -122,7 +122,6 @@ class ScoresDB {
             return newScore;
         }
     }
-
 
     static update(score) {
         this.db.run(`UPDATE Scores SET ranking="${score.ranking}", desire="${score.desire}", notes="${score.notes}" WHERE id="${score.id}"`);
