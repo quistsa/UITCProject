@@ -33,6 +33,10 @@ class User {
             this.errors.push("User's last name must be at least 2 characters long");
         }
 
+        if(!this.userID){
+            this.userID = this.lName.toLowerCase() + String(this.fName).substring(0,2).toLowerCase();
+        }
+
         //error validation for if more admin users are added in the future
         if(this.admin && this.guest){
             this.errors.push("User cannot be an admin and a guest");

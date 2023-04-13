@@ -2,6 +2,8 @@
 
 var sqlite3 = require('sqlite3').verbose();
 let Score = require('./score');
+let courseDB = require('./courseDB');
+let userDB = require('./userDB');
 
 class ScoresDB {
 //Database methods to store and edit courses
@@ -24,7 +26,7 @@ class ScoresDB {
 
     static allScores() {
         return new Promise((resolve, reject) => {
-            this.db.all('SELECT * from Scores', (err, response) => {
+            this.db.all('SELECT * from Scores ORDER BY courseID ASC', (err, response) => {
                    resolve(response.map((item) => new Score(item)));
             });
          });
@@ -46,7 +48,7 @@ class ScoresDB {
     static searchByCourse(id) {
         return new Promise((resolve, reject) => {
           //join Users and Scores tables together in order to get first and last names of users in the same table, selecting only where courseID matches the given id
-          this.db.all(`SELECT * FROM Scores INNER JOIN Users ON Users.userID == Scores.facultyID INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (Courses.courseID == ?)`,[id] , (err, rows, response) => {
+          this.db.all(`SELECT * FROM Scores INNER JOIN Users ON Users.userID == Scores.facultyID INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (Courses.courseID == ?) ORDER BY Courses.courseID`,[id] , (err, rows, response) => {
             if (err) {
               console.error(err);
               reject(err);
@@ -68,7 +70,7 @@ class ScoresDB {
     static searchByUser(id) {
             return new Promise((resolve, reject) => {
             //need to select things only where courseID = id still
-            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID INNER JOIN Users ON Users.userID == Scores.facultyID WHERE (Users.id == ?)`,[id], (err, rows, response) => { 
+            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID INNER JOIN Users ON Users.userID == Scores.facultyID WHERE (Users.userID == ?) ORDER BY Courses.courseID`,[id], (err, rows, response) => { 
                 if (err) {
                     console.error(err);
                     reject(err);
@@ -88,7 +90,7 @@ class ScoresDB {
     //return scores for a particular user, given an id
     static scoresForUser(id) {
         return new Promise((resolve, reject) => {
-            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (Scores.facultyID == ?)`,[id] , (err, rows, response) => {
+            this.db.all(`SELECT * FROM Scores INNER JOIN Courses ON Courses.courseID == Scores.courseID WHERE (Scores.facultyID == ?) ORDER BY Courses.courseID`,[id] , (err, rows, response) => {
                 if (err) {
                     console.error(err);
                     reject(err);
@@ -105,11 +107,12 @@ class ScoresDB {
         });
     }
 
+    //create a new score, [FIX] not sure if needed
     static addScore(desc) {
         let newScore = new Score(desc);
         if (newScore.isValid()) {
             return new Promise((resolve, reject) => {
-                    this.db.run(`INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("${newScore.facultyID}", "${newScore.courseID}", "${newScore.ranking}", "${newScore.ranking}", "${newScore.notes}");`,
+                    this.db.run(`INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("${newScore.facultyID}", "${newScore.courseID}", "${newScore.ranking}", "${newScore.desire}", "${newScore.notes}");`,
                     function(err, data) {
                         newScore.id = this.lastID;
                         resolve(newScore);
@@ -120,13 +123,19 @@ class ScoresDB {
         }
     }
 
+
     static update(score) {
-        this.db.run(`UPDATE Courses SET facultyID="${score.facultyID}", courseID="${score.courseID}", ranking="${score.ranking}", desire="${score.desire}", notes="${score.notes}"`);
+        this.db.run(`UPDATE Scores SET ranking="${score.ranking}", desire="${score.desire}", notes="${score.notes}" WHERE id="${score.id}"`);
     }
 
     static removeScore(score) {
         //might experiment with setting all values to 0 rather than deleting entry
-        this.db.run(`DELETE FROM Courses WHERE id="${score.id}"`);
+        this.db.run(`DELETE FROM Scores WHERE id="${score.id}"`);
+    }
+
+    //
+    static removeUserScores(user) {
+        this.db.run(`DELETE FROM Scores WHERE facultyID="${user.userID}"`)
     }
 }
 

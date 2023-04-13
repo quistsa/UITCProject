@@ -23,21 +23,6 @@ class UserController{
         res.render('401error');
     }
 
-    //admin functions, [TODO] delete once it's made sure they're not necessary
-    async adminFaculty(req, res) {
-        let users = await userDB.allUsers();
-        let courses = await courseDB.allCourses();
-        let scores = await scoresDB.allScores();
-        res.render('admin/adminFaculty', { users: users,  courses: courses, scores: scores });
-    }
-
-    async adminCourse(req, res) { 
-        let courses = await courseDB.allCourses();
-        let users = await userDB.allUsers();
-        let scores = await scoresDB.allScores();
-        res.render('admin/adminCourse', { courses: courses, users: users, scores: scores });
-    }
-
     //not currently used or necessary
     async show(req, res) {
         let id = req.params.id;
@@ -120,6 +105,7 @@ class UserController{
             //[TODO] redirect to facultyList with error message
         } else {
             userDB.removeUser(user);
+            scoresDB.removeUserScores(user);
             let users = await userDB.allUsers();
             res.render('faculty/facultyList', { users: users });
         }

@@ -15,7 +15,7 @@ class ScoreController {
         let id = req.params.id;
 
         if (!id){ 
-            id = 1;
+            id = "quistsa";
         }
 
         let scores = await scoresDB.searchByUser(id);
@@ -105,9 +105,6 @@ class ScoreController {
             res.send("Could not find score with id of " + id);
             //[TODO] redirect to scoreForm with error message
         } else {
-            //[TODO] update to be scores variables
-            score.facultyID = req.body.score.facultyID;
-            score.courseID = req.body.score.courseID;
             score.ranking = req.body.score.ranking;
             score.desire = req.body.score.desire;
             score.notes = req.body.score.notes;

@@ -15,44 +15,6 @@ class CourseController{
         res.render('course/courseList', { courses: courses });
     }
 
-    //move searchByUser and searchByCourse to scoresController
-    //search list of courses by user
-    async searchByUser(req, res) {
-        let id = req.params.id;
-
-        if (!id){ 
-            id = 1;
-        }
-
-        let scores = await scoresDB.searchByUser(id);
-        let users = await userDB.allUsers();
-
-        if (!scores) {
-            res.send("Couldn't find a user with ID of " + id);
-            //[TODO] redirect to adminFaculty with error message
-        } else {
-            res.render('admin/adminFaculty', { scores: scores, users: users, facultyID: id });
-        }
-    }
-
-    async searchByCourse(req, res) {
-        let id = req.params.id;
-        
-        if (!id){ 
-            id = "CIS101";
-        }
-
-        let scores = await scoresDB.searchByCourse(id);
-        let courses = await courseDB.allCourses();
-
-        if (!scores) {
-            res.send("Couldn't find a course with ID of " + id);
-            //[TODO] redirect to adminCourse with error message
-        } else {
-            res.render('admin/adminCourse', { scores: scores, courses: courses, courseID: id });
-        }
-    }
-
     //not currently used or necessary
     async show(req, res) {
         let id = req.params.id;

@@ -44,7 +44,7 @@
 								<% route = `/scores/${score.id}` %>
 								<form action="<%=route%>" target="dummyframe" accept-charset="UTF-8" method="post" class="form">
 									<tr>
-										<td class="center"><b><%= score.courseID %></b><br><%= score.Course.name %></td>
+										<td class="center"><b><%= score.courseID %></b><br><%= score.Course.name %></td> 
 										<td><input type="text" id="score_ranking" name="score[ranking]" value="<%=score.ranking%>" class="form-control w-50" placeholder="0-3"/></td>
 										<td><input type="text" id="score_desire" name="score[desire]" value="<%=score.desire%>" class="form-control w-50" placeholder="0-3"/></td>
 										<td><input type="text" tabindex="-1" id="score_notes" name="score[notes]" value="<%=score.notes%>" class="form-control" placeholder="Notes"/></td>
@@ -55,7 +55,6 @@
 								</form>
 							<% }); %>
 					</table><!-- End Table -->
-					<button class="btn btn-primary" type="save" id="saveBtn">Save</button> <!-- [TODO] make the save button do something, also maybe make it float on the right side to be more user friendly -->
 			</div>		
 		</main> 			
 </body>
@@ -90,48 +89,7 @@
   
 	h1 {
 	size: .5em;
-	}
-  
-  
-	/*Styles for Login Page */
-	#main-holder {
-	width: 55%;
-	height: 150%;
-  
-	margin: auto;
-	display: grid;
-	justify-items: center;
-	align-items: center;
-	background-color: white;
-	border-radius: 7px;
-	}
-  
-	#login-form {
-	align-self: flex-start;
-	display: grid;
-	justify-items: center;
-	align-items: center;
-	}
-  
-	.login-form-field {
-	margin-bottom: 10px;
-	border-radius: 3px;
-	border: 1px solid black;
-	padding: 5%;
-	}
-  
-	#login-form-submit {
-	width: 100%;
-	padding: 7px;
-	border: none;
-	border-radius: 5px;
-	color: black;
-	font-weight: bold;
-	background-color: #90ee90;
-	cursor: pointer;
-	outline: none;
-	}
-  
+	}  
   
 	/* Style for Faculty and Admin Page */
 	img {
@@ -187,6 +145,7 @@
 	background-color: #FFFFFF;
 	min-width: 200px; 
 	}
+
 	.dropdown-content a { 
 	color: black;
 	padding: 12px 16px;
@@ -203,8 +162,7 @@
 	display: block;
 	float: right;
 	}
-  
-	/*Table Designing*/   
+    
 	caption {
 	font-size: 1.8em; 
 	font-weight: bold;  

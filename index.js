@@ -116,7 +116,6 @@ app.get('/faculty/:id', (req, res) => { //add isAuthenticated later
 
 //get list of users
 app.get('/users', (req, res) => {
-    console.log("get list of users");
     userController.index(req, res);
 })
 
@@ -133,6 +132,10 @@ app.get('/users/new', (req, res) =>{
 //update an existing user
 app.post('/users/:id', (req, res) => {
     userController.update(req, res);
+})
+
+app.get('/users/:id', (req, res) => {
+    userController.index(req, res);
 })
 
 app.get('/users/:id/edit', (req, res) => {
@@ -161,6 +164,10 @@ app.post('/courses', (req, res) => {
 app.get('/courses/new', (req, res) =>{ 
     //display form for creating a new course 
     courseController.newCourse(req, res);
+})
+
+app.get('/courses/:id', (req, res) => {
+    courseController.index(req, res);
 })
 
 app.post('/courses/:id', (req, res) => {
