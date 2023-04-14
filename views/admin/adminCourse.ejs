@@ -58,7 +58,7 @@
 				<tr><!--Row 1 -->
 					<th>Faculty Name</th>
 					<th onclick="sortTable(0)">Ranking</th>
-					<th onclick="sortTable(1)">Desire</th>
+					<th onclick="sortTable(0)">Desire</th>
 					<th>Notes</th> 
 				</tr>	
 				
@@ -106,7 +106,7 @@
 		//setCourse(document.getElementById('select'),"<%=courseID%>");	
 
 
-		//rules for sortable table for ranking and desire (need to fix numerical asc but works)
+		//rules for sortable table for ranking and desire 
 			function sortTable(n) {
 				var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 				table = document.getElementById("dataTable");
@@ -161,7 +161,6 @@
 					}
 				}
 				}
-
 	</script>
 
 <style>
@@ -345,15 +344,6 @@
 	li{
 	padding: 0;
 	margin: 0;
-	}
-
-	input[type=text], select {
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: block;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
 	}
 
 	.errorCodeH1 {

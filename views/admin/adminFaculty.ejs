@@ -59,20 +59,21 @@
 					<tr><!--Row 1 -->
 						<th>Course Name</th>
 						<th onclick="sortTable(0)">Ranking</th>
-						<th onclick="sortTable(1)">Desire</th>
+						<th onclick="sortTable(0)">Desire</th>
 						<th>Notes</th> 
 					</tr>	
 					
 					<!-- iterate through list of users and print scores for each -->
-					<% scores.forEach(score => { %>
-						<tr>
-							<td><%= score.courseID %></td>
-							<td><%= score.ranking %></td>
-							<td><%= score.desire %></td>
-							<td><%= score.notes %></td>
-						</tr> 	
-					<% }); %> <!-- end for loop -->
-					
+					<tbody>
+						<% scores.forEach(score => { %>
+							<tr>
+								<td><%= score.courseID %></td>
+								<td><%= score.ranking %></td>
+								<td><%= score.desire %></td>
+								<td><%= score.notes %></td>
+							</tr> 	
+						<% }); %> <!-- end for loop -->
+					</tbody>
 				</table>
 		
 		</div>
@@ -104,7 +105,7 @@
 		//setFaculty(document.getElementById('select'),
 
 
-		//rules for sortable table for ranking and desire (need to fix numerical asc but works)
+		//rules for sortable table for ranking and desire
 		function sortTable(n) {
 				var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 				table = document.getElementById("dataTable");
@@ -159,8 +160,6 @@
 					}
 				}
 				}
-
-
    </script>
 
    <style>
@@ -344,15 +343,6 @@
 	li{
 	padding: 0;
 	margin: 0;
-	}
-
-	input[type=text], select {
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: block;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
 	}
 
 	.errorCodeH1 {
