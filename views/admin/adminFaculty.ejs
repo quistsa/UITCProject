@@ -35,13 +35,22 @@
 			</nav> 
 
 			<p class="center"> Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> 
-
-			<select id="select">
-				<!--iterate through list of faculty to list the faculty-->
-				<% users.forEach(user => { %>
-					<option id="<%= user.userID %>"><%=user.lName %>, <%= user.fName %></option>
-				<% }); %>
-			</select>
+			
+			<div class="'input-group">
+				<ul>
+					<li>
+						<div>
+							<input type="text" id="searchInput" onkeyup="filterFunction()" placeholder="Search..">
+							<select id="select">
+								<!--iterate through list of faculty to list the faculty-->
+								<% users.forEach(user => { %>
+									<option id="<%= user.userID %>"><%=user.lName %>, <%= user.fName %></option>
+								<% }); %>
+							</select>
+						</div>
+					</li>
+				</ul>	
+			</div>
 	
 						
 				<table><!--Starting Table--> 
