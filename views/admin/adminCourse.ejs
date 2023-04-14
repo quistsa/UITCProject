@@ -42,12 +42,14 @@
 					<li>
 						<div>
 							<input type="text" id="searchInput" onkeyup="filterFunction()" placeholder="Search..">
-				<select id="select">
-					<!--iterate through list of courses to print IDs-->
-						<% courses.forEach(course => { %>
-							<option id="<%= course.courseID %>"><a href="#"><%= course.courseID %></a></option>
-						<% }); %>	
-				</select> 
+							<select id="select">
+								<!--iterate through list of courses to print IDs-->
+									<% courses.forEach(course => { %>
+										<option id="<%= course.courseID %>"><a href="#"><%= course.courseID %></a></option>
+									<% }); %>	
+							</select> 
+						</div>
+					</li>
 				</ul>
 			</div>
 		
