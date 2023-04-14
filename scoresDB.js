@@ -128,7 +128,6 @@ class ScoresDB {
     }
 
     static update(score) {
-        console.log("updating score [update]" + score.facultyID + " " + score.courseID + " " + score.id);
         this.db.run(`UPDATE Scores SET ranking="${score.ranking}", desire="${score.desire}", notes="${score.notes}" WHERE facultyID="${score.facultyID}" AND courseID="${score.courseID}"`);
     }
 
@@ -137,7 +136,7 @@ class ScoresDB {
         this.db.run(`DELETE FROM Scores WHERE id="${score.id}"`);
     }
 
-    //when a user is updated, change associated score IDs
+    //when a user's ID is updated, change associated score IDs
     static updateUserID(user, prevID) {
         this.db.run(`UPDATE Scores SET facultyID="${user.userID}" WHERE facultyID="${prevID}"`);
     }

@@ -66,6 +66,7 @@ class ScoreController {
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
             res.render('faculty/faculty', { courses: courses, user: user, scores: scores, scoreObj: scoreObj }); 
+            //[TODO] might validate upper and lower limits using js in the view
         }
     }
 
@@ -79,7 +80,7 @@ class ScoreController {
         
         let newScore = await scoresDB.addScore(req.body.score);
 
-        if (newScore.isValid()) {
+        if (newScore.isValid()) { //[TODO] validate upper and lower limits
             res.writeHead(302, { 'Location': `/scores/${ newScore.id }`});
             res.end();
         } else {
@@ -109,6 +110,7 @@ class ScoreController {
 
         let testScore = new Score(req.body.score);
         if (!testScore.isValid()) {
+            //[TODO] validate upper and lower limits
             testScore.id = score.id;
             this.faculty(req, res);
             return;

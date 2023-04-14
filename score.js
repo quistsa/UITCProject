@@ -4,7 +4,6 @@ let Course = require('./course');
 
 class Score {
 
-
     constructor(description){
         if (description) {
             this.id = description.id;
