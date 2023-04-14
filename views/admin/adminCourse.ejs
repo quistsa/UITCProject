@@ -57,7 +57,7 @@
 				<tr><!--Row 1 -->
 					<th>Faculty Name</th>
 					<th onclick="sortTable(0)">Ranking</th>
-					<th onclick="sortTable(1)">Desire</th>
+					<th onclick="sortTable(0)">Desire</th>
 					<th>Notes</th> 
 				</tr>	
 				
@@ -103,24 +103,6 @@
 		//		}
 		//	}
 		//setCourse(document.getElementById('select'),"<%=courseID%>");
-
-		//rules for search bar (almost completed need help on select)
-		/*function filterFunction() {
-			var input, filter, select, option, a, i;
-			input = document.getElementById("input");
-			filter = input.value.toUpperCase();
-			select = document.getElementById("select");
-			option = select.getElementsByTagName("option");
-			for (i = 0; i < option.length; i++) {
-				a = option[i].getElementsByTagName("a")[0];
-				if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-					option[i].style.display = "";
-				} else {
-					option[i].style.display = "none";
-				}
-			}
-			} */		
-
 
 		//rules for sortable table for ranking and desire (need to fix numerical asc but works)
 			function sortTable(n) {
