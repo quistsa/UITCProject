@@ -24,10 +24,10 @@
 
 			<nav>		
 				<ul>
-					<li class="center">  	
+					<li class="center btn-group">  	
 						<!--Nav bar-->
-							<a class="btn btn-primary" href="/facultySearch">Search by Professor</a> 
 							<a class="btn btn-primary" href="/courseSearch">Search by Course</a> 
+							<a class="btn btn-primary" href="/facultySearch">Search by Professor</a> 
 							<a class="btn btn-primary" href="/courses">Course List</a>
 							<a class="btn btn-primary" href="/users">Faculty List</a>
 					</li>
@@ -38,19 +38,17 @@
 			</br> Desire Key: 0 = can't teach, 1 = don't want to teach , 2 = somewhat would love to teach, 3 = would love to teach</p>
 	
 			<div class="input-group">
-				<ul>
-					<li>
-						<div>
-							<input type="text" id="searchInput" onkeyup="filterFunction()" placeholder="Search..">
-							<select id="select">
-								<!--iterate through list of courses to print IDs-->
-									<% courses.forEach(course => { %>
-										<option id="<%= course.courseID %>"><a href="#"><%= course.courseID %></a></option>
-									<% }); %>	
-							</select> 
-						</div>
-					</li>
-				</ul>
+				<div>
+					<ul>
+						<input type="text" id="searchInput" onkeyup="filterFunction()" placeholder="Search..">
+						<select id="select">
+							<!--iterate through list of courses to print IDs-->
+								<% courses.forEach(course => { %>
+									<option id="<%= course.courseID %>"><a href="#"><%= course.courseID %></a></option>
+								<% }); %>	
+						</select>
+					</ul> 
+				</div>
 			</div>
 		
 
@@ -86,11 +84,11 @@
 
 	<script> 
 
-		const selectElem = document.getElementById("select");
+		const selectElem = document.querySelector('#select');
 
 		//redirect to selected course on dropdown option change
 		selectElem.addEventListener("change", () => {
-			const index = selectElem.selectedIndex.id;
+			const index = selectElem.options[selectElem.selectedIndex].id;
 			window.location.href = "/courseSearch/" + index;
 		});
 
