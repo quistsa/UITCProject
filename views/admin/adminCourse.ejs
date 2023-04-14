@@ -41,7 +41,6 @@
 				<ul>
 					<li>
 						<div>
-							<input type="text" id="searchInput" onkeyup="filterFunction()" placeholder="Search..">
 							<select id="select">
 								<!--iterate through list of courses to print IDs-->
 									<% courses.forEach(course => { %>
@@ -104,24 +103,7 @@
 		//			}
 		//		}
 		//	}
-		//setCourse(document.getElementById('select'),"<%=courseID%>");
-
-		//rules for search bar (almost completed need help on select)
-		/*function filterFunction() {
-			var input, filter, select, option, a, i;
-			input = document.getElementById("input");
-			filter = input.value.toUpperCase();
-			select = document.getElementById("select");
-			option = select.getElementsByTagName("option");
-			for (i = 0; i < option.length; i++) {
-				a = option[i].getElementsByTagName("a")[0];
-				if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-					option[i].style.display = "";
-				} else {
-					option[i].style.display = "none";
-				}
-			}
-			} */		
+		//setCourse(document.getElementById('select'),"<%=courseID%>");	
 
 
 		//rules for sortable table for ranking and desire (need to fix numerical asc but works)

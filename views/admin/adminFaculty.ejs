@@ -34,13 +34,14 @@
 				</ul>		
 			</nav> 
 
-			<p class="center"> Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away </p> 
+			<p class="center"> Ranking Key: 0 = default, 1 = teach in more than a year, 2 = teach in less than 6 months, 3 = teach right away
+			</br> Desire Key: 0 = can't teach, 1 = don't want to teach , 2 = somewhat would love to teach, 3 = would love to teach</p>
+	
 			
 			<div class="'input-group">
 				<ul>
 					<li>
 						<div>
-							<input type="text" id="searchInput" onkeyup="filterFunction()" placeholder="Search..">
 							<select id="select">
 								<!--iterate through list of faculty to list the faculty-->
 								<% users.forEach(user => { %>
@@ -55,12 +56,12 @@
 						
 				<table><!--Starting Table--> 
 			
-					<tr>
-						<th>Courses</th>
-						<th>Ranking</th>
-						<th>Desire</th>
+					<tr><!--Row 1 -->
+						<th>Course Name</th>
+						<th onclick="sortTable(0)">Ranking</th>
+						<th onclick="sortTable(1)">Desire</th>
 						<th>Notes</th> 
-					</tr>
+					</tr>	
 					
 					<!-- iterate through list of users and print scores for each -->
 					<% scores.forEach(score => { %>
@@ -101,6 +102,64 @@
 			}
 		}
 		//setFaculty(document.getElementById('select'),
+
+
+		//rules for sortable table for ranking and desire (need to fix numerical asc but works)
+		function sortTable(n) {
+				var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+				table = document.getElementById("dataTable");
+				switching = true;
+				//Set the sorting direction to ascending:
+				dir = "asc"; 
+				/*Make a loop that will continue until
+				no switching has been done:*/
+				while (switching) {
+					//start by saying: no switching is done:
+					switching = false;
+					rows = table.rows;
+					/*Loop through all table rows (except the
+					first, which contains table headers):*/
+					for (i = 1; i < (rows.length - 1); i++) {
+					//start by saying there should be no switching:
+					shouldSwitch = false;
+					/*Get the two elements you want to compare,
+					one from current row and one from the next:*/
+					x = rows[i].getElementsByTagName("td")[n];
+					y = rows[i + 1].getElementsByTagName("td")[n];
+					 /*check if the two rows should switch place,
+					based on the direction, asc or desc:*/
+					if (dir == "asc") {
+						if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						//if so, mark as a switch and break the loop:
+						shouldSwitch= true;
+						break;
+						}
+					} else if (dir == "desc") {
+						if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+						//if so, mark as a switch and break the loop:
+						shouldSwitch = true;
+						break;
+						}
+					}
+					}
+					if (shouldSwitch) {
+					/*If a switch has been marked, make the switch
+					and mark that a switch has been done:*/
+					rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					switching = true;
+					//Each time a switch is done, increase this count by 1:
+					switchcount ++;      
+					} else {
+					/*If no switching has been done AND the direction is "asc",
+					set the direction to "desc" and run the while loop again.*/
+					if (switchcount == 0 && dir == "asc") {
+						dir = "desc";
+						switching = true;
+					}
+					}
+				}
+				}
+
 
    </script>
 
