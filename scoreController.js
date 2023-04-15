@@ -19,6 +19,7 @@ class ScoreController {
         }
 
         let scores = await scoresDB.searchByUser(id);
+        let courses = await courseDB.allCourses();
         let users = await userDB.allUsers();
 
         if (scores == null) {
@@ -27,7 +28,7 @@ class ScoreController {
             let btnPath = "/facultySearch/";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
-            res.render('admin/adminFaculty', { scores: scores, users: users, facultyID: id });
+            res.render('admin/adminFaculty', { scores: scores, courses: courses, users: users, facultyID: id });
         }
     }
 
@@ -40,6 +41,7 @@ class ScoreController {
 
         let scores = await scoresDB.searchByCourse(id);
         let courses = await courseDB.allCourses();
+        let users = await userDB.allUsers();
 
         if (scores == null) {
             let errormsg = "There is no course with an ID of '" + id + "' or the requested course has no entered scores.";
@@ -47,7 +49,7 @@ class ScoreController {
             let btnPath = "/courseSearch/";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
-            res.render('admin/adminCourse', { scores: scores, courses: courses, courseID: id });
+            res.render('admin/adminCourse', { courses: courses, scores: scores, users: users, courseID: id });
         }
     }
 

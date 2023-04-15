@@ -40,16 +40,14 @@
 			
 			<div class="'input-group">
 				<ul>
-					<li>
-						<div>
-							<select id="select">
-								<!--iterate through list of faculty to list the faculty-->
-								<% users.forEach(user => { %>
-									<option id="<%= user.userID %>"><%=user.lName %>, <%= user.fName %></option>
-								<% }); %>
-							</select>
-						</div>
-					</li>
+					<div>
+						<select id="select">
+							<!--iterate through list of faculty to list the faculty-->
+							<% users.forEach(user => { %>
+								<option id="<%= user.userID %>"><%=user.lName %>, <%= user.fName %></option>
+							<% }); %>
+						</select>
+					</div>
 				</ul>	
 			</div>
 	
@@ -65,14 +63,30 @@
 					
 					<!-- iterate through list of users and print scores for each -->
 					<tbody>
-						<% scores.forEach(score => { %>
-							<tr>
-								<td><%= score.courseID %></td>
-								<td><%= score.ranking %></td>
-								<td><%= score.desire %></td>
-								<td><%= score.notes %></td>
-							</tr> 	
-						<% }); %> <!-- end for loop -->
+						<% courses.forEach(course => { %>
+							<% let userHasScore = false; %>
+							<% for (let l = scores.length, i = 0; i < l; i++) { %>
+							  <% if (scores[i].courseID == course.courseID) { %>
+									<tr>
+										<td><%= scores[i].courseID %></td>
+										<td><%= scores[i].ranking %></td>
+										<td><%= scores[i].desire %></td>
+										<td><%= scores[i].notes %></td>
+									</tr>
+								<% userHasScore = true; %>
+								<% break %>
+							  <% } %>
+							<% } %>
+						  
+							<% if (!userHasScore) { %>
+							  <tr>
+								<td><%= course.courseID %></td>
+								<td>0</td>
+								<td>0</td>
+								<td></td>
+							  </tr>
+							<% } %>
+						  <% }); %> <!-- end for loop -->
 					</tbody>
 				</table>
 		</div>
@@ -86,12 +100,13 @@
    <script>
 		const selectElem = document.getElementById("select");
 
+		//redirect to facultySearch page with facultyID
 		selectElem.addEventListener("change", () => {
-			//[TODO] change selectedindex to redirected index
-			const index = selectElem.selectedIndex + 1;
+			const index = selectElem.options[selectElem.selectedIndex].id;
 			window.location.href = "/facultySearch/" + index;
 		});
 
+		//reselect proper dropdown option
 		function setFaculty(dropdown, id) {
 			for (let i = 0; i < dropdown.options.length; i++) {
 				if (dropdown.options[i].id == id) {
@@ -100,7 +115,7 @@
 				}
 			}
 		}
-		//setFaculty(document.getElementById('select'),
+		setFaculty(document.getElementById('select'), "<%= facultyID %>");
 
 
 		//rules for sortable table for ranking and desire

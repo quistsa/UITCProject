@@ -60,17 +60,33 @@
 					<th onclick="sortTable(0)">Desire</th>
 					<th>Notes</th> 
 				</tr>	
-				
+
 				<!-- iterate through list of users and print scores for each -->
 				<tbody>
-					<% scores.forEach(score => { %>
-						<tr>
-							<td><%= score.User.lName %>, <%= score.User.fName %></td>
-							<td><%= score.ranking %></td>
-							<td><%= score.desire %></td>
-							<td><%= score.notes %></td>
-						</tr> 	
-					<% }); %> <!-- end for loop -->
+					<% users.forEach(user => { %>
+						<% let userHasScore = false; %>
+						<% for (let l = scores.length, i = 0; i < l; i++) { %>
+						  <% if (scores[i].facultyID == user.userID) { %>
+							<tr>
+							  <td><%= scores[i].User.lName %>, <%= scores[i].User.fName %></td>
+							  <td><%= scores[i].ranking %></td>
+							  <td><%= scores[i].desire %></td>
+							  <td><%= scores[i].notes %></td>
+							</tr> 
+							<% userHasScore = true; %>
+							<% break %>
+						  <% } %>
+						<% } %>
+					  
+						<% if (!userHasScore) { %>
+						  <tr>
+							<td><%= user.lName %>, <%= user.fName %></td>
+							<td>0</td>
+							<td>0</td>
+							<td></td>
+						  </tr>
+						<% } %>
+					  <% }); %> <!-- end for loop -->
 				</tbody>
 				
 			</table>
@@ -92,17 +108,17 @@
 			window.location.href = "/courseSearch/" + index;
 		});
 
-		//update dropdown to show selected course [FIX] not doing anything :(
-		//function setCourse(dropdown, id) {
-		//	console.log("courseID" + id);
-		//		for (let i = 0; i < dropdown.options.length; i++) {
-		//			if (dropdown.options[i].id == id) {
-		//				dropdown.options[i].selected = true;
-		//				return;
-		//			}
-		//		}
-		//	}
-		//setCourse(document.getElementById('select'),"<%=courseID%>");
+		//update dropdown to show selected course
+		function setCourse(dropdown, id) {
+			console.log("courseID" + id);
+				for (let i = 0; i < dropdown.options.length; i++) {
+					if (dropdown.options[i].id == id) {
+						dropdown.options[i].selected = true;
+						return;
+					}
+				}
+			}
+		setCourse(document.getElementById('select'),"<%=courseID%>");
 
 		//rules for sortable table for ranking and desire (need to fix numerical asc but works)
 			function sortTable(n) {
