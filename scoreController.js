@@ -53,7 +53,7 @@ class ScoreController {
         }
     }
 
-    async faculty(req, res) {
+    async faculty(req, res, facID) {
         let id = req.params.id;
 
         let courses = await courseDB.allCourses();
@@ -67,8 +67,7 @@ class ScoreController {
             let btnPath = "/login";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
-            res.render('faculty/faculty', { courses: courses, user: user, scores: scores, scoreObj: scoreObj }); 
-            //[TODO] might validate upper and lower limits using js in the view
+            res.render('faculty/faculty', { courses: courses, user: user, scores: scores, scoreObj: scoreObj });
         }
     }
 
@@ -86,7 +85,7 @@ class ScoreController {
             res.writeHead(302, { 'Location': `/scores/${ newScore.id }`});
             res.end();
         } else {
-            this.faculty(req, res, newScore);
+            this.faculty(req, res);
         }
     }
 
@@ -112,9 +111,7 @@ class ScoreController {
 
         let testScore = new Score(req.body.score);
         if (!testScore.isValid()) {
-            //[TODO] validate upper and lower limits
             testScore.id = score.id;
-            this.faculty(req, res);
             return;
         }
 

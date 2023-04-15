@@ -203,10 +203,10 @@ app.post('/scores/:id', (req, res) => {
 //   scoreController.edit(req, res);
 //})
 
-app.get('/scores/:id/delete', (req, res) => {
-    //display form for updating a score 
-    scoreController.delete(req, res);
-})
+//app.get('/scores/:id/delete', (req, res) => {
+//    //display form for updating a score 
+//    scoreController.delete(req, res);
+//})
 
 //////////////////////////////////////////
 //error redirects
