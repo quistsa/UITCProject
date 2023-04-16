@@ -19,7 +19,7 @@ class UserDB {
 
     static allUsers() {
         return new Promise((resolve, reject) => {
-            this.db.all('SELECT * from Users', (err, response) => {
+            this.db.all('SELECT * from Users ORDER BY lName ASC', (err, response) => {
                    resolve(response.map((item) => new User(item)));
             });
          });

@@ -14,13 +14,14 @@ class ScoreController {
     async searchByUser(req, res) {
         let id = req.params.id;
 
+        let users = await userDB.allUsers();
+
         if (!id){ 
-            id = "quistsa";
+            id = users[0].userID;
         }
 
         let scores = await scoresDB.searchByUser(id);
         let courses = await courseDB.allCourses();
-        let users = await userDB.allUsers();
 
         if (scores == null) {
             let errormsg = "There is no user with an ID of '" + id + "' or the requested user has no entered scores.";
