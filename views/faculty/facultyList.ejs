@@ -12,23 +12,18 @@
 
 <body>
 	<main class="content">
-		<h1> Welcome Back, admin</h1>
-		<button  class= "right" type="button" onclick="alert('You have successfully logged out. You may now close this window.')">Logout</button> </h1> 
+		<h1> Welcome Back, Admin</h1>
 				
 		<div class="wrapper">
-		
-			<!--header image-->
-			<header> 
-			</header>
 			 
 			<h1 class="center">GVSU School of Computing Course Listing</h1> 
 
-			<nav>		
+			<nav class="center">		
 				<ul>
-					<li class="center">  	
+					<li class="btn-group">  	
 						<!--Nav bar-->
-							<a class="btn btn-primary" href="/facultySearch">Search by Professor</a> 
-							<a class="btn btn-primary" href="/courseSearch">Search by Course</a> 
+							<a class="btn btn-primary" href="/courseSearch">Search by Course</a>
+							<a class="btn btn-primary" href="/facultySearch">Search by Professor</a>
 							<a class="btn btn-primary" href="/courses">Course List</a>
 							<a class="btn btn-primary" href="/users">Faculty List</a>
 					</li>
@@ -74,6 +69,9 @@
 	margin: 0; padding: 0; border: 0;
 	}
 
+	#newBtn {
+		margin: 1em;
+	}
 
 	/*Styles for All Pages */
 	body {
@@ -96,52 +94,6 @@
 	size: .5em;
 	}
 
-
-	/*Styles for Login Page */
-	#main-holder {
-	width: 55%;
-	height: 150%;
-
-	margin: auto;
-	display: grid;
-	justify-items: center;
-	align-items: center;
-	background-color: white;
-	border-radius: 7px;
-	}
-
-	#login-form {
-	align-self: flex-start;
-	display: grid;
-	justify-items: center;
-	align-items: center;
-	}
-
-	.login-form-field {
-	margin-bottom: 10px;
-	border-radius: 3px;
-	border: 1px solid black;
-	padding: 5%;
-	}
-
-	#login-form-submit {
-	width: 100%;
-	padding: 7px;
-	border: none;
-	border-radius: 5px;
-	color: black;
-	font-weight: bold;
-	background-color: #90ee90;
-	cursor: pointer;
-	outline: none;
-	}
-
-
-	/* Style for Faculty and Admin Page */
-	img {
-	max-width: 30%
-	}  
-	
 	.content p {
 	border: 8px solid; 
 	border-color: #b0c4de; 

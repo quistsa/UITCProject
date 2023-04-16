@@ -53,7 +53,7 @@ class ScoreController {
         }
     }
 
-    async faculty(req, res, facID) {
+    async faculty(req, res) {
         let id = req.params.id;
 
         let courses = await courseDB.allCourses();
@@ -81,7 +81,7 @@ class ScoreController {
         
         let newScore = await scoresDB.addScore(req.body.score);
 
-        if (newScore.isValid()) { //[TODO] validate upper and lower limits
+        if (newScore.isValid()) {
             res.writeHead(302, { 'Location': `/scores/${ newScore.id }`});
             res.end();
         } else {

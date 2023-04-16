@@ -28,16 +28,16 @@
 
 	<h1><%= submitLabel %></h1>
 	
-	<nav>		
-	  <ul>
-		<li class="center">  	
-			<!--Nav bar-->
-				<a class="btn btn-primary" href="/facultySearch">Search by Professor</a> 
-				<a class="btn btn-primary" href="/courseSearch">Search by Course</a> 
-				<a class="btn btn-primary" href="/courses">Course List</a>
-				<a class="btn btn-primary" href="/users">Faculty List</a>
-		</li>
-	  </ul>		
+	<nav class="center">		
+		<ul>
+			<li class="btn-group">  	
+				<!--Nav bar-->
+					<a class="btn btn-primary" href="/courseSearch">Search by Course</a>
+					<a class="btn btn-primary" href="/facultySearch">Search by Professor</a>
+					<a class="btn btn-primary" href="/courses">Course List</a>
+					<a class="btn btn-primary" href="/users">Faculty List</a>
+			</li>
+		</ul>		
 	</nav> 
 
 	<% if (course.errors.length > 0) { %>
@@ -68,7 +68,6 @@
 			<input type="submit" name="commit" value="<%= submitLabel %>" class="btn btn-primary"/>
 			<% if(edit) { %>
 				<a class="btn btn-danger" href="/courses/<%= course.courseID %>/delete">Delete Course</a>
-				<!--[TODO] add page for "are you sure?" -->
 			<% } %>
 		</div>
 
