@@ -38,8 +38,13 @@
 			</br> Desire Key: 0 = can't teach, 1 = don't want to teach, 2 = somewhat would love to teach, 3 = would love to teach</p>
 	
 			
-			<div class="'input-group">
+			<div class="input-group">
 				<ul>
+					<form id="searchForm" onsubmit="search()">
+						<input type="text" id="searchInput" placeholder="Search.." style="display: inline"> 
+						<input type="submit" id="searchbtn" class="btn btn-primary" value="Search" style="display: inline">
+					</form>
+
 					<div>
 						<select id="select">
 							<!--iterate through list of faculty to list the faculty-->
@@ -117,6 +122,13 @@
 		}
 		setFaculty(document.getElementById('select'), "<%= facultyID %>");
 
+		//redirect to user inputted course
+		function search(){
+			const form = document.getElementById("searchForm");
+			const searchIndex = document.getElementById("searchInput").value;
+			form.action = "/facultySearch/" + searchIndex;
+			form.submit();
+		}
 
 		//rules for sortable table for ranking and desire
 		function sortTable(n) {
