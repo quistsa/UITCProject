@@ -36,9 +36,11 @@
 				<div>
 					<ul>
 						<form id="searchForm" onsubmit="search()">
-							<input type="text" id="searchInput" placeholder="Search.." style="display: inline"> 
+							<input type="text" id="searchInput" placeholder="Search by courseID" style="display: inline"> 
 							<input type="submit" id="searchbtn" class="btn btn-primary" value="Search" style="display: inline">
 						</form>
+
+						<a id="download" href="/download" class="btn btn-primary" style="display: inline; position: absolute; right: 1em">Download Scores</a>
 
 						<select id="select">
 							<!--iterate through list of courses to print IDs-->

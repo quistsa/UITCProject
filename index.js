@@ -106,6 +106,11 @@ app.get('/facultySearch/:id', (req, res) => {
     scoreController.searchByUser(req, res);
 })
 
+//download function for getting scores database
+app.get('/download', (req, res) => {
+    res.download('scores.sqlite');
+})
+
 /////////////////////////////////////////
 //faculty/users redirects
 /////////////////////////////////////////
