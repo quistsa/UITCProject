@@ -80,6 +80,11 @@ class UserController{
             testUser.id = user.id;
             res.render('faculty/facultyForm', { user: testUser });
             return;
+        } else if (userDB.findUser(testUser.userID) != null){
+            testUser.id = user.id;
+            testUser.errors.push("User with ID of " + testUser.userID + " already exists.")
+            res.render('faculty/facultyForm', { user: testUser });
+            return;
         }
 
         if (user == null) {

@@ -40,7 +40,7 @@ class UserDB {
 
     static createUser(desc) {
         let newUser = new User(desc);
-        if (newUser.isValid()) {
+        if (newUser.isValid() && this.findUser(newUser.userID)) {
             return new Promise((resolve, reject) => {
                 this.db.run(`INSERT INTO Users (userID, fName, lName, guest) VALUES ("${newUser.userID}", "${newUser.fName}", "${newUser.lName}", "${newUser.guest}");`,
                     function(err, data) {
