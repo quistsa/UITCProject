@@ -1,9 +1,9 @@
-<!--List all faculty linked to their pages and create new faculty button--><!--List all courses linked to their pages and create new course button-->
+<!--List all courses linked to their pages and create new course button-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>GVSU Depth Charts Faculty List</title>
+	<title>GVSU Depth Charts Course List</title>
 	<meta charset="utf-8"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1">  
 	<link rel="icon" href="favicon.ico">
@@ -11,10 +11,11 @@
 </head>
 
 <body>
-	<main class="content">				
+	<main class="content">
+
 		<div class="wrapper">
 			 
-			<h1 class="center">GVSU Depth Charts Faculty List</h1> 
+			<h1 class="center">GVSU Depth Charts Course Listing</h1> 
 
 			<nav class="center">		
 				<ul>
@@ -27,33 +28,19 @@
                             <a class="btn btn-primary" href="/addFunc">Additional Functions</a>
 					</li>
 				</ul>		
-			</nav> 
+			</nav>  
 
-			<table>
-				<tr>
-					<th>Name</th>
-                    <th>userID</th>
-					<th>Actions</th>
-				</tr>
-
-				<% users.forEach( (user) => { %>
-					<tr>
-						<td>
-							<%= user.lName %>, <%= user.fName %>
-						</td>
-						<td>
-							<%= user.userID %>
-						</td>
-						<td>
-							<a class="btn btn-primary" href="/users/<%= user.userID%>/edit">Edit</a>
-						</td>
-					</tr>
-				<% }); %>
-
-			</table>
-
-			<a class="btn btn-primary" id="newBtn" href="/users/new">New Faculty</a>
-
+			<div class="center">
+				<div>
+					<a class="btn btn-primary" href="/rankkey">Update Ranking Key</a>
+				</div>
+				<div>
+					<a class="btn btn-primary" href="/deskey">Update Desire Key</a>
+				</div>
+				<div>
+					<a class="btn btn-dark" href="/download">Download Scores</a>
+				</div>
+			</div>
         </div>
     </main>
 </body>
@@ -91,8 +78,8 @@
 
 	h1 {
 	size: .5em;
-	}
-
+	}  
+	
 	.content p {
 	border: 8px solid; 
 	border-color: #b0c4de; 
@@ -122,6 +109,10 @@
 	button{
 	text-align: right; 
 	}
+	
+	div {
+		padding: 1em;
+	}
 
 	/*button itself*/
 	.dropbtn {  
@@ -142,7 +133,6 @@
 	background-color: #FFFFFF;
 	min-width: 200px; 
 	}
-	
 	.dropdown-content a { 
 	color: black;
 	padding: 12px 16px;

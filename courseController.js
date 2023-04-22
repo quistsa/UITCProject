@@ -3,22 +3,19 @@
 const { test } = require('media-typer');
 
 const Course = require('./course');
-
-const courseDB = require('./courseDB');
 const scoresDB = require('./scoresDB');
-const userDB = require('./userDB');
 
 class CourseController{
     //return list of all courses
     async index(req, res) {
-        let courses = await courseDB.allCourses();
+        let courses = await scoresDB.allCourses();
         res.render('course/courseList', { courses: courses });
     }
 
     //not currently used or necessary
     async show(req, res) {
         let id = req.params.id;
-        let course = await courseDB.findCourse(id);
+        let course = await scoresDB.findCourse(id);
 
         if (course == null) {
             let errormsg = "Could not find a course with an ID of " + id;
@@ -37,7 +34,7 @@ class CourseController{
     async create(req, res) {
         console.log("Creating new course");
         
-        let newCourse = await courseDB.create(req.body.course);
+        let newCourse = await scoresDB.createCourse(req.body.course);
 
         if (newCourse.isValid()) {
             res.writeHead(302, { 'Location': `/courses/${ newCourse.id }`});
@@ -49,7 +46,7 @@ class CourseController{
 
     async edit(req, res) {
         let id = req.params.id;
-        let course = await courseDB.findCourse(id);
+        let course = await scoresDB.findCourse(id);
 
         if (course == null) {
             let errormsg = "Could not find a course with an ID of " + id;
@@ -64,7 +61,7 @@ class CourseController{
     async update(req, res) {
         //update variables for a course
         let id = req.params.id;
-        let course = await courseDB.findCourse(id);
+        let course = await scoresDB.findCourse(id);
 
         let testCourse = new Course(req.body.course);
         if (!testCourse.isValid()) {
@@ -83,7 +80,7 @@ class CourseController{
             course.name = req.body.course.name;
 
             console.log("Updating course");
-            courseDB.update(course);
+            scoresDB.updateCourse(course);
 
             res.writeHead(302, { 'Location': `/courses` });
             res.end();
@@ -92,7 +89,7 @@ class CourseController{
 
     async delete(req, res) {
         let id = req.params.id;
-        let course = await courseDB.findCourse(id);
+        let course = await scoresDB.findCourse(id);
         
 
         if (course == null) {
@@ -101,14 +98,14 @@ class CourseController{
             let btnPath = "/courses";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
-            courseDB.remove(course);
-            let courses = await courseDB.allCourses();
+            scoresDB.removeCourse(course);
+            let courses = await scoresDB.allCourses();
             res.render('course/courseList', { courses: courses });
         }
     }
 
     async rawIndex(req, res) {
-        let courses = await courseDB.allCourses();
+        let courses = await scoresDB.allCourses();
         res.send(courses);
     }
 }

@@ -111,6 +111,26 @@ app.get('/download', (req, res) => {
     res.download('scores.sqlite');
 })
 
+app.get('/addFunc', (req, res) => {
+    scoreController.additionalFunctions(req, res);
+})
+
+app.get('/rankkey', (req, res) => {
+    scoreController.rankingKeyForm(req, res);
+})
+
+app.post('/rankkey', (req, res) => {
+    scoreController.updateRankingKey(req, res);
+})
+
+app.get('/deskey', (req, res) => {
+    scoreController.desireKeyForm(req, res);
+})
+
+app.post('/deskey', (req, res) => {
+    scoreController.updateDesireKey(req, res);
+})
+
 /////////////////////////////////////////
 //faculty/users redirects
 /////////////////////////////////////////
@@ -202,16 +222,6 @@ app.post('/scores/:id', (req, res) => {
     //display a form with current info for updating a scores
     scoreController.update(req, res);
 })
-
-//app.get('/scores/:id/edit', (req, res) => {
-    //display form for updating a score 
-//   scoreController.edit(req, res);
-//})
-
-//app.get('/scores/:id/delete', (req, res) => {
-//    //display form for updating a score 
-//    scoreController.delete(req, res);
-//})
 
 //////////////////////////////////////////
 //error redirects

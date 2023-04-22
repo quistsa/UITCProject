@@ -1,8 +1,6 @@
 const Score = require('./score');
 
 const scoresDB = require('./scoresDB');
-const courseDB = require('./courseDB');
-const userDB = require('./userDB');
 
 class ScoreController {
 
@@ -14,14 +12,14 @@ class ScoreController {
     async searchByUser(req, res) {
         let id = req.params.id;
 
-        let users = await userDB.allUsers();
+        let users = await scoresDB.allUsers();
 
         if (!id){ 
             id = users[0].userID;
         }
 
         let scores = await scoresDB.searchByUser(id);
-        let courses = await courseDB.allCourses();
+        let courses = await scoresDB.allCourses();
 
         if (scores == null) {
             let errormsg = "There is no user with an ID of '" + id + "' or the requested user has no entered scores.";
@@ -41,8 +39,8 @@ class ScoreController {
         }
 
         let scores = await scoresDB.searchByCourse(id);
-        let courses = await courseDB.allCourses();
-        let users = await userDB.allUsers();
+        let courses = await scoresDB.allCourses();
+        let users = await scoresDB.allUsers();
 
         if (scores == null) {
             let errormsg = "There is no course with an ID of '" + id + "' or the requested course has no entered scores.";
@@ -57,8 +55,8 @@ class ScoreController {
     async faculty(req, res) {
         let id = req.params.id;
 
-        let courses = await courseDB.allCourses();
-        let user = await userDB.findUser(id);
+        let courses = await scoresDB.allCourses();
+        let user = await scoresDB.findUser(id);
         let scores = await scoresDB.scoresForUser(id);
         let scoreObj = new Score();
 
@@ -151,6 +149,20 @@ class ScoreController {
             let scores = await scoresDB.allScores();
             res.render('score/scoreList', { scores: scores });
         }
+    }
+
+    async additionalFunctions(req, res) {
+        res.render('admin/additionalFunct');
+    }
+
+    async rankingKeyForm(req, res) {
+        let key = scoresDB.getRankingKey();
+        res.render('adming/keyForm', {key: key});
+    }
+
+    async desireKeyForm(req, res) {
+        let key = scoresDB.getDesireKey();
+        res.render('adming/keyForm', {key: key});
     }
 
 }

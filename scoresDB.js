@@ -1,28 +1,12 @@
-//Database methods to store and edit array of scores for each faculty member and class
+//Database methods to store and edit users, courses, and an array of scores for each faculty member and class
 
 var sqlite3 = require('sqlite3').verbose();
 let Score = require('./score');
-let courseDB = require('./courseDB');
-let userDB = require('./userDB');
+let User = require('./user');
+let Course = require('./course');
+let Key = require('./key');
 
 class ScoresDB {
-//Database methods to store and edit courses
-
-    static initialize() {
-        this.db.serialize(() => {
-            this.db.run('DROP TABLE IF EXISTS Scores');
-            this.db.run(`CREATE TABLE Scores (id INTEGER PRIMARY KEY, facultyID INTEGER NOT NULL, courseID INTEGER NOT NULL, ranking INTEGER NOT NULL, desire INTEGER NOT NULL, notes TEXT);`);
-            this.db.run('INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("quistsa", "CIS101", "1", "2", "no notes");');
-            this.db.run('INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("kinneyni", "CIS450", "2", "2", "some notes");');
-            this.db.run('INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("cades", "CIS160", "1", "3", "notenstnot");');
-            this.db.run('INSERT INTO Scores (facultyID, courseID, ranking, desire, notes) VALUES ("skrobotr", "CIS260", "3", "1", "a note");');
-        });
-    }
-
-    //function to import users from a csv
-    static import() {
-        //[TODO]
-    }
 
     static allScores() {
         return new Promise((resolve, reject) => {
@@ -127,7 +111,7 @@ class ScoresDB {
         }
     }
 
-    static update(score) {
+    static updateScore(score) {
         this.db.run(`UPDATE Scores SET ranking="${score.ranking}", desire="${score.desire}", notes="${score.notes}" WHERE facultyID="${score.facultyID}" AND courseID="${score.courseID}"`);
     }
 
@@ -144,6 +128,117 @@ class ScoresDB {
     //when a user is deleted, remove associated scores
     static removeUserScores(user) {
         this.db.run(`DELETE FROM Scores WHERE facultyID="${user.userID}"`)
+    }
+
+    ///////////////////
+    //user DB functions
+    ///////////////////
+    static allUsers() {
+        return new Promise((resolve, reject) => {
+            this.db.all('SELECT * from Users ORDER BY lName ASC', (err, response) => {
+                   resolve(response.map((item) => new User(item)));
+            });
+         });
+    }
+    
+    static findUser(id) {
+        return new Promise((resolve, reject) => {
+            this.db.all(`SELECT * FROM Users WHERE (userID == ?)`, [id], (err, rows) => {
+                if (rows.length >= 1) {
+                    resolve(new User(rows[0]));
+                } else {
+                    console.log(`User id ${id} not found [userDB.findUser]`);
+                    resolve(null);
+                }
+            });
+        });
+    }
+
+    static createUser(desc) {
+        let newUser = new User(desc);
+        if (newUser.isValid()) {
+            return new Promise((resolve, reject) => {
+                this.db.run(`INSERT INTO Users (userID, fName, lName, guest) VALUES ("${newUser.userID}", "${newUser.fName}", "${newUser.lName}", "${newUser.guest}");`,
+                    function(err, data) {
+                        newUser.id = this.lastID;
+                        resolve(newUser);
+                    });
+            });
+        } else {
+            return newUser;
+        }
+    }
+
+    static updateUser(user) {
+        this.db.run(`UPDATE Users SET userID="${user.userID}", fName="${user.fName}", lName="${user.lName}", guest="${user.guest}" WHERE id="${user.id}"`);
+    }
+
+    static removeUser(user) {
+        this.db.run(`DELETE FROM Users WHERE id="${user.id}"`);
+    }
+
+
+    //////////////////////
+    //course DB functions
+    //////////////////////
+    static allCourses() {
+        return new Promise((resolve, reject) => {
+            this.db.all('SELECT * from Courses ORDER BY courseID ASC', (err, response) => {
+                   resolve(response.map((item) => new Course(item)));
+            });
+         });
+    }
+    
+    static findCourse(id) {
+        return new Promise((resolve, reject) => {
+            this.db.all(`SELECT * from Courses WHERE (courseID == ?)`,[id], (err, rows) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                } else {
+                    //console.log(rows);
+                    //console.log(response);
+                    if (rows.length >= 1) {
+                        resolve(new Course(rows[0]));
+                    } else {
+                        console.log(`Course id ${id} not found [courseDB.findCourse]`);
+                        resolve(null);
+                    }
+                }
+            });
+        });
+    }
+
+    static createCourse(desc) {
+        let newCourse = new Course(desc);
+        if (newCourse.isValid()) {
+            return new Promise((resolve, reject) => {
+                    this.db.run(`INSERT INTO Courses (courseID, name) VALUES ("${newCourse.courseID}", "${newCourse.name}");`,
+                    function(err, data) {
+                        newCourse.id = this.lastID;
+                        resolve(newCourse);
+                    });
+                    console.log("Course Created");
+            });
+        } else {
+            return newCourse;
+        }
+    }
+
+    static updateCourse(course) {
+        this.db.run(`UPDATE Courses SET courseID="${course.courseID}", name="${course.name}" WHERE id="${course.id}"`);
+    }
+
+    static removeCourse(course) {
+        this.db.run(`DELETE FROM Courses WHERE id="${course.id}"`);
+    }
+
+
+    ///////////////////////////////
+    //ranking/desire key functions
+    ///////////////////////////////
+    static updateKey(key) {
+        
     }
 }
 

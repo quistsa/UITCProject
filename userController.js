@@ -2,15 +2,13 @@
 
 const { test } = require('media-typer');
 const User = require('./user');
-const userDB = require('./userDB');
-const courseDB = require('./courseDB');
 const scoresDB = require('./scoresDB');
 
 
 class UserController{
     //retun list of all users
     async index(req, res) {
-        let users = await userDB.allUsers();
+        let users = await scoresDB.allUsers();
         res.render('faculty/facultyList', { users: users });
     }
 
@@ -26,7 +24,7 @@ class UserController{
     //not currently used or necessary
     async show(req, res) {
         let id = req.params.id;
-        let user = await userDB.findUser(id);
+        let user = await scoresDB.findUser(id);
 
         if (user == null) {
             let errormsg = "Could not find a user with an ID of " + id;
@@ -46,7 +44,7 @@ class UserController{
     async create(req, res) {
         console.log("Creating new user");
         
-        let newUser = await userDB.createUser(req.body.user);
+        let newUser = await scoresDB.createUser(req.body.user);
 
         if (newUser.isValid()) {
             res.writeHead(302, { 'Location': `/users/${newUser.id}`});
@@ -58,7 +56,7 @@ class UserController{
 
     async edit(req, res) {
         let id = req.params.id;
-        let user = await userDB.findUser(id);
+        let user = await scoresDB.findUser(id);
 
         if (user == null) {
             let errormsg = "Could not find a user with an ID of " + id;
@@ -73,7 +71,7 @@ class UserController{
     async update(req, res) {
         //update variables for a user
         let id = req.params.id;
-        let user = await userDB.findUser(id);
+        let user = await scoresDB.findUser(id);
 
         let testUser = new User(req.body.user);
         if (!testUser.isValid()) {
@@ -95,7 +93,7 @@ class UserController{
             user.guest = req.body.user.guest;
 
             console.log("Updating user");
-            userDB.updateUser(user);
+            scoresDB.updateUser(user);
             scoresDB.updateUserID(user, prevID);
 
             res.writeHead(302, { 'Location': `/users/${user.id}` });
@@ -105,7 +103,7 @@ class UserController{
 
     async delete(req, res) {
         let id = req.params.id;
-        let user = await userDB.findUser(id);
+        let user = await scoresDB.findUser(id);
         
 
         if (user == null) {
@@ -114,15 +112,15 @@ class UserController{
             let btnPath = "/users";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
-            userDB.removeUser(user);
+            scoresDB.removeUser(user);
             scoresDB.removeUserScores(user);
-            let users = await userDB.allUsers();
+            let users = await scoresDB.allUsers();
             res.render('faculty/facultyList', { users: users });
         }
     }
 
     async rawIndex(req, res) {
-        let users = await userDB.allUsers();
+        let users = await scoresDB.allUsers();
         res.send(users);
     }
 }
