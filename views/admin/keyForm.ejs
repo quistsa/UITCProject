@@ -1,4 +1,4 @@
-<!-- Page for displaying form for creating or updating a course -->
+<!-- Page for displaying form for updating a key -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,16 +11,13 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 
-
 	<% 
-		if (key.) {
-			submitLabel = "Update Course";
-			route = `/courses/${course.courseID}`;
-			edit = true;
+		if (key.type == "ranking") {
+			submitLabel = "Update Ranking Key";
+			route = `/keys/${key.type}`;
 		} else {
-			submitLabel = "Create Course";
-			route = "/courses";
-			edit = false;
+			submitLabel = "Update Desire Key";
+			route = `/keys/${key.type}`;
 		}
 	%>
 
@@ -41,13 +38,13 @@
 		</ul>		
 	</nav> 
 
-	<% if (course.errors.length > 0) { %>
-        <% console.log("Errors occurred"); console.log(course.errors); %>
+		<% if (key.errors.length > 0) { %>
+        <% console.log("Errors occurred"); console.log(key.errors); %>
 
             <div>
                 <p>Errors:</p>
                 <ul>
-                    <%- course.errors.map((item) => `<li>${item}</li>`).join("\n"); %>
+                    <%- key.errors.map((item) => `<li>${item}</li>`).join("\n"); %>
                 </ul>
             </div>
 	<% } %>
@@ -56,21 +53,18 @@
 	  <form action="<%= route %>" accept-charset="UTF-8" method="post" class="form">
 	
 		<div class="field">
-			<label for="course_courseID">Course ID</label>
-			<input type="text" id="course_courseID" name="course[courseID]" placeholder="CIS101" value="<%= course.courseID %>">
+			<label for="key_upper">Upper Limit</label>
+			<input type="text" id="key_upper" name="key[upper]" value="<%= key.upper %>">
 		</div>
 
 		<div class="field">
-			<label for="course_name">Course Name</label>
-			<input type="text" id="course_name" name="course[name]" placeholder="Introduction to Computing" value="<%= course.name %>">
+			<label for="key_desc">Key Description</label>
+			<textarea class="form-control" type="text" id="key_desc" name="key[desc]"><%= key.desc %></textarea>
 		</div>
 
-		<div class="actions">
-			<input type="submit" name="commit" value="<%= submitLabel %>" class="btn btn-primary"/>
-			<% if(edit) { %>
-				<a class="btn btn-danger" href="/courses/<%= course.courseID %>/delete">Delete Course</a>
-			<% } %>
-		</div>
+		<input type="hidden" id="key_type" name="key[type]" value="<%= key.type %>">
+
+		<input type="submit" name="commit" value="<%= submitLabel %>" class="btn btn-primary"/>
 
 	   </form>
 	</div>
@@ -173,6 +167,10 @@
 		/*Button*/
 		button{
 		text-align: right; 
+		}
+
+		.btn-primary {
+			margin-top: 1em;
 		}
 
 		/*button itself*/

@@ -18,8 +18,7 @@
 
 				<h3>Course Search for <%=user.fName%> <%=user.lName%></h3>
 
-				<p class="center"> Prep Score Key: <b>0</b> = default, <b>1</b> = teach in more than a year, <b>2</b> = teach in less than 6 months, <b>3</b> = teach right away
-				</br> Desire Key: <b>0</b> = can't teach, <b>1</b> = don't want to teach, <b>2</b> = somewhat would like to teach, <b>3</b> = would love to teach</p>
+				<p class="center"> <%= rankKey.desc %> </br> <%= desKey.desc %> </p>
 
 				<!--dummy frame for submitting forms without redirecting-->
 				<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
@@ -27,7 +26,7 @@
 					<table class="table" id="dataTable"><!--Start Table -->
 							<tr class = "table-primary">
 								<th class="center" id="underline" onclick="sortTable(0)">Course Number</th>
-								<th id="underline" onclick="sortTable(1)">Prep Score</th>
+								<th id="underline" onclick="sortTable(1)">Ranking</th>
 								<th id="underline" onclick="sortTable(2)">Desire</th>
 								<th>Notes</th>
 							</tr>
@@ -61,8 +60,8 @@
 									<tr>
 										<td class="center"><b><%= course.courseID %></b><br><%= course.name %></td>
 										<td><input type="text" id="score_ranking" name="score[ranking]" value="<%=score.ranking%>" class="form-control w-50" placeholder="0-3"/></td>
-										<td><input type="text" onBlur="save('<%=route%>', '<%=numbers%>')" id="score_desire" name="score[desire]" value="<%=score.desire%>" class="form-control w-50" placeholder="0-3"/></td>	
-										<td><input type="text" onBlur="save('<%=route%>', '<%=numbers%>')" tabindex="-1" id="score_notes" name="score[notes]" value="<%=score.notes%>" class="form-control" placeholder="Notes"/></td>
+										<td><input type="text" onblur="save('<%=route%>', '<%=numbers%>')" id="score_desire" name="score[desire]" value="<%=score.desire%>" class="form-control w-50" placeholder="0-3"/></td>	
+										<td><input type="text" onblur="save('<%=route%>', '<%=numbers%>')" tabindex="-1" id="score_notes" name="score[notes]" value="<%=score.notes%>" class="form-control" placeholder="Notes"/></td>
 									</tr>
 									<% numbers++; %>
 									<input type="hidden" id="score_facultyID" name="score[facultyID]" value="<%=user.userID%>">
@@ -82,21 +81,22 @@
 
 	//function to save form automatically on focus loss for desire and notes field
 	function save(path, numbers) {
+		console.log("here");
 		var rankingInputs = document.getElementsByName("score[ranking]");
 		var desireInputs = document.getElementsByName("score[desire]");
-		
+
 		if (rankingInputs[numbers].value && rankingInputs[numbers].value >= 0 && rankingInputs[numbers].value <= 3) {
 			if (desireInputs[numbers].value && desireInputs[numbers].value >= 0 && desireInputs[numbers].value <= 3) {
-			document.forms[path].submit();
+				document.forms[path].submit();
 			} else {
-			alert("Desire field is required and must be between 0-3.");
+				alert("Desire field is required and must be between 0-3.");
 			}
 		} else {
 			alert("Ranking field is required and must be between 0-3.");
 		}
 	}
 
-	//rules for sortable table for ranking and desire (need to fix numerical asc but works)
+	//rules for sortable table for ranking and desire
 	function sortTable(n) {
 				var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 				table = document.getElementById("dataTable");

@@ -1,4 +1,5 @@
 const Score = require('./score');
+const Key = require('./key');
 
 const scoresDB = require('./scoresDB');
 
@@ -6,6 +7,7 @@ class ScoreController {
 
     async init(req, res) {
         scoresDB.initialize();
+        console.log("initialized");
     }
 
     //search list of scores by user
@@ -16,10 +18,18 @@ class ScoreController {
 
         if (!id){ 
             id = users[0].userID;
+
+            let i = 0;
+            while (scoresDB.searchByUser(id) ==  null){
+                id = users[i].userID;
+                i++;
+            }
         }
 
         let scores = await scoresDB.searchByUser(id);
         let courses = await scoresDB.allCourses();
+        let rankKey = await scoresDB.getKey("ranking");
+        let desKey = await scoresDB.getKey("desire");
 
         if (scores == null) {
             let errormsg = "There is no user with an ID of '" + id + "' or the requested user has no entered scores.";
@@ -27,7 +37,7 @@ class ScoreController {
             let btnPath = "/facultySearch/";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
-            res.render('admin/adminFaculty', { scores: scores, courses: courses, users: users, facultyID: id });
+            res.render('admin/adminFaculty', { scores: scores, courses: courses, users: users, facultyID: id, rankKey: rankKey, desKey: desKey });
         }
     }
 
@@ -41,6 +51,8 @@ class ScoreController {
         let scores = await scoresDB.searchByCourse(id);
         let courses = await scoresDB.allCourses();
         let users = await scoresDB.allUsers();
+        let rankKey = await scoresDB.getKey("ranking");
+        let desKey = await scoresDB.getKey("desire");
 
         if (scores == null) {
             let errormsg = "There is no course with an ID of '" + id + "' or the requested course has no entered scores.";
@@ -48,7 +60,7 @@ class ScoreController {
             let btnPath = "/courseSearch/";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
-            res.render('admin/adminCourse', { courses: courses, scores: scores, users: users, courseID: id });
+            res.render('admin/adminCourse', { courses: courses, scores: scores, users: users, courseID: id, rankKey: rankKey, desKey: desKey });
         }
     }
 
@@ -59,6 +71,12 @@ class ScoreController {
         let user = await scoresDB.findUser(id);
         let scores = await scoresDB.scoresForUser(id);
         let scoreObj = new Score();
+        let rankKey = await scoresDB.getKey("ranking");
+        let desKey = await scoresDB.getKey("desire");
+
+        //[TODO] using key.upper variables breaks all javascript on the page
+        let rankUpper = rankKey.upper;
+        let desUpper = desKey.upper;
 
         if (user == null) {
             let errormsg = "There is no user with an ID of '" + id + "' or the requested user has no entered scores.";
@@ -66,13 +84,8 @@ class ScoreController {
             let btnPath = "/login";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
-            res.render('faculty/faculty', { courses: courses, user: user, scores: scores, scoreObj: scoreObj });
+            res.render('faculty/faculty', { courses: courses, user: user, scores: scores, scoreObj: scoreObj, rankKey: rankKey, desKey: desKey});
         }
-    }
-
-    // [TODO] not used
-    newScore(req, res) {
-        res.render('score/scoreForm', { score: new Score() });
     }
 
     async create(req, res) {
@@ -85,21 +98,6 @@ class ScoreController {
             res.end();
         } else {
             this.faculty(req, res);
-        }
-    }
-
-    //[TODO] not used
-    async edit(req, res) {
-        let id = req.params.id;
-        let score = await scoresDB.findScore(id);
-
-        if (!score) {
-            let errormsg = "Could not find a score with an ID of " + id;
-            let btnmsg = "Return to login page";
-            let btnPath = "/login";
-            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
-        } else {
-            res.render('score/scoreForm', { score: score });
         }
     }
 
@@ -127,7 +125,7 @@ class ScoreController {
             score.notes = req.body.score.notes;
 
             console.log("Updating score");
-            scoresDB.update(score);
+            scoresDB.updateScore(score);
 
             res.writeHead(302, { 'Location': `/scores/${score.id}` });
             res.end();
@@ -145,7 +143,7 @@ class ScoreController {
             let btnPath = "/login";
             res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
         } else {
-            scoresDB.remove(score);
+            scoresDB.removeScore(score);
             let scores = await scoresDB.allScores();
             res.render('score/scoreList', { scores: scores });
         }
@@ -155,14 +153,47 @@ class ScoreController {
         res.render('admin/additionalFunct');
     }
 
-    async rankingKeyForm(req, res) {
-        let key = scoresDB.getRankingKey();
-        res.render('adming/keyForm', {key: key});
+    async getKeyForm(req, res) {
+        let id = req.params.id;
+        let key = await scoresDB.getKey(id);
+
+        if (key == null) {
+            let errormsg = "Could not find a key for " + id;
+            let btnmsg = "Return to additional functions page";
+            let btnPath = "/addFunc";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
+        } else {
+            res.render('admin/keyForm', { key: key });
+        }
     }
 
-    async desireKeyForm(req, res) {
-        let key = scoresDB.getDesireKey();
-        res.render('adming/keyForm', {key: key});
+    async updateKey(req, res) {
+        let type = req.params.id;
+        let key = await scoresDB.getKey(type);
+
+        let testKey = new Key(req.body.key);
+        if (!testKey.isValid()) {
+            testKey.id = key.id;
+            res.render('admin/keyForm', { key: testKey });
+            return;
+        }
+
+        if (key == null) {
+            let errormsg = "Could not find a key with an ID of " + id;
+            let btnmsg = "Return to functions page";
+            let btnPath = "/addFunc";
+            res.render('notFoundError', { errormsg: errormsg, btnmsg: btnmsg, btnPath: btnPath });
+        } else {
+            key.type = req.body.key.type;
+            key.upper = req.body.key.upper;
+            key.desc = req.body.key.desc;
+
+            console.log("Updating key");
+            scoresDB.updateKey(key);
+
+            res.writeHead(302, { 'Location': `/keys/${key.type}` });
+            res.end();
+        }
     }
 
 }

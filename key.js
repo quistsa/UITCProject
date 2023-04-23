@@ -19,10 +19,6 @@ class Key {
             this.errors.push("Upper limit is a required field");
         }
 
-        if (!Number.this.upper.isInteger()){
-            this.errors.push("Upper limit must be an integer");
-        }
-
         if (!this.desc || String(this.desc).length <= 0){
             this.errors.push("Key description is a required field");
         }

@@ -18,8 +18,6 @@ class Score {
         
         this.errors = [];
     }
-
-    //[TODO] Add method to adjust upper and lower values
  
     isValid(){
         this.errors = [];

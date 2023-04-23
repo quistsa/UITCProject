@@ -147,7 +147,7 @@ class ScoresDB {
                 if (rows.length >= 1) {
                     resolve(new User(rows[0]));
                 } else {
-                    console.log(`User id ${id} not found [userDB.findUser]`);
+                    console.log(`User id ${id} not found [scoresDB.findUser]`);
                     resolve(null);
                 }
             });
@@ -201,7 +201,7 @@ class ScoresDB {
                     if (rows.length >= 1) {
                         resolve(new Course(rows[0]));
                     } else {
-                        console.log(`Course id ${id} not found [courseDB.findCourse]`);
+                        console.log(`Course id ${id} not found [scoresDB.findCourse]`);
                         resolve(null);
                     }
                 }
@@ -238,7 +238,27 @@ class ScoresDB {
     //ranking/desire key functions
     ///////////////////////////////
     static updateKey(key) {
-        
+        this.db.run(`UPDATE Keys SET upper="${key.upper}", desc="${key.desc}" WHERE type="${key.type}"`);
+    }
+
+    static getKey(type) {
+        return new Promise((resolve, reject) => {
+            this.db.all(`SELECT * from Keys WHERE (type == ?)`, [type], (err, rows) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                } else {
+                    //console.log(rows);
+                    //console.log(response);
+                    if (rows.length >= 1) {
+                        resolve(new Key(rows[0]));
+                    } else {
+                        console.log(`Key for ${type} not found [scoresDB.getKey]`);
+                        resolve(null);
+                    }
+                }
+            });
+        });
     }
 }
 

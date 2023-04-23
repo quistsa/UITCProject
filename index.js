@@ -115,20 +115,16 @@ app.get('/addFunc', (req, res) => {
     scoreController.additionalFunctions(req, res);
 })
 
-app.get('/rankkey', (req, res) => {
-    scoreController.rankingKeyForm(req, res);
+app.get('/keys/:id', (req, res) => {
+    scoreController.getKeyForm(req, res);
 })
 
-app.post('/rankkey', (req, res) => {
-    scoreController.updateRankingKey(req, res);
+app.post('/keys/:id', (req, res) => {
+    scoreController.updateKey(req, res);
 })
 
-app.get('/deskey', (req, res) => {
-    scoreController.desireKeyForm(req, res);
-})
-
-app.post('/deskey', (req, res) => {
-    scoreController.updateDesireKey(req, res);
+app.get('/init', (req, res) => {
+    scoreController.init();
 })
 
 /////////////////////////////////////////
