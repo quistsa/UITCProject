@@ -20,7 +20,7 @@ const { response } = require('express');
 
 //start server
 const app = express();
-const port = 3500;
+const port = process.env.PORT;
 
 //session info
 app.use(session({
@@ -247,4 +247,4 @@ app.use((req, res, next) => {
 /////////////////////
 //launch the server//
 /////////////////////
-app.listen(port, () => console.log(`Example listening on port ${port}`));
+app.listen(port, '0.0.0.0', () => console.log(`Example listening on port ${port}`));
