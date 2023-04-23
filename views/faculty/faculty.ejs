@@ -14,7 +14,7 @@
 				
 			<div class="wrapper">
 				
-				<h1 class="center">GVSU School of Computing Course Listing</h1> 
+				<h1 class="center">GVSU School of Computing Depth Charts</h1> 
 
 				<h3>Course Search for <%=user.fName%> <%=user.lName%></h3>
 
@@ -56,14 +56,17 @@
 										edit = false;
 									}
 								%>
+								
 								<form name="<%=route%>" action="<%=route%>" target="dummyframe" accept-charset="UTF-8" method="post" class="form">
 									<tr>
 										<td class="center"><b><%= course.courseID %></b><br><%= course.name %></td>
 										<td><input type="text" id="score_ranking" name="score[ranking]" value="<%=score.ranking%>" class="form-control w-50" placeholder="0-3"/></td>
-										<td><input type="text" onblur="save('<%=route%>', '<%=numbers%>')" id="score_desire" name="score[desire]" value="<%=score.desire%>" class="form-control w-50" placeholder="0-3"/></td>	
-										<td><input type="text" onblur="save('<%=route%>', '<%=numbers%>')" tabindex="-1" id="score_notes" name="score[notes]" value="<%=score.notes%>" class="form-control" placeholder="Notes"/></td>
+										<td><input type="text" onchange="save('<%=route%>', '<%=numbers%>')" id="score_desire" name="score[desire]" value="<%=score.desire%>" class="form-control w-50" placeholder="0-3"/></td>	
+										<td><input type="text" onchange="save('<%=route%>', '<%=numbers%>')" tabindex="-1" id="score_notes" name="score[notes]" value="<%=score.notes%>" class="form-control" placeholder="Notes"/></td>
 									</tr>
+
 									<% numbers++; %>
+
 									<input type="hidden" id="score_facultyID" name="score[facultyID]" value="<%=user.userID%>">
 									<input type="hidden" id="score_courseID" name="score[courseID]" value="<%=course.courseID%>">
 								</form>
@@ -79,14 +82,14 @@
    
    <script>
 
-	//function to save form automatically on focus loss for desire and notes field
+	//function to save form automatically on value change for desire and notes field
 	function save(path, numbers) {
-		console.log("here");
 		var rankingInputs = document.getElementsByName("score[ranking]");
 		var desireInputs = document.getElementsByName("score[desire]");
 
-		if (rankingInputs[numbers].value && rankingInputs[numbers].value >= 0 && rankingInputs[numbers].value <= 3) {
-			if (desireInputs[numbers].value && desireInputs[numbers].value >= 0 && desireInputs[numbers].value <= 3) {
+		//[TODO] validating using rankKey.upper and desKey.upper breaks the javascript
+		if (rankingInputs[numbers].value && rankingInputs[numbers].value >= 0 && rankingInputs[numbers].value <= 3) { 
+			if (desireInputs[numbers].value && desireInputs[numbers].value >= 0 && desireInputs[numbers].value <= 3) { 
 				document.forms[path].submit();
 			} else {
 				alert("Desire field is required and must be between 0-3.");

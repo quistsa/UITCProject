@@ -40,14 +40,13 @@
 
 		<% if (key.errors.length > 0) { %>
         <% console.log("Errors occurred"); console.log(key.errors); %>
-
             <div>
                 <p>Errors:</p>
                 <ul>
                     <%- key.errors.map((item) => `<li>${item}</li>`).join("\n"); %>
                 </ul>
             </div>
-	<% } %>
+		<% } %>
 	
 	<div class="background">
 	  <form action="<%= route %>" accept-charset="UTF-8" method="post" class="form">
@@ -59,7 +58,7 @@
 
 		<div class="field">
 			<label for="key_desc">Key Description</label>
-			<textarea class="form-control" type="text" id="key_desc" name="key[desc]"><%= key.desc %></textarea>
+			<textarea class="form-control w-50" type="text" id="key_desc" name="key[desc]"><%= key.desc %></textarea>
 		</div>
 
 		<input type="hidden" id="key_type" name="key[type]" value="<%= key.type %>">

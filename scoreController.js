@@ -74,10 +74,6 @@ class ScoreController {
         let rankKey = await scoresDB.getKey("ranking");
         let desKey = await scoresDB.getKey("desire");
 
-        //[TODO] using key.upper variables breaks all javascript on the page
-        let rankUpper = rankKey.upper;
-        let desUpper = desKey.upper;
-
         if (user == null) {
             let errormsg = "There is no user with an ID of '" + id + "' or the requested user has no entered scores.";
             let btnmsg = "Return to login page";
